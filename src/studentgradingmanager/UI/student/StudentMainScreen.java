@@ -4,9 +4,14 @@
  */
 package studentgradingmanager.UI.student;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import studentgradingmanager.UI.ChangePassword;
+import studentgradingmanager.UI.dialog.SignOut;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.StudentNavController;
 
@@ -15,7 +20,7 @@ import studentgradingmanager.controller.StudentNavController;
  *
  * @author Quan
  */
-public class StudentMainScreen extends javax.swing.JFrame {
+public class StudentMainScreen extends javax.swing.JFrame{
 
     /**
      * Creates new form StudentMainScreen
@@ -154,6 +159,11 @@ public class StudentMainScreen extends javax.swing.JFrame {
 
         jpStudentSignOutSelector.setBackground(new java.awt.Color(111, 142, 222));
         jpStudentSignOutSelector.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpStudentSignOutSelector.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpStudentSignOutSelectorMouseClicked(evt);
+            }
+        });
 
         jlbStudentSignOutSelector.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlbStudentSignOutSelector.setForeground(new java.awt.Color(255, 51, 51));
@@ -260,6 +270,14 @@ public class StudentMainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jpStudentSignOutSelectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpStudentSignOutSelectorMouseClicked
+        
+        SignOut signOut = new SignOut(this, true);
+        signOut.setLocationRelativeTo(null);
+        signOut.setVisible(true);
+        signOut.requestFocusInWindow();
+    }//GEN-LAST:event_jpStudentSignOutSelectorMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -294,7 +312,8 @@ public class StudentMainScreen extends javax.swing.JFrame {
 
                 studentMainScreen.setLocationRelativeTo(null);
                 studentMainScreen.setVisible(true);
-                studentMainScreen.requestFocusInWindow(); 
+                studentMainScreen.requestFocusInWindow();
+                
             }
         });
     }
@@ -330,10 +349,24 @@ public class StudentMainScreen extends javax.swing.JFrame {
     public void setJpStudentGradeResultSelector(JPanel jpStudentGradeResultSelector) {
         this.jpStudentGradeResultSelector = jpStudentGradeResultSelector;
     }
+    
+    public void setColorOnMousePressed(JPanel jpItem, JLabel jlbItem) {
+        jpItem.setBackground(new Color(81, 102, 159));
+        jlbItem.setBackground(new Color(81, 102, 159));
+    }
+    
+    public void setColorOnMouseEntered(JPanel jpItem, JLabel jlbItem) {
+        jpItem.setBackground(new Color(0, 154, 255));
+        jlbItem.setBackground(new Color(0, 154, 255));
+    }
+    
+    public void setColorOnMouseExited(JPanel jpItem, JLabel jlbItem) {
+        jpItem.setBackground(new Color(111, 142, 222));
+        jlbItem.setBackground(new Color(111, 142, 222));
+    }
+    
 
     
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlbStudentAccountInfoSelector;
     private javax.swing.JLabel jlbStudentGradeResultSelector;
@@ -349,5 +382,8 @@ public class StudentMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpStudentSignOutSelector;
     private javax.swing.JPanel jpUserAvatar;
     // End of variables declaration//GEN-END:variables
+
+
 }
+
 

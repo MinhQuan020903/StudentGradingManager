@@ -33,8 +33,9 @@ public class StudentNavController {
         typeSelected = "Thông tin tài khoản";
         setColorOnMousePressed(jpItem, jlbItem);
         
-        root.removeAll();
+        //root.removeAll();
         root.setLayout(new BorderLayout());
+        
         root.add(new StudentAccountInfo());
         root.validate();
         root.repaint();
@@ -72,6 +73,7 @@ public class StudentNavController {
                     node = new StudentGradeResult();
                     break;
                 }
+                
                 default : {
                     node = new StudentAccountInfo();
                     break;
@@ -97,7 +99,7 @@ public class StudentNavController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            setColorOnMousePressed(jpItem, jlbItem);
+            setColorOnMouseEntered(jpItem, jlbItem);
         }
 
         @Override
@@ -121,8 +123,8 @@ public class StudentNavController {
     }
     
     public void setColorOnMouseEntered(JPanel jpItem, JLabel jlbItem) {
-        jpItem.setBackground(new Color(0, 154, 230));
-        jlbItem.setBackground(new Color(0, 154, 230));
+        jpItem.setBackground(new Color(0, 154, 255));
+        jlbItem.setBackground(new Color(0, 154, 255));
     }
     
     public void setColorOnItems(String type) {

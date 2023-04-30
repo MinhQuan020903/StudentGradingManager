@@ -27,28 +27,154 @@ public class StudentGradeResult extends javax.swing.JPanel {
     private void initComponents() {
 
         jpStudentGradeResult = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jcbYear = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jcbSemester1 = new javax.swing.JComboBox<>();
+        jbSearch = new javax.swing.JButton();
+        jspStudentResultTable = new javax.swing.JScrollPane();
+        jtStudentResult = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jlbYearGrade = new javax.swing.JLabel();
+        jlbSemesterGrade = new javax.swing.JLabel();
 
         jpStudentGradeResult.setBackground(new java.awt.Color(255, 255, 255));
         jpStudentGradeResult.setForeground(new java.awt.Color(255, 255, 255));
+        jpStudentGradeResult.setPreferredSize(new java.awt.Dimension(782, 549));
 
-        jLabel1.setText("grade result");
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Năm học");
+
+        jcbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Điểm TB năm học");
+
+        jcbSemester1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jbSearch.setText("Tìm kiếm");
+
+        jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
+        jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
+        jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
+        jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "STT", "Tên môn học", "Điểm QT", "Điểm GK", "Điểm CK", "Điểm TBHK", "Ghi chú"
+            }
+        ));
+        jtStudentResult.setGridColor(new java.awt.Color(0, 0, 0));
+        jtStudentResult.setShowGrid(true);
+        jspStudentResultTable.setViewportView(jtStudentResult);
+        if (jtStudentResult.getColumnModel().getColumnCount() > 0) {
+            jtStudentResult.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jtStudentResult.getColumnModel().getColumn(1).setPreferredWidth(95);
+            jtStudentResult.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jtStudentResult.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jtStudentResult.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jtStudentResult.getColumnModel().getColumn(5).setPreferredWidth(50);
+        }
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Học kỳ");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Điểm TB học kỳ");
+
+        jlbYearGrade.setBackground(new java.awt.Color(255, 255, 255));
+        jlbYearGrade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlbYearGrade.setForeground(new java.awt.Color(255, 0, 51));
+        jlbYearGrade.setText("1.0");
+
+        jlbSemesterGrade.setBackground(new java.awt.Color(255, 255, 255));
+        jlbSemesterGrade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlbSemesterGrade.setForeground(new java.awt.Color(255, 0, 51));
+        jlbSemesterGrade.setText("10.0");
 
         javax.swing.GroupLayout jpStudentGradeResultLayout = new javax.swing.GroupLayout(jpStudentGradeResult);
         jpStudentGradeResult.setLayout(jpStudentGradeResultLayout);
         jpStudentGradeResultLayout.setHorizontalGroup(
             jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel1)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                        .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbSemester1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(69, 69, 69)
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                                .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91))))
+                    .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(50, 50, 50)
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbSemesterGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlbYearGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpStudentGradeResultLayout.setVerticalGroup(
             jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel1)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpStudentGradeResultLayout.createSequentialGroup()
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbSemester1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(38, 38, 38)
+                .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jlbSemesterGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlbYearGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -65,7 +191,17 @@ public class StudentGradeResult extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jbSearch;
+    private javax.swing.JComboBox<String> jcbSemester1;
+    private javax.swing.JComboBox<String> jcbYear;
+    private javax.swing.JLabel jlbSemesterGrade;
+    private javax.swing.JLabel jlbYearGrade;
     private javax.swing.JPanel jpStudentGradeResult;
+    private javax.swing.JScrollPane jspStudentResultTable;
+    private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,11 @@
  */
 package studentgradingmanager.UI.student.jpanel;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import studentgradingmanager.UI.ChangePassword;
+
+
 /**
  *
  * @author Quan
@@ -15,6 +20,7 @@ public class StudentAccountInfo extends javax.swing.JPanel {
      */
     public StudentAccountInfo() {
         initComponents();
+        continueInitComponents();
     }
 
     /**
@@ -27,28 +33,231 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     private void initComponents() {
 
         jpStudentAccountInfo = new javax.swing.JPanel();
-        jlTest = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jlbStudentName = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jlbStudentEmail = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jlbStudentId = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jlbStudentPassword = new javax.swing.JLabel();
+        jbChangePassword = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jlbStudentDob = new javax.swing.JLabel();
+        jbChangePhoneNumber = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jlbStudentPhoneNumber = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jlbStudentGender = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jlbStudentGrade = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jlbStudentClass = new javax.swing.JLabel();
 
         jpStudentAccountInfo.setBackground(new java.awt.Color(255, 255, 255));
         jpStudentAccountInfo.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlTest.setText("account info");
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Họ tên học sinh");
+
+        jlbStudentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentName.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentName.setText("Nguyễn Văn A");
+        jlbStudentName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Mã học sinh");
+
+        jlbStudentEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentEmail.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentEmail.setText("12345678@edu.vn");
+        jlbStudentEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Email");
+
+        jlbStudentId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentId.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentId.setText("12345678");
+        jlbStudentId.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Mật khẩu");
+
+        jlbStudentPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentPassword.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentPassword.setText("12345678");
+        jlbStudentPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jbChangePassword.setBackground(new java.awt.Color(255, 255, 255));
+        jbChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbChangePassword.setForeground(new java.awt.Color(0, 51, 204));
+        jbChangePassword.setText("Đổi");
+        jbChangePassword.setBorder(null);
+        jbChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbChangePasswordActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("SĐT");
+
+        jlbStudentDob.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentDob.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentDob.setText("1/1/2005");
+        jlbStudentDob.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jbChangePhoneNumber.setBackground(new java.awt.Color(255, 255, 255));
+        jbChangePhoneNumber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbChangePhoneNumber.setForeground(new java.awt.Color(0, 51, 204));
+        jbChangePhoneNumber.setText("Đổi");
+        jbChangePhoneNumber.setBorder(null);
+        jbChangePhoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbChangePhoneNumberActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Ngày sinh");
+
+        jlbStudentPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentPhoneNumber.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentPhoneNumber.setText("1234567890");
+        jlbStudentPhoneNumber.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Giới tính");
+
+        jlbStudentGender.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentGender.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentGender.setText("Nam");
+        jlbStudentGender.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Khối");
+
+        jlbStudentGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentGrade.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentGrade.setText("12");
+        jlbStudentGrade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel11.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Lớp");
+
+        jlbStudentClass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlbStudentClass.setForeground(new java.awt.Color(0, 0, 0));
+        jlbStudentClass.setText("12A1");
+        jlbStudentClass.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jpStudentAccountInfoLayout = new javax.swing.GroupLayout(jpStudentAccountInfo);
         jpStudentAccountInfo.setLayout(jpStudentAccountInfoLayout);
         jpStudentAccountInfoLayout.setHorizontalGroup(
             jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jlTest)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(23, 23, 23)
+                        .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbStudentClass, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)))
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jlbStudentPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbChangePhoneNumber))
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jlbStudentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbChangePassword))
+                    .addComponent(jlbStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbStudentEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbStudentDob, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(23, 23, 23)
+                        .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbStudentGender, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         jpStudentAccountInfoLayout.setVerticalGroup(
             jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jlTest)
-                .addContainerGap(182, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpStudentAccountInfoLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbStudentEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbStudentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbChangePassword))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbChangePhoneNumber)
+                    .addComponent(jlbStudentPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlbStudentDob, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlbStudentGender, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jpStudentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlbStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpStudentAccountInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlbStudentClass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -59,13 +268,48 @@ public class StudentAccountInfo extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpStudentAccountInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpStudentAccountInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
+       // Send signel to parent Jframe for navigating
+       //to ChangePassword screen
+       
+       
+    }//GEN-LAST:event_jbChangePasswordActionPerformed
+
+    private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jlTest;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jbChangePassword;
+    private javax.swing.JButton jbChangePhoneNumber;
+    private javax.swing.JLabel jlbStudentClass;
+    private javax.swing.JLabel jlbStudentDob;
+    private javax.swing.JLabel jlbStudentEmail;
+    private javax.swing.JLabel jlbStudentGender;
+    private javax.swing.JLabel jlbStudentGrade;
+    private javax.swing.JLabel jlbStudentId;
+    private javax.swing.JLabel jlbStudentName;
+    private javax.swing.JLabel jlbStudentPassword;
+    private javax.swing.JLabel jlbStudentPhoneNumber;
     private javax.swing.JPanel jpStudentAccountInfo;
     // End of variables declaration//GEN-END:variables
+
+    private void continueInitComponents() {
+        jbChangePassword.setContentAreaFilled(false);
+        jbChangePhoneNumber.setContentAreaFilled(false);
+    }
 }
