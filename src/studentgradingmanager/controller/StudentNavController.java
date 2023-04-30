@@ -14,19 +14,16 @@ import javax.swing.JPanel;
 import studentgradingmanager.UI.student.jpanel.StudentAccountInfo;
 import studentgradingmanager.UI.student.jpanel.StudentGradeResult;
 import studentgradingmanager.bean.Category;
+import studentgradingmanager.utils.NavController;
 
 /**
  *
  * @author Quan
  */
-public class StudentNavController {
-    private JPanel root;
-    private String typeSelected = "";
-    
-    private ArrayList<Category> listCategory = null;
-    
+public class StudentNavController extends NavController{
+
     public StudentNavController(JPanel jpRoot) {
-        this.root = jpRoot;
+        super(jpRoot);
     }
     
     public void setView (JPanel jpItem, JLabel jlbItem) {
@@ -107,32 +104,6 @@ public class StudentNavController {
             if (!typeSelected.equalsIgnoreCase(type)) {
                 setColorOnMouseExited(jpItem, jlbItem);
                 
-            }
-        }
-    }
-    
-    
-    public void setColorOnMouseExited(JPanel jpItem, JLabel jlbItem) {
-        jpItem.setBackground(new Color(111, 142, 222));
-        jlbItem.setBackground(new Color(111, 142, 222));
-    }
-    
-    public void setColorOnMousePressed(JPanel jpItem, JLabel jlbItem) {
-        jpItem.setBackground(new Color(81, 102, 159));
-        jlbItem.setBackground(new Color(81, 102, 159));
-    }
-    
-    public void setColorOnMouseEntered(JPanel jpItem, JLabel jlbItem) {
-        jpItem.setBackground(new Color(0, 154, 255));
-        jlbItem.setBackground(new Color(0, 154, 255));
-    }
-    
-    public void setColorOnItems(String type) {
-        for (Category category : listCategory) {
-            if (!typeSelected.equalsIgnoreCase(category.getType())) {
-                setColorOnMouseExited(category.getJp(), category.getJlb());
-            } else {
-                setColorOnMousePressed(category.getJp(), category.getJlb());
             }
         }
     }

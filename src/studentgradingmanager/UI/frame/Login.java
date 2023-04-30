@@ -7,6 +7,7 @@ package studentgradingmanager.UI.frame;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
+import studentgradingmanager.UI.teacher.TeacherMainScreen;
 
 /**
  *
@@ -47,6 +48,7 @@ public class Login extends javax.swing.JFrame {
         jbShowPassword = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jlbLoginFailed = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +152,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Email");
 
+        jlbLoginFailed.setBackground(new java.awt.Color(255, 255, 255));
+        jlbLoginFailed.setForeground(new java.awt.Color(255, 51, 51));
+        jlbLoginFailed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-error-48.png"))); // NOI18N
+        jlbLoginFailed.setText("Đăng nhập thất bại. Vui lòng nhập lại thông tin tài khoản.");
+
         javax.swing.GroupLayout jpLoginScreenLayout = new javax.swing.GroupLayout(jpLoginScreen);
         jpLoginScreen.setLayout(jpLoginScreenLayout);
         jpLoginScreenLayout.setHorizontalGroup(
@@ -178,7 +185,8 @@ public class Login extends javax.swing.JFrame {
                                     .addGroup(jpLoginScreenLayout.createSequentialGroup()
                                         .addComponent(jlbUserPassword)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtfUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jtfUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jlbLoginFailed))
                                 .addGap(18, 18, 18)
                                 .addComponent(jbShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(235, 235, 235))
@@ -189,7 +197,7 @@ public class Login extends javax.swing.JFrame {
         jpLoginScreenLayout.setVerticalGroup(
             jpLoginScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLoginScreenLayout.createSequentialGroup()
-                .addComponent(jpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,14 +221,16 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jcbRememberPassword))
                 .addGap(19, 19, 19)
                 .addComponent(jbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 280, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jlbLoginFailed)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLoginScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpLoginScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,13 +263,28 @@ public class Login extends javax.swing.JFrame {
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
         
         //TODO: Add sign-in condition here:
-        if (true) {
+        /* 
+        Login test account:
+        Student: email="student", password="1234"
+        Teacher: email="teacher", password="1234"
+        */
+        if (jtfUserEmail.getText().equals("student") && jtfUserPassword.getText().equals("1234")) {
+            System.out.print("DCMMMMMMMM");
             StudentMainScreen studentMainScreen = new StudentMainScreen();
             studentMainScreen.show();
             studentMainScreen.setLocationRelativeTo(null);
             studentMainScreen.requestFocusInWindow(); 
             dispose();
+        } else if (jtfUserEmail.getText().equals("teacher") && jtfUserPassword.getText().equals("1234")) {
+            TeacherMainScreen teacherMainScreen = new TeacherMainScreen();
+            teacherMainScreen.show();
+            teacherMainScreen.setLocationRelativeTo(null);
+            teacherMainScreen.requestFocusInWindow(); 
+            dispose();
+        } else {
+            jlbLoginFailed.setVisible(true);
         }
+                
     }//GEN-LAST:event_jbLoginActionPerformed
 
     private void jbShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbShowPasswordActionPerformed
@@ -339,6 +364,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JToggleButton jbShowPassword;
     private javax.swing.JLabel jbUserIcon;
     private javax.swing.JCheckBox jcbRememberPassword;
+    private javax.swing.JLabel jlbLoginFailed;
     private javax.swing.JLabel jlbTitle;
     private javax.swing.JLabel jlbUserPassword;
     private javax.swing.JPanel jpLoginScreen;
@@ -353,5 +379,7 @@ public class Login extends javax.swing.JFrame {
     private void continueInitComponents() {
         //Hide borders of jbShowPassword
         jbShowPassword.setContentAreaFilled(false);
+        //Hide login failed prompt
+        jlbLoginFailed.setVisible(false);
     }
 }

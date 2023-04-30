@@ -4,8 +4,8 @@
  */
 package studentgradingmanager.UI.dialog;
 
+import javax.swing.JFrame;
 import studentgradingmanager.UI.frame.Login;
-import studentgradingmanager.UI.student.StudentMainScreen;
 
 /**
  *
@@ -16,7 +16,7 @@ public class SignOut extends java.awt.Dialog {
     /**
      * Creates new form NewDialog
      */
-    public SignOut(StudentMainScreen parent, boolean modal) {
+    public SignOut(JFrame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
@@ -129,7 +129,7 @@ public class SignOut extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SignOut dialog = new SignOut(new StudentMainScreen(), true);
+                SignOut dialog = new SignOut(new JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -142,7 +142,7 @@ public class SignOut extends java.awt.Dialog {
     }
 
 
-    private StudentMainScreen parent;
+    private JFrame parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbAccept;
