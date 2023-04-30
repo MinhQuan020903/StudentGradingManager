@@ -15,6 +15,8 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
      */
     public TeacherAccountInfo() {
         initComponents();
+        jbChangePassword.setContentAreaFilled(false);
+        jbChangePhoneNumber.setContentAreaFilled(false);
     }
 
     /**
@@ -169,7 +171,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
         jpTeacherAccountInfoLayout.setHorizontalGroup(
             jpTeacherAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherAccountInfoLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(64, 64, 64)
                 .addGroup(jpTeacherAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTeacherAccountInfoLayout.createSequentialGroup()
                         .addComponent(jlbTeacherPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,12 +208,12 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
                                 .addGroup(jpTeacherAccountInfoLayout.createSequentialGroup()
                                     .addGap(12, 12, 12)
                                     .addComponent(jLabel9))))))
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
         jpTeacherAccountInfoLayout.setVerticalGroup(
             jpTeacherAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherAccountInfoLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlbTeacherName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +253,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
                 .addGroup(jpTeacherAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbTeacherSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTeacherClass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -262,7 +264,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherAccountInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addComponent(jpTeacherAccountInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

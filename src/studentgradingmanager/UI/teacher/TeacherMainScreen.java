@@ -4,7 +4,10 @@
  */
 package studentgradingmanager.UI.teacher;
 
+import java.util.ArrayList;
 import studentgradingmanager.UI.dialog.SignOut;
+import studentgradingmanager.bean.Category;
+import studentgradingmanager.controller.TeacherNavController;
 
 /**
  *
@@ -17,6 +20,14 @@ public class TeacherMainScreen extends javax.swing.JFrame {
      */
     public TeacherMainScreen() {
         initComponents();
+        TeacherNavController controller = new TeacherNavController(jpMainScreenContent);
+        controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
+        
+        ArrayList<Category> listCategory = new ArrayList<>();
+        listCategory.add(new Category("Thông tin tài khoản", jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector));
+        listCategory.add(new Category("Tra cứu kết quả học sinh", jpTeacherSearchSelector, jlbTeacherSearchSelector));
+        listCategory.add(new Category("Quản lý điểm lớp học", jpTeacherGradingManagementSelector, jlbTeacherGradingManagementSelector));
+        controller.setEvent(listCategory); 
     }
 
     /**

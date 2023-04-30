@@ -29,7 +29,7 @@ public class TeacherSearch extends javax.swing.JPanel {
         jpTeacherSearch = new javax.swing.JPanel();
         jtfSearchForStudent = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbSearch = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jtStudents = new javax.swing.JTable();
 
@@ -41,17 +41,22 @@ public class TeacherSearch extends javax.swing.JPanel {
         jtfSearchForStudent.setForeground(new java.awt.Color(153, 153, 153));
         jtfSearchForStudent.setText("Nhập tên / mã học sinh cần tìm");
         jtfSearchForStudent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtfSearchForStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtfSearchForStudentMouseClicked(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-search-16.png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(169, 186, 247));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Tìm kiếm");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbSearch.setBackground(new java.awt.Color(169, 186, 247));
+        jbSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbSearch.setForeground(new java.awt.Color(255, 255, 255));
+        jbSearch.setText("Tìm kiếm");
+        jbSearch.setBorder(null);
+        jbSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbSearchActionPerformed(evt);
             }
         });
 
@@ -105,7 +110,7 @@ public class TeacherSearch extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addGap(83, 83, 83)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -113,18 +118,18 @@ public class TeacherSearch extends javax.swing.JPanel {
             jpTeacherSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherSearchLayout.createSequentialGroup()
                 .addGroup(jpTeacherSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(40, 40, 40))
                     .addGroup(jpTeacherSearchLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addGroup(jpTeacherSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)))
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                            .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -139,15 +144,21 @@ public class TeacherSearch extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbSearchActionPerformed
+
+    private void jtfSearchForStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfSearchForStudentMouseClicked
+        if (jtfSearchForStudent.getText().equals("Nhập tên / mã học sinh cần tìm")) {
+            jtfSearchForStudent.setText("");
+        }
+    }//GEN-LAST:event_jtfSearchForStudentMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton jbSearch;
     private javax.swing.JPanel jpTeacherSearch;
     private javax.swing.JTable jtStudents;
     private javax.swing.JTextField jtfSearchForStudent;
