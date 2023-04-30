@@ -4,7 +4,7 @@
  */
 package studentgradingmanager.UI.dialog;
 
-import studentgradingmanager.UI.Login;
+import studentgradingmanager.UI.frame.Login;
 import studentgradingmanager.UI.student.StudentMainScreen;
 
 /**
