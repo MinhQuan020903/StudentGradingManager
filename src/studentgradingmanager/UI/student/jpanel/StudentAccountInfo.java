@@ -6,7 +6,7 @@ package studentgradingmanager.UI.student.jpanel;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import studentgradingmanager.UI.ChangePassword;
+import studentgradingmanager.UI.frame.ChangePassword;
 
 
 /**

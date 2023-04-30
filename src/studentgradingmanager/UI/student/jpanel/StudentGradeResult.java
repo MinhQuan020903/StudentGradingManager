@@ -36,8 +36,8 @@ public class StudentGradeResult extends javax.swing.JPanel {
         jtStudentResult = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jlbYearGrade = new javax.swing.JLabel();
-        jlbSemesterGrade = new javax.swing.JLabel();
+        jlbYearResult = new javax.swing.JLabel();
+        jlbSemesterResult = new javax.swing.JLabel();
 
         jpStudentGradeResult.setBackground(new java.awt.Color(255, 255, 255));
         jpStudentGradeResult.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,15 +106,15 @@ public class StudentGradeResult extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Điểm TB học kỳ");
 
-        jlbYearGrade.setBackground(new java.awt.Color(255, 255, 255));
-        jlbYearGrade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlbYearGrade.setForeground(new java.awt.Color(255, 0, 51));
-        jlbYearGrade.setText("1.0");
+        jlbYearResult.setBackground(new java.awt.Color(255, 255, 255));
+        jlbYearResult.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlbYearResult.setForeground(new java.awt.Color(255, 0, 51));
+        jlbYearResult.setText("1.0");
 
-        jlbSemesterGrade.setBackground(new java.awt.Color(255, 255, 255));
-        jlbSemesterGrade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlbSemesterGrade.setForeground(new java.awt.Color(255, 0, 51));
-        jlbSemesterGrade.setText("10.0");
+        jlbSemesterResult.setBackground(new java.awt.Color(255, 255, 255));
+        jlbSemesterResult.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlbSemesterResult.setForeground(new java.awt.Color(255, 0, 51));
+        jlbSemesterResult.setText("10.0");
 
         javax.swing.GroupLayout jpStudentGradeResultLayout = new javax.swing.GroupLayout(jpStudentGradeResult);
         jpStudentGradeResult.setLayout(jpStudentGradeResultLayout);
@@ -146,8 +146,8 @@ public class StudentGradeResult extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(50, 50, 50)
                         .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlbSemesterGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlbYearGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlbSemesterResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpStudentGradeResultLayout.setVerticalGroup(
@@ -169,11 +169,11 @@ public class StudentGradeResult extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jlbSemesterGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlbSemesterResult, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpStudentGradeResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jlbYearGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67))
         );
 
@@ -198,8 +198,8 @@ public class StudentGradeResult extends javax.swing.JPanel {
     private javax.swing.JButton jbSearch;
     private javax.swing.JComboBox<String> jcbSemester1;
     private javax.swing.JComboBox<String> jcbYear;
-    private javax.swing.JLabel jlbSemesterGrade;
-    private javax.swing.JLabel jlbYearGrade;
+    private javax.swing.JLabel jlbSemesterResult;
+    private javax.swing.JLabel jlbYearResult;
     private javax.swing.JPanel jpStudentGradeResult;
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;

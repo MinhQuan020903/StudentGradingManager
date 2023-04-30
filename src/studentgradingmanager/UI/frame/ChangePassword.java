@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package studentgradingmanager.UI;
+package studentgradingmanager.UI.frame;
 
 import java.awt.GraphicsEnvironment;
 import javax.swing.JOptionPane;
