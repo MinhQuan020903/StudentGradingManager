@@ -4,6 +4,12 @@
  */
 package studentgradingmanager.UI.student;
 
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import studentgradingmanager.bean.Category;
+import studentgradingmanager.controller.StudentNavController;
+
 
 /**
  *
@@ -16,7 +22,13 @@ public class StudentMainScreen extends javax.swing.JFrame {
      */
     public StudentMainScreen() {
         initComponents();
+        StudentNavController controller = new StudentNavController(jpMainScreenContent);
+        controller.setView(jpStudentAccountInfoSelector, jlbStudentAccountInfoSelector);
         
+        ArrayList<Category> listCategory = new ArrayList<>();
+        listCategory.add(new Category("Thông tin tài khoản", jpStudentAccountInfoSelector, jlbStudentAccountInfoSelector));
+        listCategory.add(new Category("Kết quả học tập", jpStudentGradeResultSelector, jlbStudentGradeResultSelector));
+        controller.setEvent(listCategory); 
         //Init user avatar jpanel
     }
 
@@ -179,7 +191,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
                     .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
@@ -211,7 +223,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
         jpMainScreenContent.setLayout(jpMainScreenContentLayout);
         jpMainScreenContentLayout.setHorizontalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 791, Short.MAX_VALUE)
+            .addGap(0, 785, Short.MAX_VALUE)
         );
         jpMainScreenContentLayout.setVerticalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +237,8 @@ public class StudentMainScreen extends javax.swing.JFrame {
             .addGroup(jpMainScreenLayout.createSequentialGroup()
                 .addComponent(jpMainScreenSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainScreenLayout.setVerticalGroup(
             jpMainScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +250,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,13 +291,46 @@ public class StudentMainScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 StudentMainScreen studentMainScreen = new StudentMainScreen();  
-                
+
                 studentMainScreen.setLocationRelativeTo(null);
                 studentMainScreen.setVisible(true);
                 studentMainScreen.requestFocusInWindow(); 
             }
         });
     }
+
+    public JLabel getJlbStudentAccountInfoSelector() {
+        return jlbStudentAccountInfoSelector;
+    }
+
+    public void setJlbStudentAccountInfoSelector(JLabel jlbStudentAccountInfoSelector) {
+        this.jlbStudentAccountInfoSelector = jlbStudentAccountInfoSelector;
+    }
+
+    public JLabel getJlbStudentGradeResultSelector() {
+        return jlbStudentGradeResultSelector;
+    }
+
+    public void setJlbStudentGradeResultSelector(JLabel jlbStudentGradeResultSelector) {
+        this.jlbStudentGradeResultSelector = jlbStudentGradeResultSelector;
+    }
+
+    public JPanel getJpStudentAccountInfoSelector() {
+        return jpStudentAccountInfoSelector;
+    }
+
+    public void setJpStudentAccountInfoSelector(JPanel jpStudentAccountInfoSelector) {
+        this.jpStudentAccountInfoSelector = jpStudentAccountInfoSelector;
+    }
+
+    public JPanel getJpStudentGradeResultSelector() {
+        return jpStudentGradeResultSelector;
+    }
+
+    public void setJpStudentGradeResultSelector(JPanel jpStudentGradeResultSelector) {
+        this.jpStudentGradeResultSelector = jpStudentGradeResultSelector;
+    }
+
     
     
 
