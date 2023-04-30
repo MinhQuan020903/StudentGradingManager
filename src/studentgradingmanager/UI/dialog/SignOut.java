@@ -6,7 +6,6 @@ package studentgradingmanager.UI.dialog;
 
 import javax.swing.JFrame;
 import studentgradingmanager.UI.frame.Login;
-import studentgradingmanager.UI.student.StudentMainScreen;
 
 /**
  *
