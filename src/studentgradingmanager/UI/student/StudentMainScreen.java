@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import studentgradingmanager.UI.ChangePassword;
+import studentgradingmanager.UI.frame.ChangePassword;
 import studentgradingmanager.UI.dialog.SignOut;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.StudentNavController;
