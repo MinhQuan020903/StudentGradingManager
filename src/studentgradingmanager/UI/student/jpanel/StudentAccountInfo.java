@@ -7,6 +7,7 @@ package studentgradingmanager.UI.student.jpanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import studentgradingmanager.UI.frame.ChangePassword;
+import studentgradingmanager.UI.frame.ChangePhoneNumber;
 
 
 /**
@@ -282,7 +283,11 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
-        
+        ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber();
+        changePhoneNumber.setMessage("FROM_STUDENT_ACCOUNT_INFO");
+        changePhoneNumber.show();
+        changePhoneNumber.setLocationRelativeTo(null);
+        changePhoneNumber.requestFocusInWindow(); 
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
 
