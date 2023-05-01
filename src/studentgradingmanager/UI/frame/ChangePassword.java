@@ -38,13 +38,13 @@ public class ChangePassword extends javax.swing.JFrame {
         jpTitle = new javax.swing.JPanel();
         jlbTitle = new javax.swing.JLabel();
         jbBack = new javax.swing.JButton();
-        jtfUserPassword = new javax.swing.JPasswordField();
+        jtfNewPassword = new javax.swing.JPasswordField();
         jbShowPassword = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtfUserConfirmPassword = new javax.swing.JPasswordField();
+        jtfConfirmPassword = new javax.swing.JPasswordField();
         jbShowConfirmPassword = new javax.swing.JToggleButton();
-        jbChangePassword = new javax.swing.JButton();
+        jbSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,26 +75,26 @@ public class ChangePassword extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTitleLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jbBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                .addGap(206, 206, 206)
                 .addComponent(jlbTitle)
-                .addGap(316, 316, 316))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         jpTitleLayout.setVerticalGroup(
             jpTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTitleLayout.createSequentialGroup()
                 .addGroup(jpTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTitleLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jlbTitle))
-                    .addGroup(jpTitleLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jbBack)))
+                        .addComponent(jbBack))
+                    .addGroup(jpTitleLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jlbTitle)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jtfUserPassword.setBackground(new java.awt.Color(217, 217, 217));
-        jtfUserPassword.setForeground(new java.awt.Color(153, 153, 153));
-        jtfUserPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtfNewPassword.setBackground(new java.awt.Color(217, 217, 217));
+        jtfNewPassword.setForeground(new java.awt.Color(153, 153, 153));
+        jtfNewPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jbShowPassword.setBackground(new java.awt.Color(255, 255, 255));
         jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png"))); // NOI18N
@@ -113,9 +113,9 @@ public class ChangePassword extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Xác nhận mật khẩu");
 
-        jtfUserConfirmPassword.setBackground(new java.awt.Color(217, 217, 217));
-        jtfUserConfirmPassword.setForeground(new java.awt.Color(153, 153, 153));
-        jtfUserConfirmPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtfConfirmPassword.setBackground(new java.awt.Color(217, 217, 217));
+        jtfConfirmPassword.setForeground(new java.awt.Color(153, 153, 153));
+        jtfConfirmPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jbShowConfirmPassword.setBackground(new java.awt.Color(255, 255, 255));
         jbShowConfirmPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png"))); // NOI18N
@@ -126,13 +126,13 @@ public class ChangePassword extends javax.swing.JFrame {
             }
         });
 
-        jbChangePassword.setBackground(new java.awt.Color(111, 142, 222));
-        jbChangePassword.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jbChangePassword.setForeground(new java.awt.Color(255, 255, 255));
-        jbChangePassword.setText("Lưu");
-        jbChangePassword.addActionListener(new java.awt.event.ActionListener() {
+        jbSave.setBackground(new java.awt.Color(111, 142, 222));
+        jbSave.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jbSave.setForeground(new java.awt.Color(255, 255, 255));
+        jbSave.setText("Lưu");
+        jbSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbChangePasswordActionPerformed(evt);
+                jbSaveActionPerformed(evt);
             }
         });
 
@@ -149,19 +149,19 @@ public class ChangePassword extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpChangePasswordLayout.createSequentialGroup()
                         .addGroup(jpChangePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpChangePasswordLayout.createSequentialGroup()
-                                .addComponent(jtfUserConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbShowConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2)
                             .addGroup(jpChangePasswordLayout.createSequentialGroup()
                                 .addGroup(jpChangePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtfNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(293, 293, 293))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpChangePasswordLayout.createSequentialGroup()
-                        .addComponent(jbChangePassword)
+                        .addComponent(jbSave)
                         .addGap(472, 472, 472))))
         );
         jpChangePasswordLayout.setVerticalGroup(
@@ -178,13 +178,13 @@ public class ChangePassword extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jLabel2)
                         .addGap(12, 12, 12)
-                        .addComponent(jtfUserConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38)
-                .addComponent(jbChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(101, Short.MAX_VALUE))
         );
 
@@ -206,11 +206,11 @@ public class ChangePassword extends javax.swing.JFrame {
 
         if (jbShowPassword.isSelected()) {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-eye-30.png")));
-            jtfUserPassword.setEchoChar((char)0);
+            jtfNewPassword.setEchoChar((char)0);
 
         } else {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png")));
-            jtfUserPassword.setEchoChar('*');
+            jtfNewPassword.setEchoChar('*');
             jbShowPassword.setSelected(false);
         }
     }//GEN-LAST:event_jbShowPasswordActionPerformed
@@ -220,16 +220,16 @@ public class ChangePassword extends javax.swing.JFrame {
         // Check conditions for show / hide password buttons
         if (jbShowConfirmPassword.isSelected()) {
             jbShowConfirmPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-eye-30.png")));
-            jtfUserConfirmPassword.setEchoChar((char)0);
+            jtfConfirmPassword.setEchoChar((char)0);
 
         } else {
             jbShowConfirmPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png")));
-            jtfUserConfirmPassword.setEchoChar('*');
+            jtfConfirmPassword.setEchoChar('*');
             jbShowConfirmPassword.setSelected(false);
         }
     }//GEN-LAST:event_jbShowConfirmPasswordActionPerformed
 
-    private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
+    private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
         
         // Navigate to Login screen when finish change password
         try {
@@ -242,7 +242,7 @@ public class ChangePassword extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-    }//GEN-LAST:event_jbChangePasswordActionPerformed
+    }//GEN-LAST:event_jbSaveActionPerformed
 
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
        
@@ -332,14 +332,14 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbBack;
-    private javax.swing.JButton jbChangePassword;
+    private javax.swing.JButton jbSave;
     private javax.swing.JToggleButton jbShowConfirmPassword;
     private javax.swing.JToggleButton jbShowPassword;
     private javax.swing.JLabel jlbTitle;
     private javax.swing.JPanel jpChangePassword;
     private javax.swing.JPanel jpTitle;
-    private javax.swing.JPasswordField jtfUserConfirmPassword;
-    private javax.swing.JPasswordField jtfUserPassword;
+    private javax.swing.JPasswordField jtfConfirmPassword;
+    private javax.swing.JPasswordField jtfNewPassword;
     // End of variables declaration//GEN-END:variables
 
     // This function runs after the auto-run initComponents() function

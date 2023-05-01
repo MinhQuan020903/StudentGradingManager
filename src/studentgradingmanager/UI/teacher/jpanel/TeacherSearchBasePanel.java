@@ -4,6 +4,7 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import java.awt.BorderLayout;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,7 +31,7 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
         Object[][] student1 = {{"1", "12345678", "Nguyễn Văn A", "12A1", "Trần Văn B"}};
         for (Object[] row : student1) {
-            model.addRow(row);
+            model.insertRow(0, row);
         }
         
     }
