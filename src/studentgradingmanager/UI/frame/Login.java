@@ -249,6 +249,7 @@ public class Login extends javax.swing.JFrame {
         // Navigate to ChangePassword screen
         try {
             ChangePassword changePassword = new ChangePassword();
+            changePassword.setMessage("FROM_LOGIN");
             changePassword.show();
             changePassword.setLocationRelativeTo(null);
             changePassword.requestFocusInWindow(); 
@@ -269,7 +270,6 @@ public class Login extends javax.swing.JFrame {
         Teacher: email="teacher", password="1234"
         */
         if (jtfUserEmail.getText().equals("student") && jtfUserPassword.getText().equals("1234")) {
-            System.out.print("DCMMMMMMMM");
             StudentMainScreen studentMainScreen = new StudentMainScreen();
             studentMainScreen.show();
             studentMainScreen.setLocationRelativeTo(null);

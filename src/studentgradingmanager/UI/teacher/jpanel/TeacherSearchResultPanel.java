@@ -4,17 +4,160 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author Quan
  */
-public class TeacherSearchResult extends javax.swing.JPanel {
+public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form TeacherSearchResult
      */
-    public TeacherSearchResult() {
+    public TeacherSearchResultPanel() {
         initComponents();
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JButton getJbBack() {
+        return jbBack;
+    }
+
+    public void setJbBack(JButton jbBack) {
+        this.jbBack = jbBack;
+    }
+
+    public JButton getJbSearch() {
+        return jbSearch;
+    }
+
+    public void setJbSearch(JButton jbSearch) {
+        this.jbSearch = jbSearch;
+    }
+
+    public JComboBox<String> getJcbSemester() {
+        return jcbSemester;
+    }
+
+    public void setJcbSemester(JComboBox<String> jcbSemester) {
+        this.jcbSemester = jcbSemester;
+    }
+
+    public JComboBox<String> getJcbYear() {
+        return jcbYear;
+    }
+
+    public void setJcbYear(JComboBox<String> jcbYear) {
+        this.jcbYear = jcbYear;
+    }
+
+    public JLabel getJlbSemesterResult() {
+        return jlbSemesterResult;
+    }
+
+    public void setJlbSemesterResult(JLabel jlbSemesterResult) {
+        this.jlbSemesterResult = jlbSemesterResult;
+    }
+
+    public JLabel getJlbStudentId() {
+        return jlbStudentId;
+    }
+
+    public void setJlbStudentId(JLabel jlbStudentId) {
+        this.jlbStudentId = jlbStudentId;
+    }
+
+    public JLabel getJlbStudentName() {
+        return jlbStudentName;
+    }
+
+    public void setJlbStudentName(JLabel jlbStudentName) {
+        this.jlbStudentName = jlbStudentName;
+    }
+
+    public JLabel getJlbYearResult() {
+        return jlbYearResult;
+    }
+
+    public void setJlbYearResult(JLabel jlbYearResult) {
+        this.jlbYearResult = jlbYearResult;
+    }
+
+    public JPanel getJpTeacherSearchResult() {
+        return jpTeacherSearchResult;
+    }
+
+    public void setJpTeacherSearchResult(JPanel jpTeacherSearchResult) {
+        this.jpTeacherSearchResult = jpTeacherSearchResult;
+    }
+
+    public JScrollPane getJspStudentResultTable() {
+        return jspStudentResultTable;
+    }
+
+    public void setJspStudentResultTable(JScrollPane jspStudentResultTable) {
+        this.jspStudentResultTable = jspStudentResultTable;
+    }
+
+    public JTable getJtStudentResult() {
+        return jtStudentResult;
+    }
+
+    public void setJtStudentResult(JTable jtStudentResult) {
+        this.jtStudentResult = jtStudentResult;
     }
 
     /**
@@ -146,51 +289,55 @@ public class TeacherSearchResult extends javax.swing.JPanel {
         jpTeacherSearchResult.setLayout(jpTeacherSearchResultLayout);
         jpTeacherSearchResultLayout.setHorizontalGroup(
             jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchResultLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(42, 42, 42)
-                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61)
-                        .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(154, 154, 154))
             .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTeacherSearchResultLayout.createSequentialGroup()
+                                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlbStudentName)
+                                        .addGap(119, 119, 119)
+                                        .addComponent(jLabel7))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTeacherSearchResultLayout.createSequentialGroup()
+                                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))
+                                        .addGap(64, 64, 64)
+                                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlbSemesterResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlbStudentName)
-                                .addGap(147, 147, 147)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlbStudentId))))
+                                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jlbStudentId)))))
+                        .addGap(0, 153, Short.MAX_VALUE))
                     .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(2, 2, 2)
+                        .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlbSemesterResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 418, Short.MAX_VALUE))
         );
         jpTeacherSearchResultLayout.setVerticalGroup(
             jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,12 +349,13 @@ public class TeacherSearchResult extends javax.swing.JPanel {
                 .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
                         .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbSemester))
+                        .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchResultLayout.createSequentialGroup()
                         .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)))

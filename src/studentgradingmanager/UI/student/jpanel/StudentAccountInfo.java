@@ -273,14 +273,16 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
-       // Send signel to parent Jframe for navigating
-       //to ChangePassword screen
-       
-       
+        ChangePassword changePassword = new ChangePassword();
+        changePassword.setMessage("FROM_STUDENT_ACCOUNT_INFO");
+        changePassword.show();
+        changePassword.setLocationRelativeTo(null);
+        changePassword.requestFocusInWindow(); 
+
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
 

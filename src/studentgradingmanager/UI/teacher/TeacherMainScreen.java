@@ -56,7 +56,6 @@ public class TeacherMainScreen extends javax.swing.JFrame {
         jpMainScreenContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(960, 540));
 
         jpMainScreen.setBackground(new java.awt.Color(255, 255, 255));
         jpMainScreen.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,7 +282,7 @@ public class TeacherMainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 966, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
