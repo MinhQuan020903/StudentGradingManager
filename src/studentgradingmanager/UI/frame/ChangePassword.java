@@ -257,21 +257,7 @@ public class ChangePassword extends javax.swing.JFrame {
                 dispose();
                 break;
             }     
-            case "FROM_STUDENT_ACCOUNT_INFO" : {
-                StudentMainScreen studentMainScreen = new StudentMainScreen(); 
-                studentMainScreen.show();
-                studentMainScreen.setLocationRelativeTo(null);
-                studentMainScreen.setVisible(true);
-                studentMainScreen.requestFocusInWindow();
-                dispose();
-                break;
-            }
-            case "FROM_TEACHER_ACCOUNT_INFO" : {
-                TeacherMainScreen teacherMainScreen = new TeacherMainScreen(); 
-                teacherMainScreen.show();
-                teacherMainScreen.setLocationRelativeTo(null);
-                teacherMainScreen.setVisible(true);
-                teacherMainScreen.requestFocusInWindow();
+            default: {
                 dispose();
                 break;
             }

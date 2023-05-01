@@ -242,7 +242,9 @@ public class TeacherGradingManagementBasePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfSearchForStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfSearchForStudentMouseClicked
-        // TODO add your handling code here:
+        if (jtfSearchForStudent.getText().equals("Nhập tên / mã học sinh cần tìm")) {
+            jtfSearchForStudent.setText("");
+        }
     }//GEN-LAST:event_jtfSearchForStudentMouseClicked
 
     private void jbNewSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewSubjectActionPerformed
