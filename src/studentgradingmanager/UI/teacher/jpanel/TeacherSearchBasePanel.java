@@ -51,6 +51,7 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
         jbSearch = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jtStudents = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jpTeacherSearchBase.setBackground(new java.awt.Color(255, 255, 255));
         jpTeacherSearchBase.setForeground(new java.awt.Color(255, 255, 255));
@@ -115,13 +116,19 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
         });
         jScrollPane.setViewportView(jtStudents);
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Bấm vào học sinh để xem thông tin ");
+
         javax.swing.GroupLayout jpTeacherSearchBaseLayout = new javax.swing.GroupLayout(jpTeacherSearchBase);
         jpTeacherSearchBase.setLayout(jpTeacherSearchBaseLayout);
         jpTeacherSearchBaseLayout.setHorizontalGroup(
             jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherSearchBaseLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(28, 28, 28)
                 .addGroup(jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpTeacherSearchBaseLayout.createSequentialGroup()
                         .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,24 +136,25 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(108, 108, 108)
                         .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jpTeacherSearchBaseLayout.setVerticalGroup(
             jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherSearchBaseLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
                 .addGroup(jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchBaseLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(52, 52, 52))
                     .addGroup(jpTeacherSearchBaseLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
                         .addGroup(jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(92, 92, 92))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -182,6 +190,7 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton jbSearch;
     private javax.swing.JPanel jpTeacherSearchBase;
