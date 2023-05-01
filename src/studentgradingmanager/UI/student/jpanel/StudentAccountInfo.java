@@ -284,7 +284,6 @@ public class StudentAccountInfo extends javax.swing.JPanel {
 
     private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
         ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber();
-        changePhoneNumber.setMessage("FROM_STUDENT_ACCOUNT_INFO");
         changePhoneNumber.show();
         changePhoneNumber.setLocationRelativeTo(null);
         changePhoneNumber.requestFocusInWindow(); 
