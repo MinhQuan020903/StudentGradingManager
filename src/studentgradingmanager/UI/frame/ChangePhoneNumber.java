@@ -177,27 +177,7 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
 
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
 
-        // Navigate to Login screen when click Back
-        switch (message) {
-            case "FROM_STUDENT_ACCOUNT_INFO" : {
-                StudentMainScreen studentMainScreen = new StudentMainScreen();
-                studentMainScreen.show();
-                studentMainScreen.setLocationRelativeTo(null);
-                studentMainScreen.setVisible(true);
-                studentMainScreen.requestFocusInWindow();
-                dispose();
-                break;
-            }
-            case "FROM_TEACHER_ACCOUNT_INFO" : {
-                TeacherMainScreen teacherMainScreen = new TeacherMainScreen();
-                teacherMainScreen.show();
-                teacherMainScreen.setLocationRelativeTo(null);
-                teacherMainScreen.setVisible(true);
-                teacherMainScreen.requestFocusInWindow();
-                dispose();
-                break;
-            }
-        }
+        dispose();
     }//GEN-LAST:event_jbBackActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
@@ -261,16 +241,6 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
                 new ChangePhoneNumber().setVisible(true);
             }
         });
-    }
-
-    private String message = "";
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
