@@ -4,6 +4,8 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import studentgradingmanager.UI.frame.ChangePassword;
+
 /**
  *
  * @author Quan
@@ -53,6 +55,11 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
         jpTeacherAccountInfo.setBackground(new java.awt.Color(255, 255, 255));
         jpTeacherAccountInfo.setForeground(new java.awt.Color(255, 255, 255));
         jpTeacherAccountInfo.setPreferredSize(new java.awt.Dimension(760, 540));
+        jpTeacherAccountInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpTeacherAccountInfoMouseClicked(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -273,9 +280,16 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
-        // Send signel to parent Jframe for navigating
-        //to ChangePassword screen
+        ChangePassword changePassword = new ChangePassword();
+        changePassword.setMessage("FROM_TEACHER_ACCOUNT_INFO");
+        changePassword.show();
+        changePassword.setLocationRelativeTo(null);
+        changePassword.requestFocusInWindow(); 
     }//GEN-LAST:event_jbChangePasswordActionPerformed
+
+    private void jpTeacherAccountInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpTeacherAccountInfoMouseClicked
+        
+    }//GEN-LAST:event_jpTeacherAccountInfoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
