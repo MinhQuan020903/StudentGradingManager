@@ -399,17 +399,19 @@ public class TeacherGradingManagementNewSubjectPanel extends javax.swing.JPanel 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfNewSubjectNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfNewSubjectNameMouseClicked
-        if (jtfNewSubjectName.getText().equals("Nhập tên / mã học sinh cần tìm")) {
+        if (jtfNewSubjectName.getText().equals("Nhập tên môn học...")) {
             jtfNewSubjectName.setText("");
         }
     }//GEN-LAST:event_jtfNewSubjectNameMouseClicked
 
     private void jtfNewSubjectNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNewSubjectNameActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtfNewSubjectNameActionPerformed
 
     private void jtfNewSubjectNoteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfNewSubjectNoteMouseClicked
-        // TODO add your handling code here:
+        if (jtfNewSubjectNote.getText().equals("Nhập ghi chú...")) {
+            jtfNewSubjectNote.setText("");
+        }
     }//GEN-LAST:event_jtfNewSubjectNoteMouseClicked
 
     private void jtfNewSubjectNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNewSubjectNoteActionPerformed
