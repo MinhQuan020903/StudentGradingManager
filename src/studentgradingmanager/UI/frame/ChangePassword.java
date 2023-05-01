@@ -257,8 +257,9 @@ public class ChangePassword extends javax.swing.JFrame {
                 dispose();
                 break;
             }     
-            default : {
+            default: {
                 dispose();
+                break;
             }
         }
             
