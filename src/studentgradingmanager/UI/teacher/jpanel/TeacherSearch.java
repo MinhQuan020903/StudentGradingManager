@@ -4,8 +4,7 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
-import java.awt.CardLayout;
-import javax.swing.JPanel;
+
 import studentgradingmanager.controller.TeacherSearchController;
 
 /**
@@ -19,16 +18,7 @@ public class TeacherSearch extends javax.swing.JPanel {
      */
     public TeacherSearch() {
         initComponents();
-        add(jpTeacherSearch);
         TeacherSearchController controller = new TeacherSearchController(this);
-    }
-
-    public JPanel getJpTeacherSearch() {
-        return jpTeacherSearch;
-    }
-
-    public void setJpTeacherSearch(JPanel jpTeacherSearch) {
-        this.jpTeacherSearch = jpTeacherSearch;
     }
 
     /**
