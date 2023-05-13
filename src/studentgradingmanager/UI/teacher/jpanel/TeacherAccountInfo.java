@@ -13,13 +13,43 @@ import studentgradingmanager.UI.frame.ChangePhoneNumber;
  */
 public class TeacherAccountInfo extends javax.swing.JPanel {
 
+    private String info[];
+
     /**
      * Creates new form TeacherAccountInfo
      */
     public TeacherAccountInfo() {
+    }
+
+    public TeacherAccountInfo(String info[]) {
+        this.info = info;
+
         initComponents();
         jbChangePassword.setContentAreaFilled(false);
         jbChangePhoneNumber.setContentAreaFilled(false);
+
+        setInfomationToPanel();
+    }
+
+    private void setInfomationToPanel() {
+        String hoten = info[0];
+        String maGV = info[1];
+        String email = info[2];
+        String matkhau = info[3];
+        String sdt = info[4];
+        String ngaysinh = info[5];
+        String gioitinh = info[6];
+        String monhoc = info[7];
+        String lopchunhiem = info[8];
+        
+        jlbTeacherName.setText(hoten);
+        jlbTeacherId.setText(maGV);
+        jlbTeacherEmail.setText(email);
+        jlbTeacherPassword.setText(matkhau);
+        jlbTeacherPhoneNumber.setText(sdt);
+        jlbTeacherDob.setText(ngaysinh);
+        jlbTeacherSubject.setText(monhoc);
+        jlbTeacherClass.setText(lopchunhiem);
     }
 
     /**
@@ -280,7 +310,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
         ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber();
         changePhoneNumber.show();
         changePhoneNumber.setLocationRelativeTo(null);
-        changePhoneNumber.requestFocusInWindow(); 
+        changePhoneNumber.requestFocusInWindow();
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
@@ -288,7 +318,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
         changePassword.setMessage("FROM_TEACHER_ACCOUNT_INFO");
         changePassword.show();
         changePassword.setLocationRelativeTo(null);
-        changePassword.requestFocusInWindow(); 
+        changePassword.requestFocusInWindow();
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jpTeacherAccountInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpTeacherAccountInfoMouseClicked
@@ -319,4 +349,5 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
     private javax.swing.JLabel jlbTeacherSubject;
     private javax.swing.JPanel jpTeacherAccountInfo;
     // End of variables declaration//GEN-END:variables
+
 }

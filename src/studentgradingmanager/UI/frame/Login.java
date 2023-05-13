@@ -4,17 +4,29 @@
  */
 package studentgradingmanager.UI.frame;
 
+import Database.DBConnect;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.BorderLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.UI.teacher.TeacherMainScreen;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Quan
  */
 public class Login extends javax.swing.JFrame {
-   
 
     /**
      * Creates new form Login
@@ -245,14 +257,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbRememberPasswordActionPerformed
 
     private void jbForgetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbForgetPasswordActionPerformed
-        
+
         // Navigate to ChangePassword screen
         try {
             ChangePassword changePassword = new ChangePassword();
             changePassword.setMessage("FROM_LOGIN");
             changePassword.show();
             changePassword.setLocationRelativeTo(null);
-            changePassword.requestFocusInWindow(); 
+            changePassword.requestFocusInWindow();
             dispose();
 
         } catch (Exception ex) {
@@ -262,39 +274,92 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jbForgetPasswordActionPerformed
 
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
-        
+
+        if (jtfUserEmail.getText().isEmpty() || (jtfUserEmail.getText().equals("Nhập email..."))) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Email");
+        } else if (jtfUserPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu");
+        } else {
+            String email = jtfUserEmail.getText().toString().trim().toLowerCase();
+            String password = jtfUserPassword.getText().toString().trim();
+            try {
+                // connect db
+                java.sql.Connection connection = DBConnect.getConnection();
+                String sql = "Select * from TAIKHOAN";
+                PreparedStatement ps = connection.prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+                boolean finded = false;
+                while (rs.next()) {
+                    if (rs.getString("EMAIL").toLowerCase().equals(email)) {
+                        //JOptionPane.showMessageDialog(this, email);
+                        if (rs.getString("MATKHAU").equals(password)) {
+                            finded = true;
+                            //if(rs.getString(sql))
+                            if (rs.getString("VAITRO").equals("GV")) {
+                                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + email);
+                                String matkGV = rs.getString("MATK");
+                                TeacherMainScreen teacherMainScreen = new TeacherMainScreen(email, password, matkGV);
+                                teacherMainScreen.show();
+                                teacherMainScreen.setLocationRelativeTo(null);
+                                teacherMainScreen.requestFocusInWindow();
+                                dispose();
+                                break;
+                            } else if (rs.getString("VAITRO").equals("HS")) {
+                                JOptionPane.showMessageDialog(this, "Xin chào học sinh " + email);
+                                StudentMainScreen studentMainScreen = new StudentMainScreen(email, password);
+                                studentMainScreen.show();
+                                studentMainScreen.setLocationRelativeTo(null);
+                                studentMainScreen.requestFocusInWindow();
+                                dispose();
+                                break;
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu, thử lại sau");
+                            break;
+                        }
+                    }
+                }
+                if (!finded) {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy tài khoản" + email + " trong kho dữ liệu, thử lại sau");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
         //TODO: Add sign-in condition here:
         /* 
         Login test account:
         Student: email="student", password="1234"
         Teacher: email="teacher", password="1234"
-        */
-        if (jtfUserEmail.getText().equals("student") && jtfUserPassword.getText().equals("1234")) {
-            StudentMainScreen studentMainScreen = new StudentMainScreen();
-            studentMainScreen.show();
-            studentMainScreen.setLocationRelativeTo(null);
-            studentMainScreen.requestFocusInWindow(); 
-            dispose();
-        } else if (jtfUserEmail.getText().equals("teacher") && jtfUserPassword.getText().equals("1234")) {
-            TeacherMainScreen teacherMainScreen = new TeacherMainScreen();
-            teacherMainScreen.show();
-            teacherMainScreen.setLocationRelativeTo(null);
-            teacherMainScreen.requestFocusInWindow(); 
-            dispose();
-        } else {
-            jlbLoginFailed.setVisible(true);
-        }
-                
+         */
+//        if (jtfUserEmail.getText().equals("student") && jtfUserPassword.getText().equals("1234")) {
+//            StudentMainScreen studentMainScreen = new StudentMainScreen();
+//            studentMainScreen.show();
+//            studentMainScreen.setLocationRelativeTo(null);
+//            studentMainScreen.requestFocusInWindow(); 
+//            dispose();
+//        } else if (jtfUserEmail.getText().equals("teacher") && jtfUserPassword.getText().equals("1234")) {
+//        TeacherMainScreen teacherMainScreen = new TeacherMainScreen();
+//        teacherMainScreen.show();
+//        teacherMainScreen.setLocationRelativeTo(null);
+//        teacherMainScreen.requestFocusInWindow();
+//        dispose();
+//        } else {
+//            jlbLoginFailed.setVisible(true);
+//        }
+
     }//GEN-LAST:event_jbLoginActionPerformed
 
     private void jbShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbShowPasswordActionPerformed
-        
+
         // Check conditions for show / hide password button
         if (jbShowPassword.isSelected()) {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-eye-30.png")));
-            jtfUserPassword.setEchoChar((char)0);
+            jtfUserPassword.setEchoChar((char) 0);
 
-        } else {               
+        } else {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png")));
             jtfUserPassword.setEchoChar('*');
             jbShowPassword.setSelected(false);
@@ -342,12 +407,11 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Login login = new Login();
-                
+
                 //Center the screen
                 login.setLocationRelativeTo(null);
                 login.setVisible(true);
@@ -373,7 +437,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField jtfUserPassword;
     // End of variables declaration//GEN-END:variables
 
-    
     // This function runs after the auto-run initComponents() function
     // generated by JavaSwingUI
     private void continueInitComponents() {

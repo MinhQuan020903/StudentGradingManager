@@ -4,10 +4,24 @@
  */
 package studentgradingmanager.UI.teacher;
 
+import Database.DBConnect;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import studentgradingmanager.UI.dialog.SignOut;
+import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.TeacherNavController;
+import javax.swing.JOptionPane;
+import studentgradingmanager.UI.student.StudentMainScreen;
+import studentgradingmanager.UI.teacher.TeacherMainScreen;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,19 +29,62 @@ import studentgradingmanager.controller.TeacherNavController;
  */
 public class TeacherMainScreen extends javax.swing.JFrame {
 
+    private String emailGV;
+    private String matkhauGV;
+    private String matkGV;
+    private String maGV;
+    private String hotenGV;
+    private String sdtGV;
+    private String ngsinhGV;
+    private String gioitinhGV;
+
     /**
      * Creates new form TeacherMainScreen
      */
     public TeacherMainScreen() {
+    }
+
+    public TeacherMainScreen(String email, String matkhauGV, String matkGV) throws SQLException {
         initComponents();
-        TeacherNavController controller = new TeacherNavController(jpMainScreenContent);
-        controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
+        this.matkhauGV = matkhauGV;
+        this.emailGV = email;
+        this.matkGV = matkGV;
+        //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkhauGV);
+        findInformationTeacher();
         
+        TeacherNavController controller = new TeacherNavController(jpMainScreenContent, emailGV, matkhauGV, matkGV);
+        controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
+
         ArrayList<Category> listCategory = new ArrayList<>();
         listCategory.add(new Category("Thông tin tài khoản", jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector));
         listCategory.add(new Category("Tra cứu kết quả học sinh", jpTeacherSearchSelector, jlbTeacherSearchSelector));
         listCategory.add(new Category("Quản lý điểm lớp học", jpTeacherGradingManagementSelector, jlbTeacherGradingManagementSelector));
-        controller.setEvent(listCategory); 
+        controller.setEvent(listCategory);
+
+    }
+
+    private void findInformationTeacher() throws SQLException {
+        java.sql.Connection connection = DBConnect.getConnection();
+        //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+        String sql = "SELECT * FROM GIAOVIEN WHERE MATK = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, matkGV);
+
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            // Lấy thông tin của giáo viên có MATK = matkGV
+            this.hotenGV = resultSet.getString("HOTEN");
+            this.maGV = resultSet.getString("MAGV");
+            this.sdtGV = resultSet.getString("SDT");
+            this.ngsinhGV = resultSet.getString("NGSINH");
+            this.gioitinhGV = resultSet.getString("GIOITINH");
+
+            jlbTeacherName.setText(hotenGV);
+            jlbTeacherId.setText(maGV);
+
+            JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + hotenGV);
+        }
     }
 
     /**
