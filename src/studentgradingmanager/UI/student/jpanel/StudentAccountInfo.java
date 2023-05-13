@@ -15,13 +15,20 @@ import studentgradingmanager.UI.frame.ChangePhoneNumber;
  * @author Quan
  */
 public class StudentAccountInfo extends javax.swing.JPanel {
-
+    
+    String[] info;
     /**
      * Creates new form StudentAccountInfo
      */
+    
     public StudentAccountInfo() {
+    }
+
+    public StudentAccountInfo(String[] info) {
+        this.info = info;
         initComponents();
         continueInitComponents();
+        setInformation();
     }
 
     /**
@@ -317,5 +324,27 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     private void continueInitComponents() {
         jbChangePassword.setContentAreaFilled(false);
         jbChangePhoneNumber.setContentAreaFilled(false);
+    }
+
+    private void setInformation() {
+        String hoTen = info[0];
+        String id = info[1];
+        String email = info[2];
+        String matKhau = info[3];
+        String sdt = info[4];
+        String ngaySinh = info[5];
+        String gioiTinh = info[6];
+        String khoi = info[7];
+        String lop = info[8];
+        
+        jlbStudentName.setText(hoTen);
+        jlbStudentId.setText(id);
+        jlbStudentEmail.setText(email);
+        jlbStudentPassword.setText(matKhau);
+        jlbStudentPhoneNumber.setText(sdt);
+        jlbStudentDob.setText(ngaySinh);
+        jlbStudentGender.setText(gioiTinh);
+        jlbStudentGrade.setText(khoi);
+        jlbStudentClass.setText(lop);
     }
 }

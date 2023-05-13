@@ -4,8 +4,11 @@
  */
 package studentgradingmanager.UI.student;
 
+import Database.DBConnect;
 import java.awt.Color;
 import java.awt.Container;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,7 +17,7 @@ import studentgradingmanager.UI.frame.ChangePassword;
 import studentgradingmanager.UI.dialog.SignOut;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.StudentNavController;
-
+import java.sql.SQLException;
 /**
  *
  * @author Quan
@@ -23,22 +26,24 @@ public class StudentMainScreen extends javax.swing.JFrame {
 
     private String email;
     private String password;
-
+    private String maTK;
+    private String hoTen;
+    private String id;
     /**
      * Creates new form StudentMainScreen
      */
     public StudentMainScreen() {
     }
 
-    public StudentMainScreen(String email, String password) {
+    public StudentMainScreen(String email, String password, String maTK) throws SQLException {
         initComponents();
 
         this.email = email;
         this.password = password;
-
-        StudentNavController controller = new StudentNavController(jpMainScreenContent);
+        this.maTK = maTK;
+        StudentNavController controller = new StudentNavController(jpMainScreenContent, this.email, this.password, this.maTK);
         controller.setView(jpStudentAccountInfoSelector, jlbStudentAccountInfoSelector);
-
+        findInformationStudent();
         ArrayList<Category> listCategory = new ArrayList<>();
         listCategory.add(new Category("Thông tin tài khoản", jpStudentAccountInfoSelector, jlbStudentAccountInfoSelector));
         listCategory.add(new Category("Kết quả học tập", jpStudentGradeResultSelector, jlbStudentGradeResultSelector));
@@ -390,5 +395,27 @@ public class StudentMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpStudentSignOutSelector;
     private javax.swing.JPanel jpUserAvatar;
     // End of variables declaration//GEN-END:variables
+
+    private void findInformationStudent() throws SQLException{
+        java.sql.Connection connection = DBConnect.getConnection();
+        
+        String sql = "SELECT * FROM HOCSINH WHERE MATK = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, maTK);
+        
+        ResultSet resultSet = statement.executeQuery();
+            
+       
+        if (resultSet.next()) {
+            // Lấy thông tin của giáo viên có MATK = matkGV
+            this.hoTen = resultSet.getString("HOTEN");
+            this.id = resultSet.getString("MAHS");
+            
+            jlbStudentName.setText(hoTen);
+            jlbStudentId.setText(id);
+
+            JOptionPane.showMessageDialog(this, "Xin chào hoc sinh " + hoTen);
+        }
+    }
 
 }
