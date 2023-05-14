@@ -4,44 +4,60 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
+import OOP.Teacher;
+import TransferData.MessageBroker;
+import TransferData.MessageListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import studentgradingmanager.UI.frame.ChangePassword;
 import studentgradingmanager.UI.frame.ChangePhoneNumber;
+
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author Quan
  */
-public class TeacherAccountInfo extends javax.swing.JPanel {
+public class TeacherAccountInfo extends javax.swing.JPanel implements MessageListener {
 
-    private String info[];
+    private Teacher teacherItem;
 
     /**
      * Creates new form TeacherAccountInfo
      */
     public TeacherAccountInfo() {
+        
     }
 
-    public TeacherAccountInfo(String info[]) {
-        this.info = info;
-
+    public TeacherAccountInfo(Teacher teacherItem) {
+        this.teacherItem = teacherItem;
         initComponents();
         jbChangePassword.setContentAreaFilled(false);
         jbChangePhoneNumber.setContentAreaFilled(false);
-
+        MessageBroker.getInstance().addListener(this);
         setInfomationToPanel();
     }
 
     private void setInfomationToPanel() {
-        String hoten = info[0];
-        String maGV = info[1];
-        String email = info[2];
-        String matkhau = info[3];
-        String sdt = info[4];
-        String ngaysinh = info[5];
-        String gioitinh = info[6];
-        String monhoc = info[7];
-        String lopchunhiem = info[8];
-        
+        String hoten = teacherItem.getHotenGV();
+        String maGV = teacherItem.getMaGV();
+        String email = teacherItem.getEmailGV();
+        String matkhau = teacherItem.getMatkhauGV();
+        String sdt = teacherItem.getSdtGV();
+        String ngaysinh = teacherItem.getNgsinhGV();
+        String gioitinh = teacherItem.getGioitinhGV();
+        String monhoc = teacherItem.getMamonhocGV();
+        String lopchunhiem = teacherItem.getMalopchunghiemGV();
+
         jlbTeacherName.setText(hoten);
         jlbTeacherId.setText(maGV);
         jlbTeacherEmail.setText(email);
@@ -307,14 +323,15 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
-        ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber();
+        ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber(teacherItem.getMatkGV(), teacherItem.getSdtGV());
         changePhoneNumber.show();
         changePhoneNumber.setLocationRelativeTo(null);
         changePhoneNumber.requestFocusInWindow();
+        
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
-        ChangePassword changePassword = new ChangePassword();
+        ChangePassword changePassword = new ChangePassword(teacherItem.getMatkGV(), teacherItem.getMatkhauGV());
         changePassword.setMessage("FROM_TEACHER_ACCOUNT_INFO");
         changePassword.show();
         changePassword.setLocationRelativeTo(null);
@@ -322,7 +339,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jpTeacherAccountInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpTeacherAccountInfoMouseClicked
-
+       
     }//GEN-LAST:event_jpTeacherAccountInfoMouseClicked
 
 
@@ -349,5 +366,50 @@ public class TeacherAccountInfo extends javax.swing.JPanel {
     private javax.swing.JLabel jlbTeacherSubject;
     private javax.swing.JPanel jpTeacherAccountInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onMessageReceived(String message) {
+        try {
+            findInformationTeacher();
+            updatePasswordAndPhoneNumber();
+            //System.out.println("tranfer");
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherAccountInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void findInformationTeacher() throws SQLException {
+        java.sql.Connection connection = DBConnect.getConnection();
+        //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+        String sql = "SELECT * FROM TAIKHOAN WHERE MATK = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, teacherItem.getMatkGV());
+
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            teacherItem.setMatkhauGV(resultSet.getString("MATKHAU"));
+        }
+        
+        sql = "SELECT * FROM GIAOVIEN WHERE MATK = ?";
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, teacherItem.getMatkGV());
+        resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            teacherItem.setSdtGV(resultSet.getString("SDT"));
+        }      
+      
+        if(!statement.isClosed()) {
+            statement.close();
+            System.out.println("Close update Info");
+        }
+    }
+    private void updatePasswordAndPhoneNumber() {
+        jlbTeacherPassword.setText(teacherItem.getMatkhauGV());
+        jlbTeacherPhoneNumber.setText(teacherItem.getSdtGV());
+        //System.out.println("updated");
+    }
+
+
 
 }

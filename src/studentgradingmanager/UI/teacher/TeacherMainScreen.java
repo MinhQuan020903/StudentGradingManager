@@ -5,6 +5,7 @@
 package studentgradingmanager.UI.teacher;
 
 import Database.DBConnect;
+import TransferData.MessageListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import studentgradingmanager.controller.TeacherNavController;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.UI.teacher.TeacherMainScreen;
+
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +29,7 @@ import java.util.logging.Logger;
  *
  * @author Quan
  */
-public class TeacherMainScreen extends javax.swing.JFrame {
+public class TeacherMainScreen extends javax.swing.JFrame implements MessageListener{
 
     private String emailGV;
     private String matkhauGV;
@@ -409,4 +411,14 @@ public class TeacherMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpTeacherSignOutSelector;
     private javax.swing.JPanel jpUserAvatar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onMessageReceived(String message) {
+        try {
+            findInformationTeacher();
+            System.err.println("Tranfers");
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherMainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

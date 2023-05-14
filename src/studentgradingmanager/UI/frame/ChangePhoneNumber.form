@@ -214,6 +214,8 @@
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;p l&#x1ea1;i S&#x110;T m&#x1edb;i..."/>
           </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfConfirmPhoneNumberFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfConfirmPhoneNumberFocusLost"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtfConfirmPhoneNumberMouseClicked"/>
           </Events>
         </Component>

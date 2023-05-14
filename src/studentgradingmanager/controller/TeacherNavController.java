@@ -5,6 +5,7 @@
 package studentgradingmanager.controller;
 
 import Database.DBConnect;
+import OOP.Teacher;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +43,8 @@ public class TeacherNavController extends NavController {
     private String gioitinhGV;
     private String mamonhocGV;
     private String malopchunhiemGV;
+    Teacher teacherItem;
+    Teacher temp;
 
     public TeacherNavController(JPanel jpRoot, String emailGV, String matkhauGV, String matkGV) throws SQLException {
         super(jpRoot);
@@ -66,7 +71,7 @@ public class TeacherNavController extends NavController {
             this.ngsinhGV = resultSet.getString("NGSINH");
             this.gioitinhGV = resultSet.getString("GIOITINH");
         }
-        
+
         sql = "SELECT * FROM GIANGDAY WHERE MAGV = ?";
         statement = connection.prepareStatement(sql);
         statement.setString(1, maGV);
@@ -74,6 +79,11 @@ public class TeacherNavController extends NavController {
         if (resultSet.next()) {
             this.mamonhocGV = resultSet.getString("MAMH");
             this.malopchunhiemGV = resultSet.getString("MALOP");
+        }
+
+        if (!statement.isClosed()) {
+            statement.close();
+            System.out.println("Closed to database findInformationTeacher!");
         }
     }
 
@@ -83,11 +93,12 @@ public class TeacherNavController extends NavController {
         setColorOnMousePressed(jpItem, jlbItem);
 
         String infor[] = {hotenGV, maGV, emailGV, matkhauGV, sdtGV, ngsinhGV, gioitinhGV, mamonhocGV, malopchunhiemGV};
-        
+        teacherItem = new Teacher(matkGV, matkhauGV, maGV, hotenGV, emailGV, sdtGV, ngsinhGV, gioitinhGV, mamonhocGV, malopchunhiemGV);
+
         root.removeAll();
         root.setLayout(new BorderLayout());
 
-        root.add(new TeacherAccountInfo(infor));
+        root.add(new TeacherAccountInfo(teacherItem));
         root.validate();
         root.repaint();
     }
@@ -118,9 +129,11 @@ public class TeacherNavController extends NavController {
         public void mouseClicked(MouseEvent e) {
             switch (type) {
                 case "Thông tin tài khoản": {
-                    node = new TeacherAccountInfo();
+                    node = new TeacherAccountInfo(teacherItem);
+                    System.out.println("Create new panel");
                     break;
                 }
+
                 case "Tra cứu kết quả học sinh": {
                     node = new TeacherSearch();
                     break;
