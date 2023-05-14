@@ -4,6 +4,7 @@
  */
 package studentgradingmanager.controller;
 
+import Class.Student;
 import Database.DBConnect;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +21,7 @@ import studentgradingmanager.bean.Category;
 import studentgradingmanager.utils.NavController;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import studentgradingmanager.UI.student.StudentMainScreen;
 /**
  *
  * @author Quan
@@ -37,15 +39,17 @@ public class StudentNavController extends NavController{
     private String khoi;
     private String lop;
     private String maLop;
-    private ArrayList<String> monHocArray = new ArrayList<String>();
-    private ArrayList<String> hocKyArray = new ArrayList<String>();
-    private String[] namHocArray;
-    private String[] maMH;
-    public StudentNavController(JPanel jpRoot, String email, String password, String maTK) throws SQLException{
+    private Student student;
+    private ArrayList<String> maHocKyArray = new ArrayList<String>();
+    private StudentMainScreen mainScreen;
+    private ArrayList<String> namHocArray = new ArrayList<String>();
+    private ArrayList<String> maMonHocArray = new ArrayList<String>();
+    public StudentNavController(JPanel jpRoot, String email, String password, String maTK, StudentMainScreen screen) throws SQLException{
         super(jpRoot);
         this.email = email;
         this.matKhau = password; 
         this.maTK = maTK;
+        this.mainScreen = screen;
         findInformationStudent();
     }
     
@@ -55,12 +59,9 @@ public class StudentNavController extends NavController{
         
         //root.removeAll();
         root.setLayout(new BorderLayout());
-        String[] info = {
-            hoTen, id, email, matKhau, sdt, ngaySinh, gioiTinh, khoi, lop
-        };
         
-        
-        root.add(new StudentAccountInfo(info));
+        student = new Student(hoTen, id, email, matKhau, sdt, ngaySinh, gioiTinh, khoi, lop, maTK);
+        root.add(new StudentAccountInfo(student, this.mainScreen));
         root.validate();
         root.repaint();
     }
@@ -100,14 +101,27 @@ public class StudentNavController extends NavController{
             this.lop = resultSet.getString("TENLOP");
             this.khoi = resultSet.getString("KHOI");
         }
-        
-        sql = "SELECT * FROM DIEM WHERE MAHS = ?";
-        statement = connection.prepareStatement(id);
+        sql = "SELECT * FROM DIEM, MONHOC WHERE MAHS = ? and DIEM.MAMH = MONHOC.MAMH";
+        statement = connection.prepareStatement(sql);
         statement.setString(1, id);
         resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            
+        while (resultSet.next()) {
+            this.maMonHocArray.add(resultSet.getString("MAMH"));
         }
+        
+        sql = "select HOCKYNAMHOC.HOCKY, MAHK from HOCKYNAMHOC";
+        statement = connection.prepareStatement(sql);
+        resultSet = statement.executeQuery();
+        while(resultSet.next()) {
+            this.maHocKyArray.add(resultSet.getString("MAHK"));
+        }
+        sql = "select distinct HOCKYNAMHOC.NAMHOC, NAMHOC from HOCKYNAMHOC";
+        statement = connection.prepareStatement(sql);
+        resultSet = statement.executeQuery();
+        while(resultSet.next()) {
+            this.namHocArray.add(resultSet.getString("NAMHOC"));
+        }
+        
     }
     
     class LabelEvent implements MouseListener {
@@ -127,12 +141,13 @@ public class StudentNavController extends NavController{
         public void mouseClicked(MouseEvent e) {
             switch(type) {
                 case "Thông tin tài khoản" : {
-                    String[] info = {hoTen, id, email, matKhau, sdt, ngaySinh, gioiTinh, khoi, lop};
-                    node = new StudentAccountInfo(info);
+//                    String[] info = {hoTen, id, email, matKhau, sdt, ngaySinh, gioiTinh, khoi, lop};
+                    node = new StudentAccountInfo(student, mainScreen);
                     break;
                 }
                 case "Kết quả học tập" : {
-                    node = new StudentGradeResult();
+                    
+                    node = new StudentGradeResult(maHocKyArray, namHocArray, id);
                     break;
                 }
                 

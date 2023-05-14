@@ -41,7 +41,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
         this.email = email;
         this.password = password;
         this.maTK = maTK;
-        StudentNavController controller = new StudentNavController(jpMainScreenContent, this.email, this.password, this.maTK);
+        StudentNavController controller = new StudentNavController(jpMainScreenContent, this.email, this.password, this.maTK, this);
         controller.setView(jpStudentAccountInfoSelector, jlbStudentAccountInfoSelector);
         findInformationStudent();
         ArrayList<Category> listCategory = new ArrayList<>();

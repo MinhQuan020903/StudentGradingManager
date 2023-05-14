@@ -4,10 +4,12 @@
  */
 package studentgradingmanager.UI.student.jpanel;
 
+import Class.Student;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import studentgradingmanager.UI.frame.ChangePassword;
 import studentgradingmanager.UI.frame.ChangePhoneNumber;
+import studentgradingmanager.UI.student.StudentMainScreen;
 
 
 /**
@@ -16,17 +18,19 @@ import studentgradingmanager.UI.frame.ChangePhoneNumber;
  */
 public class StudentAccountInfo extends javax.swing.JPanel {
     
-    String[] info;
+    
     /**
      * Creates new form StudentAccountInfo
      */
-    
+    private Student student;
+    private StudentMainScreen mainScreen;
     public StudentAccountInfo() {
     }
 
-    public StudentAccountInfo(String[] info) {
-        this.info = info;
+    public StudentAccountInfo(Student student, StudentMainScreen screen) {
         initComponents();
+        this.student = student;
+        this.mainScreen = screen;
         continueInitComponents();
         setInformation();
     }
@@ -281,7 +285,7 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
-        ChangePassword changePassword = new ChangePassword();
+        ChangePassword changePassword = new ChangePassword(student.getMaTK(), this.mainScreen);
         changePassword.setMessage("FROM_STUDENT_ACCOUNT_INFO");
         changePassword.show();
         changePassword.setLocationRelativeTo(null);
@@ -290,7 +294,7 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jbChangePhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePhoneNumberActionPerformed
-        ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber();
+        ChangePhoneNumber changePhoneNumber = new ChangePhoneNumber(student.getId(), this.mainScreen);
         changePhoneNumber.show();
         changePhoneNumber.setLocationRelativeTo(null);
         changePhoneNumber.requestFocusInWindow(); 
@@ -327,24 +331,15 @@ public class StudentAccountInfo extends javax.swing.JPanel {
     }
 
     private void setInformation() {
-        String hoTen = info[0];
-        String id = info[1];
-        String email = info[2];
-        String matKhau = info[3];
-        String sdt = info[4];
-        String ngaySinh = info[5];
-        String gioiTinh = info[6];
-        String khoi = info[7];
-        String lop = info[8];
-        
-        jlbStudentName.setText(hoTen);
-        jlbStudentId.setText(id);
-        jlbStudentEmail.setText(email);
-        jlbStudentPassword.setText(matKhau);
-        jlbStudentPhoneNumber.setText(sdt);
-        jlbStudentDob.setText(ngaySinh);
-        jlbStudentGender.setText(gioiTinh);
-        jlbStudentGrade.setText(khoi);
-        jlbStudentClass.setText(lop);
+       
+        jlbStudentName.setText(student.getHoTen());
+        jlbStudentId.setText(student.getId());
+        jlbStudentEmail.setText(student.getEmail());
+        jlbStudentPassword.setText(student.getMatKhau());
+        jlbStudentPhoneNumber.setText(student.getSdt());
+        jlbStudentDob.setText(student.getNgaySinh());
+        jlbStudentGender.setText(student.getLop());
+        jlbStudentGrade.setText(student.getKhoi());
+        jlbStudentClass.setText(student.getLop());
     }
 }
