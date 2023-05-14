@@ -372,7 +372,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         try {
             findInformationTeacher();
             updatePasswordAndPhoneNumber();
-            //System.out.println("tranfer");
+            System.out.println("Update Password and Phone Number");
         } catch (SQLException ex) {
             Logger.getLogger(TeacherAccountInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
