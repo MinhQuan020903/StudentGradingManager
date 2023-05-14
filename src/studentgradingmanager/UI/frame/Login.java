@@ -291,6 +291,7 @@ public class Login extends javax.swing.JFrame {
                 boolean finded = false;
                 while (rs.next()) {
                     if (rs.getString("EMAIL").toLowerCase().equals(email)) {
+                        finded = true;
                         //JOptionPane.showMessageDialog(this, email);
                         if (rs.getString("MATKHAU").equals(password)) {
                             finded = true;
@@ -319,6 +320,17 @@ public class Login extends javax.swing.JFrame {
                         }
                     }
                 }
+
+                if (!ps.isClosed()) {
+                    ps.close();
+                    System.out.println("Closed to database Login!");
+                }
+                try {
+                    rs.close();
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception e) {
+
+                }
                 if (!finded) {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy tài khoản" + email + " trong kho dữ liệu, thử lại sau");
                 }
@@ -327,29 +339,6 @@ public class Login extends javax.swing.JFrame {
             }
 
         }
-
-        //TODO: Add sign-in condition here:
-        /* 
-        Login test account:
-        Student: email="student", password="1234"
-        Teacher: email="teacher", password="1234"
-         */
-//        if (jtfUserEmail.getText().equals("student") && jtfUserPassword.getText().equals("1234")) {
-//            StudentMainScreen studentMainScreen = new StudentMainScreen();
-//            studentMainScreen.show();
-//            studentMainScreen.setLocationRelativeTo(null);
-//            studentMainScreen.requestFocusInWindow(); 
-//            dispose();
-//        } else if (jtfUserEmail.getText().equals("teacher") && jtfUserPassword.getText().equals("1234")) {
-//        TeacherMainScreen teacherMainScreen = new TeacherMainScreen();
-//        teacherMainScreen.show();
-//        teacherMainScreen.setLocationRelativeTo(null);
-//        teacherMainScreen.requestFocusInWindow();
-//        dispose();
-//        } else {
-//            jlbLoginFailed.setVisible(true);
-//        }
-
     }//GEN-LAST:event_jbLoginActionPerformed
 
     private void jbShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbShowPasswordActionPerformed
