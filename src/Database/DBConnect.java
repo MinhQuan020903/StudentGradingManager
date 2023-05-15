@@ -21,6 +21,7 @@ public class DBConnect {
         String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=MANAGER_STUDENT;encrypt=false";
         String username = "sa";
         String password = "123456";
+        
         try {
             Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
             System.out.println("Connected to database!");

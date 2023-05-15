@@ -6,7 +6,7 @@ package studentgradingmanager.UI.teacher.jpanel;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import studentgradingmanager.controller.TeacherGradingManagementController;
+import studentgradingmanager.UI.frame.Login;
 
 /**
  *
@@ -19,8 +19,6 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
      */
     public TeacherGradingManagement() {
         initComponents();
-        setLayout(new BorderLayout());
-        TeacherGradingManagementController controller = new TeacherGradingManagementController(this);
     }
 
     /**
@@ -32,31 +30,189 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpTeacherGradingManagement = new javax.swing.JPanel();
+        jpTeacherGradingManagementBasePanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jbSearch = new javax.swing.JButton();
+        jsResult = new javax.swing.JScrollPane();
+        jtStudentResult = new javax.swing.JTable();
+        jbUpdateSubject = new javax.swing.JButton();
+        jbNewSubject = new javax.swing.JButton();
+        jtfSearchForStudent = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(785, 540));
 
-        jpTeacherGradingManagement.setBackground(new java.awt.Color(255, 255, 255));
-        jpTeacherGradingManagement.setForeground(new java.awt.Color(255, 255, 255));
-        jpTeacherGradingManagement.setPreferredSize(new java.awt.Dimension(785, 540));
-        jpTeacherGradingManagement.setLayout(new java.awt.BorderLayout());
+        jpTeacherGradingManagementBasePanel.setBackground(new java.awt.Color(255, 255, 255));
+        jpTeacherGradingManagementBasePanel.setForeground(new java.awt.Color(255, 255, 255));
+        jpTeacherGradingManagementBasePanel.setPreferredSize(new java.awt.Dimension(785, 540));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-search-16.png"))); // NOI18N
+
+        jbSearch.setBackground(new java.awt.Color(169, 186, 247));
+        jbSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbSearch.setForeground(new java.awt.Color(255, 255, 255));
+        jbSearch.setText("Tìm kiếm");
+        jbSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSearchActionPerformed(evt);
+            }
+        });
+
+        jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
+        jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
+        jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
+        jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "STT", "Tên môn học", "Điểm QT", "Điểm GK", "Điểm CK", "Điểm TBHK", "Điểm TBNH", "Ghi chú"
+            }
+        ));
+        jtStudentResult.setGridColor(new java.awt.Color(0, 0, 0));
+        jtStudentResult.setShowGrid(true);
+        jsResult.setViewportView(jtStudentResult);
+
+        jbUpdateSubject.setBackground(new java.awt.Color(0, 255, 255));
+        jbUpdateSubject.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbUpdateSubject.setForeground(new java.awt.Color(255, 255, 255));
+        jbUpdateSubject.setText("Cập nhật điểm");
+        jbUpdateSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbUpdateSubjectActionPerformed(evt);
+            }
+        });
+
+        jbNewSubject.setBackground(new java.awt.Color(0, 255, 255));
+        jbNewSubject.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbNewSubject.setForeground(new java.awt.Color(255, 255, 255));
+        jbNewSubject.setText("Thêm môn mới");
+        jbNewSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNewSubjectActionPerformed(evt);
+            }
+        });
+
+        jtfSearchForStudent.setBackground(new java.awt.Color(217, 217, 217));
+        jtfSearchForStudent.setForeground(new java.awt.Color(153, 153, 153));
+        jtfSearchForStudent.setText("Nhập tên / mã học sinh cần tìm");
+        jtfSearchForStudent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtfSearchForStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtfSearchForStudentMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpTeacherGradingManagementBasePanelLayout = new javax.swing.GroupLayout(jpTeacherGradingManagementBasePanel);
+        jpTeacherGradingManagementBasePanel.setLayout(jpTeacherGradingManagementBasePanelLayout);
+        jpTeacherGradingManagementBasePanelLayout.setHorizontalGroup(
+            jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                        .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbUpdateSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(44, 44, 44)
+                                .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                                .addGap(129, 129, 129)
+                                .addComponent(jbNewSubject)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jsResult, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jpTeacherGradingManagementBasePanelLayout.setVerticalGroup(
+            jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel1)
+                        .addGap(61, 61, 61))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherGradingManagementBasePanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(jbSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)))
+                .addGroup(jpTeacherGradingManagementBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbUpdateSubject)
+                    .addComponent(jbNewSubject))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jsResult, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherGradingManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementBasePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherGradingManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementBasePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSearchActionPerformed
+
+    private void jbUpdateSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpdateSubjectActionPerformed
+        TeacherGradingManagementUpdateSubjectFrame frame = new TeacherGradingManagementUpdateSubjectFrame();
+        frame.show();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocusInWindow();
+    }//GEN-LAST:event_jbUpdateSubjectActionPerformed
+
+    private void jbNewSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewSubjectActionPerformed
+        TeacherGradingManagementNewSubjectFrame frame = new TeacherGradingManagementNewSubjectFrame();
+        frame.show();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocusInWindow();
+    }//GEN-LAST:event_jbNewSubjectActionPerformed
+
+    private void jtfSearchForStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfSearchForStudentMouseClicked
+        if (jtfSearchForStudent.getText().equals("Nhập tên / mã học sinh cần tìm")) {
+            jtfSearchForStudent.setText("");
+        }
+    }//GEN-LAST:event_jtfSearchForStudentMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jpTeacherGradingManagement;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbNewSubject;
+    private javax.swing.JButton jbSearch;
+    private javax.swing.JButton jbUpdateSubject;
+    private javax.swing.JPanel jpTeacherGradingManagementBasePanel;
+    private javax.swing.JScrollPane jsResult;
+    private javax.swing.JTable jtStudentResult;
+    private javax.swing.JTextField jtfSearchForStudent;
     // End of variables declaration//GEN-END:variables
 }

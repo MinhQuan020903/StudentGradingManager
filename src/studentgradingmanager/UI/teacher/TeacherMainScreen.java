@@ -165,7 +165,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             .addGroup(jpTeacherAccountInfoSelectorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlbTeacherAccountInfoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jpTeacherAccountInfoSelectorLayout.setVerticalGroup(
             jpTeacherAccountInfoSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,15 +278,15 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jlbTeacherId))
-            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
             .addComponent(jpTeacherAccountInfoSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTeacherName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
         );
         jpMainScreenSelectorLayout.setVerticalGroup(
             jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +305,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
                 .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jpMainScreenContent.setBackground(new java.awt.Color(255, 255, 255));
@@ -315,11 +315,11 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         jpMainScreenContent.setLayout(jpMainScreenContentLayout);
         jpMainScreenContentLayout.setHorizontalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
         jpMainScreenContentLayout.setVerticalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpMainScreenLayout = new javax.swing.GroupLayout(jpMainScreen);
@@ -328,8 +328,9 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             jpMainScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainScreenLayout.createSequentialGroup()
                 .addComponent(jpMainScreenSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainScreenLayout.setVerticalGroup(
             jpMainScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,11 +342,11 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 966, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
