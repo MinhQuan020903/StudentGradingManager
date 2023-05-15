@@ -4,13 +4,25 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
 import OOP.StudentBase;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -19,6 +31,7 @@ import javax.swing.JTable;
 public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
     private StudentBase studentBase;
+    private List
 
     /**
      * Creates new form TeacherSearchResult
@@ -30,6 +43,32 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
     public TeacherSearchResultPanel(StudentBase studentBase) {
         initComponents();
         this.studentBase = studentBase;
+
+        mirrorData();
+    }
+
+    private void mirrorData() {
+        try {
+            StudentBase item = studentBase;
+            
+            jlbStudentName.setText(item.getHOTEN());
+            jlbStudentId.setText(item.getMAHS());
+            
+            java.sql.Connection connection = DBConnect.getConnection();
+         
+
+            String sql = "SELECT * FROM DIEM WHERE MAHS = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, item.getMAHS());
+            
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public JLabel getjLabel2() {
@@ -86,6 +125,7 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
     public void setJbBack(JButton jbBack) {
         this.jbBack = jbBack;
+        
     }
 
     public JButton getJbSearch() {
@@ -415,4 +455,5 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
+
 }

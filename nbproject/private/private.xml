@@ -5,8 +5,9 @@
         <group>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/frame/ChangePassword.java</file>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherAccountInfo.java</file>
+            <file>file:/E:/GitHub/StudentGradingManager/src/OOP/DIEM.java</file>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearchBasePanel.java</file>
-            <file>file:/E:/GitHub/StudentGradingManager/src/OOP/StudentBase.java</file>
+            <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/controller/TeacherSearchController.java</file>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearch.java</file>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearchResultPanel.java</file>
             <file>file:/E:/GitHub/StudentGradingManager/src/studentgradingmanager/UI/frame/Login.java</file>

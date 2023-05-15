@@ -29,7 +29,7 @@ public class TeacherSearchController {
     public TeacherSearchController(TeacherSearch ts, Teacher teacherItem) {
         this.teacherItem = teacherItem;
         teacherSearch = ts;
-        teacherSearchBasePanel = new TeacherSearchBasePanel();
+        teacherSearchBasePanel = new TeacherSearchBasePanel(teacherItem);
         teacherSearchResultPanel = new TeacherSearchResultPanel();
 
         // Add action listener to the JTable in the TeacherSearchBasePanel
@@ -39,16 +39,18 @@ public class TeacherSearchController {
                 if (selectedRow != -1) {
                     // Get the selected row data
 
-//                    Object[] rowData = ((DefaultTableModel) teacherSearchBasePanel.getJtStudents().getModel()).getDataVector().elementAt(selectedRow).toArray();
-//                    JTable table = teacherSearchBasePanel.getJtStudents();
-//                    StudentBase studentBase = new StudentBase(table.getValueAt(selectedRow, 1).toString()
-//                            , table.getValueAt(selectedRow, 2).toString()
-//                            , table.getValueAt(selectedRow, 3).toString()
-//                            , null
-//                            , null
-//                            , null
-//                            , null);
-                    teacherSearchResultPanel = new TeacherSearchResultPanel();
+                    Object[] rowData = ((DefaultTableModel) teacherSearchBasePanel.getJtStudents().getModel()).getDataVector().elementAt(selectedRow).toArray();
+                    JTable table = teacherSearchBasePanel.getJtStudents();
+                    StudentBase studentBase = new StudentBase(table.getValueAt(selectedRow, 1).toString(),
+                             table.getValueAt(selectedRow, 2).toString(),
+                             table.getValueAt(selectedRow, 3).toString(),
+                             null,
+                             null,
+                             null,
+                             null);
+                    TeacherSearchResultPanel temp = new TeacherSearchResultPanel(studentBase);
+                    //teacherSearchResultPanel = new TeacherSearchResultPanel();
+                    teacherSearchResultPanel = temp;
                     // Replace the TeacherSearchBasePanel with TeacherSearchResultPanel
                     teacherSearch.remove(teacherSearchBasePanel);
                     teacherSearch.add(teacherSearchResultPanel, BorderLayout.CENTER);
@@ -65,6 +67,7 @@ public class TeacherSearchController {
             teacherSearch.add(teacherSearchBasePanel, BorderLayout.CENTER);
             teacherSearch.revalidate();
             teacherSearch.repaint();
+            System.out.println("Click");
         });
 
         // Set the TeacherSearchBasePanel as the initial panel
