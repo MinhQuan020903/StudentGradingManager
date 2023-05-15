@@ -1,122 +1,19 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package studentgradingmanager.UI.teacher.jpanel;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Quan
  */
-public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPanel {
-
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
-
-    public void setjLabel3(JLabel jLabel3) {
-        this.jLabel3 = jLabel3;
-    }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
-    public JButton getJbBack() {
-        return jbBack;
-    }
-
-    public void setJbBack(JButton jbBack) {
-        this.jbBack = jbBack;
-    }
-
-    public JButton getJbSaveEditSubject() {
-        return jbSaveEditSubject;
-    }
-
-    public void setJbSaveEditSubject(JButton jbSaveEditSubject) {
-        this.jbSaveEditSubject = jbSaveEditSubject;
-    }
-
-    public JComboBox<String> getJcbSubjects() {
-        return jcbSubjects;
-    }
-
-    public void setJcbSubjects(JComboBox<String> jcbSubjects) {
-        this.jcbSubjects = jcbSubjects;
-    }
-
-    public JPanel getJpTeacherGradingManagementEditSubjectPanel() {
-        return jpTeacherGradingManagementEditSubjectPanel;
-    }
-
-    public void setJpTeacherGradingManagementEditSubjectPanel(JPanel jpTeacherGradingManagementEditSubjectPanel) {
-        this.jpTeacherGradingManagementEditSubjectPanel = jpTeacherGradingManagementEditSubjectPanel;
-    }
-
-    public JTable getJtStudentResult() {
-        return jtStudentResult;
-    }
-
-    public void setJtStudentResult(JTable jtStudentResult) {
-        this.jtStudentResult = jtStudentResult;
-    }
-
-    public JTextField getJtfNewSubjectFinalTermScore() {
-        return jtfNewSubjectFinalTermScore;
-    }
-
-    public void setJtfNewSubjectFinalTermScore(JTextField jtfNewSubjectFinalTermScore) {
-        this.jtfNewSubjectFinalTermScore = jtfNewSubjectFinalTermScore;
-    }
-
-    public JTextField getJtfNewSubjectMidTermGrade() {
-        return jtfNewSubjectMidTermGrade;
-    }
-
-    public void setJtfNewSubjectMidTermGrade(JTextField jtfNewSubjectMidTermGrade) {
-        this.jtfNewSubjectMidTermGrade = jtfNewSubjectMidTermGrade;
-    }
-
-    public JTextField getJtfNewSubjectProgressGrade() {
-        return jtfNewSubjectProgressGrade;
-    }
-
-    public void setJtfNewSubjectProgressGrade(JTextField jtfNewSubjectProgressGrade) {
-        this.jtfNewSubjectProgressGrade = jtfNewSubjectProgressGrade;
-    }
+public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form TeacherGradingManagementEditSubjectPanel
+     * Creates new form TeacherGradingManagementUpdateSubjectFrame
      */
-    public TeacherGradingManagementUpdateSubjectPanel() {
+    public TeacherGradingManagementUpdateSubjectFrame() {
         initComponents();
     }
 
@@ -139,9 +36,13 @@ public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPan
         jbSaveEditSubject = new javax.swing.JButton();
         jcbSubjects = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jbBack = new javax.swing.JButton();
         jsResult = new javax.swing.JScrollPane();
         jtStudentResult = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jbBack = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpTeacherGradingManagementEditSubjectPanel.setBackground(new java.awt.Color(255, 255, 255));
         jpTeacherGradingManagementEditSubjectPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,10 +125,6 @@ public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPan
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Môn học");
 
-        jbBack.setBackground(new java.awt.Color(153, 204, 255));
-        jbBack.setForeground(new java.awt.Color(255, 255, 255));
-        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-back-48.png"))); // NOI18N
-
         jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
         jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
@@ -257,51 +154,87 @@ public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPan
         jtStudentResult.setShowGrid(true);
         jsResult.setViewportView(jtStudentResult);
 
+        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(51, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("CHỈNH SỬA MÔN HỌC");
+
+        jbBack.setBackground(new java.awt.Color(255, 51, 51));
+        jbBack.setForeground(new java.awt.Color(255, 255, 255));
+        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-exit-48.png"))); // NOI18N
+        jbBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(334, 334, 334)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jpTeacherGradingManagementEditSubjectPanelLayout = new javax.swing.GroupLayout(jpTeacherGradingManagementEditSubjectPanel);
         jpTeacherGradingManagementEditSubjectPanel.setLayout(jpTeacherGradingManagementEditSubjectPanelLayout);
         jpTeacherGradingManagementEditSubjectPanelLayout.setHorizontalGroup(
             jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfNewSubjectProgressGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)
-                                .addComponent(jbSaveEditSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jsResult, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfNewSubjectProgressGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(jbSaveEditSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jsResult, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(149, 149, 149))
         );
         jpTeacherGradingManagementEditSubjectPanelLayout.setVerticalGroup(
             jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNewSubjectProgressGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -310,21 +243,23 @@ public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPan
                     .addComponent(jLabel5)
                     .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSaveEditSubject))
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
                 .addComponent(jsResult, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(44, 44, 44))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfNewSubjectProgressGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfNewSubjectProgressGradeMouseClicked
@@ -355,12 +290,52 @@ public class TeacherGradingManagementUpdateSubjectPanel extends javax.swing.JPan
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSaveEditSubjectActionPerformed
 
+    private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbBackActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TeacherGradingManagementUpdateSubjectFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBack;
     private javax.swing.JButton jbSaveEditSubject;
     private javax.swing.JComboBox<String> jcbSubjects;

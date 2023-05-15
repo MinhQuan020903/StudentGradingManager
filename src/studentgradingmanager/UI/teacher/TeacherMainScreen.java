@@ -4,30 +4,89 @@
  */
 package studentgradingmanager.UI.teacher;
 
+import Database.DBConnect;
+import TransferData.MessageListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import studentgradingmanager.UI.dialog.SignOut;
+import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.TeacherNavController;
+import javax.swing.JOptionPane;
+import studentgradingmanager.UI.student.StudentMainScreen;
+import studentgradingmanager.UI.teacher.TeacherMainScreen;
+
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Quan
  */
-public class TeacherMainScreen extends javax.swing.JFrame {
+public class TeacherMainScreen extends javax.swing.JFrame implements MessageListener{
+
+    private String emailGV;
+    private String matkhauGV;
+    private String matkGV;
+    private String maGV;
+    private String hotenGV;
+    private String sdtGV;
+    private String ngsinhGV;
+    private String gioitinhGV;
 
     /**
      * Creates new form TeacherMainScreen
      */
     public TeacherMainScreen() {
+    }
+
+    public TeacherMainScreen(String email, String matkhauGV, String matkGV) throws SQLException {
         initComponents();
-        TeacherNavController controller = new TeacherNavController(jpMainScreenContent);
-        controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
+        this.matkhauGV = matkhauGV;
+        this.emailGV = email;
+        this.matkGV = matkGV;
+        //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkhauGV);
+        findInformationTeacher();
         
+        TeacherNavController controller = new TeacherNavController(jpMainScreenContent, emailGV, matkhauGV, matkGV);
+        controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
+
         ArrayList<Category> listCategory = new ArrayList<>();
         listCategory.add(new Category("Thông tin tài khoản", jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector));
         listCategory.add(new Category("Tra cứu kết quả học sinh", jpTeacherSearchSelector, jlbTeacherSearchSelector));
         listCategory.add(new Category("Quản lý điểm lớp học", jpTeacherGradingManagementSelector, jlbTeacherGradingManagementSelector));
-        controller.setEvent(listCategory); 
+        controller.setEvent(listCategory);
+
+    }
+
+    private void findInformationTeacher() throws SQLException {
+        java.sql.Connection connection = DBConnect.getConnection();
+        //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+        String sql = "SELECT * FROM GIAOVIEN WHERE MATK = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, matkGV);
+
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            // Lấy thông tin của giáo viên có MATK = matkGV
+            this.hotenGV = resultSet.getString("HOTEN");
+            this.maGV = resultSet.getString("MAGV");
+            this.sdtGV = resultSet.getString("SDT");
+            this.ngsinhGV = resultSet.getString("NGSINH");
+            this.gioitinhGV = resultSet.getString("GIOITINH");
+
+            jlbTeacherName.setText(hotenGV);
+            jlbTeacherId.setText(maGV);
+
+            JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + hotenGV);
+        }
     }
 
     /**
@@ -106,7 +165,7 @@ public class TeacherMainScreen extends javax.swing.JFrame {
             .addGroup(jpTeacherAccountInfoSelectorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlbTeacherAccountInfoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jpTeacherAccountInfoSelectorLayout.setVerticalGroup(
             jpTeacherAccountInfoSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,15 +278,15 @@ public class TeacherMainScreen extends javax.swing.JFrame {
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jlbTeacherId))
-            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
             .addComponent(jpTeacherAccountInfoSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTeacherName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
         );
         jpMainScreenSelectorLayout.setVerticalGroup(
             jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +305,7 @@ public class TeacherMainScreen extends javax.swing.JFrame {
                 .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jpMainScreenContent.setBackground(new java.awt.Color(255, 255, 255));
@@ -256,11 +315,11 @@ public class TeacherMainScreen extends javax.swing.JFrame {
         jpMainScreenContent.setLayout(jpMainScreenContentLayout);
         jpMainScreenContentLayout.setHorizontalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
         jpMainScreenContentLayout.setVerticalGroup(
             jpMainScreenContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpMainScreenLayout = new javax.swing.GroupLayout(jpMainScreen);
@@ -269,8 +328,9 @@ public class TeacherMainScreen extends javax.swing.JFrame {
             jpMainScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainScreenLayout.createSequentialGroup()
                 .addComponent(jpMainScreenSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpMainScreenContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainScreenLayout.setVerticalGroup(
             jpMainScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,11 +342,11 @@ public class TeacherMainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 966, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -352,4 +412,14 @@ public class TeacherMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpTeacherSignOutSelector;
     private javax.swing.JPanel jpUserAvatar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onMessageReceived(String message) {
+        try {
+            findInformationTeacher();
+            System.err.println("Tranfers");
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherMainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagement.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagementUpdateSubjectPanel.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagementNewSubjectPanel.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearchBasePanel.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/controller/TeacherGradingManagementController.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearch.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagementBasePanel.java</file>
-            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/controller/TeacherSearchController.java</file>
+            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagementUpdateSubjectFrame.java</file>
+            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/Database/DBConnect.java</file>
+            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherSearchResultFrame.java</file>
+            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/frame/Login.java</file>
+            <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/TeacherMainScreen.java</file>
         </group>
     </open-files>
 </project-private>
