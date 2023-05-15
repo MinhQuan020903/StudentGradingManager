@@ -4,6 +4,7 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import OOP.StudentBase;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,11 +18,18 @@ import javax.swing.JTable;
  */
 public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
+    private StudentBase studentBase;
+
     /**
      * Creates new form TeacherSearchResult
      */
     public TeacherSearchResultPanel() {
         initComponents();
+    }
+
+    public TeacherSearchResultPanel(StudentBase studentBase) {
+        initComponents();
+        this.studentBase = studentBase;
     }
 
     public JLabel getjLabel2() {
@@ -193,23 +201,19 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Năm học");
 
         jcbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Điểm TB năm học");
 
         jcbSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbSearch.setText("Tìm kiếm");
 
-        jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
         jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
         jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -238,12 +242,10 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Tên học sinh:");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Điểm TB học kỳ");
 
         jlbYearResult.setBackground(new java.awt.Color(255, 255, 255));
@@ -258,22 +260,18 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Học kỳ");
 
         jlbStudentName.setBackground(new java.awt.Color(255, 255, 255));
         jlbStudentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlbStudentName.setForeground(new java.awt.Color(0, 0, 0));
         jlbStudentName.setText("Nguyễn Văn A");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Mã học sinh:");
 
         jlbStudentId.setBackground(new java.awt.Color(255, 255, 255));
         jlbStudentId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlbStudentId.setForeground(new java.awt.Color(0, 0, 0));
         jlbStudentId.setText("12345678");
 
         jbBack.setBackground(new java.awt.Color(153, 204, 255));
@@ -282,6 +280,11 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
         jbBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbBackMouseClicked(evt);
+            }
+        });
+        jbBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBackActionPerformed(evt);
             }
         });
 
@@ -384,9 +387,13 @@ public class TeacherSearchResultPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
-        
-        
+
+
     }//GEN-LAST:event_jbBackMouseClicked
+
+    private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

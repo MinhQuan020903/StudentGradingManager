@@ -324,13 +324,7 @@ public class Login extends javax.swing.JFrame {
                 if (!ps.isClosed()) {
                     ps.close();
                     System.out.println("Closed to database Login!");
-                }
-                try {
-                    rs.close();
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception e) {
-
-                }
+                }                
                 if (!finded) {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy tài khoản" + email + " trong kho dữ liệu, thử lại sau");
                 }

@@ -135,7 +135,7 @@ public class TeacherNavController extends NavController {
                 }
 
                 case "Tra cứu kết quả học sinh": {
-                    node = new TeacherSearch();
+                    node = new TeacherSearch(teacherItem);
                     break;
                 }
                 case "Quản lý điểm lớp học": {

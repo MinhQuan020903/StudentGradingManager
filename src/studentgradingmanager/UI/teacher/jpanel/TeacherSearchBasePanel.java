@@ -4,10 +4,22 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
+import OOP.StudentBase;
+import OOP.Teacher;
+import TransferData.MessageBroker;
 import java.awt.BorderLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,6 +27,16 @@ import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.table.DefaultTableModel;
+import studentgradingmanager.UI.frame.ChangePassword;
+
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -22,18 +44,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TeacherSearchBasePanel extends javax.swing.JPanel {
 
+    private Teacher teacherItem;
+    private List<StudentBase> listStudent = new ArrayList<>();
+    private List<StudentBase> searchList;
+
     /**
      * Creates new form TeacherSearchBasePanel
      */
     public TeacherSearchBasePanel() {
         initComponents();
+    }
+    public TeacherSearchBasePanel(Teacher teacherItem) {
+        this.teacherItem = teacherItem;
+        initComponents();
         //Example infos
-        DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
-        Object[][] student1 = {{"1", "12345678", "Nguyễn Văn A", "12A1", "Trần Văn B"}};
-        for (Object[] row : student1) {
-            model.insertRow(0, row);
-        }
+        importDataToStudent();
+
         
+
     }
 
     /**
@@ -66,6 +94,11 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
                 jtfSearchForStudentMouseClicked(evt);
             }
         });
+        jtfSearchForStudent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfSearchForStudentKeyReleased(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-search-16.png"))); // NOI18N
 
@@ -82,26 +115,15 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
 
         jScrollPane.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPaneMouseClicked(evt);
+            }
+        });
 
-        jtStudents.setBackground(new java.awt.Color(255, 255, 255));
-        jtStudents.setForeground(new java.awt.Color(0, 0, 0));
         jtStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã học sinh", "Tên học sinh", "Lớp", "GVCN"
@@ -150,7 +172,7 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
                         .addGroup(jpTeacherSearchBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfSearchForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,13 +201,104 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jtfSearchForStudentMouseClicked
 
-    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSearchActionPerformed
-
     private void jtStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtStudentsMouseClicked
+
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
+        // TODO add your handling code here:
+        String searchString = jtfSearchForStudent.getText().trim();
+
+        if (searchString.equals("Nhập tên / mã học sinh cần tìm") || searchString.isEmpty()) {
+            searchList = listStudent;
+            //System.out.println("Vo day");
+        } else {
+            searchList = new ArrayList<>(); // Gán lại giá trị cho searchList trước khi tìm kiếm mới
+
+            for (int i = 0; i < listStudent.size(); i++) {
+                if (listStudent.get(i).getMAHS().toLowerCase().contains(searchString.toLowerCase())
+                        || listStudent.get(i).getHOTEN().toLowerCase().contains(searchString.toLowerCase())) {
+                    //System.out.println("Them Phan Tu");
+                    searchList.add(listStudent.get(i));
+                } else {
+                    //System.out.println("Ra khoi if");
+                }
+            }
+            //System.out.println("Click");
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
+
+        // Xóa bỏ các dòng hiện có trong JTable
+        model.setRowCount(0);
+
+        // Thêm dữ liệu mới vào JTable
+        for (int i = 0; i < searchList.size(); i++) {
+            String[] stu = {String.valueOf(i),
+                searchList.get(i).getMAHS(),
+                searchList.get(i).getHOTEN(),
+                searchList.get(i).getMALOP(),
+                teacherItem.getHotenGV()};
+            model.addRow(stu);
+        }
+
+        // Cập nhật lại giao diện JTable
+        jtStudents.revalidate();
+        jtStudents.repaint();
+
+        //System.out.println(searchList.size());
+    }//GEN-LAST:event_jbSearchActionPerformed
+
+    private void jtfSearchForStudentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchForStudentKeyReleased
+        // TODO add your handling code here:
+        String searchString = jtfSearchForStudent.getText().trim();
+                // Thực hiện các hành động tương ứng khi người dùng gõ phím
+
+                if (searchString.equals("Nhập tên / mã học sinh cần tìm") || searchString.isEmpty()) {
+                    searchList = listStudent;
+                    //System.out.println("Vo day");
+                } else {
+                    searchList = new ArrayList<>(); // Gán lại giá trị cho searchList trước khi tìm kiếm mới
+
+                    for (int i = 0; i < listStudent.size(); i++) {
+                        if (listStudent.get(i).getMAHS().toLowerCase().contains(searchString.toLowerCase())
+                                || listStudent.get(i).getHOTEN().toLowerCase().contains(searchString.toLowerCase())) {
+                            //System.out.println("Them Phan Tu");
+                            searchList.add(listStudent.get(i));
+                        } else {
+                            //System.out.println("Ra khoi if");
+                        }
+                    }
+                    // System.out.println("Click");
+                }
+
+                DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
+
+                // Xóa bỏ các dòng hiện có trong JTable
+                model.setRowCount(0);
+
+                // Thêm dữ liệu mới vào JTable
+                for (int i = 0; i < searchList.size(); i++) {
+                    String[] stu = {String.valueOf(i),
+                        searchList.get(i).getMAHS(),
+                        searchList.get(i).getHOTEN(),
+                        searchList.get(i).getMALOP(),
+                        teacherItem.getHotenGV()};
+                    model.addRow(stu);
+                }
+
+                // Cập nhật lại giao diện JTable
+                jtStudents.revalidate();
+                jtStudents.repaint();
+
+                //System.out.println(searchList.size());
+    }//GEN-LAST:event_jtfSearchForStudentKeyReleased
+
+    private void jScrollPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPaneMouseClicked
+        // TODO add your handling code here:
+        int row = jtStudents.getSelectedRow();
+        MessageBroker.getInstance().sendMessage("Click " + row);
+    }//GEN-LAST:event_jScrollPaneMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -204,5 +317,66 @@ public class TeacherSearchBasePanel extends javax.swing.JPanel {
 
     public void setJtStudents(JTable jtStudents) {
         this.jtStudents = jtStudents;
+    }
+
+    private void importDataToStudent() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
+            int i = 0;
+
+            List<String> listClass = new ArrayList<>();
+
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM GIANGDAY WHERE MAGV = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, teacherItem.getMaGV());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                if (!listClass.contains(resultSet.getString("MALOP"))) {
+                    listClass.add(resultSet.getString("MALOP"));
+                    System.out.println(listClass);
+                }
+            }
+
+            for (String item : listClass) {
+                sql = "SELECT * FROM HOCSINH WHERE MALOP = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, item);
+                resultSet = statement.executeQuery();
+                System.out.println(item);
+
+                while (resultSet.next()) {
+                    if (resultSet.getString("MALOP").equals(item)) {
+                        listStudent.add(new StudentBase(resultSet.getString("MAHS"),
+                                resultSet.getString("HOTEN"),
+                                resultSet.getString("MALOP"),
+                                resultSet.getString("SDT"),
+                                resultSet.getString("NGSINH"),
+                                resultSet.getString("GIOITINH"),
+                                resultSet.getString("MATK")));
+                    }
+
+                }
+            }
+
+            System.out.println(listStudent.get(1));
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Closed to database import data student!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchBasePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
+
+        for (int i = 0; i < listStudent.size(); i++) {
+            String[] stu = {String.valueOf(i), listStudent.get(i).getMAHS(), listStudent.get(i).getHOTEN(), listStudent.get(i).getMALOP(), teacherItem.getHotenGV()};
+            model.addRow(stu);
+        }
     }
 }

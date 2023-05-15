@@ -5,6 +5,11 @@
 package studentgradingmanager.UI.teacher.jpanel;
 
 
+import OOP.Teacher;
+import TransferData.MessageListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import studentgradingmanager.controller.TeacherSearchController;
 
 /**
@@ -12,13 +17,15 @@ import studentgradingmanager.controller.TeacherSearchController;
  * @author Quan
  */
 public class TeacherSearch extends javax.swing.JPanel {
-
+    private Teacher teacherItem;
     /**
      * Creates new form TeacherSearch
      */
-    public TeacherSearch() {
+    
+    public TeacherSearch(Teacher teacherItem) {
         initComponents();
-        TeacherSearchController controller = new TeacherSearchController(this);
+        this.teacherItem = teacherItem;
+        TeacherSearchController controller = new TeacherSearchController(this, teacherItem);
     }
 
     /**
@@ -55,4 +62,6 @@ public class TeacherSearch extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpTeacherSearch;
     // End of variables declaration//GEN-END:variables
+
+    
 }
