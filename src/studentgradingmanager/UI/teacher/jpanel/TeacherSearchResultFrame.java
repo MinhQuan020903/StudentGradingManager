@@ -4,17 +4,170 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
+import OOP.DIEM;
+import OOP.StudentBase;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Quan
  */
 public class TeacherSearchResultFrame extends javax.swing.JFrame {
 
+    private StudentBase studentBase;
+    private List<String> listMAHK;
+    private List<String> listNAMHOC;
+    private List<DIEM> listDIEM = new ArrayList<>();
+    private DefaultTableModel model;
+
     /**
      * Creates new form TeacherSearchResultFrame
      */
-    public TeacherSearchResultFrame() {
+    public TeacherSearchResultFrame(StudentBase studentBase) {
         initComponents();
+        this.studentBase = studentBase;
+        model = (DefaultTableModel) jtStudentResult.getModel();
+        mirrorData();
+        findSemester();
+        //importData();
+    }
+
+    private void importData() {
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+            listDIEM.clear();           
+            String sql = "SELECT * FROM DIEM WHERE MAHS = ? AND MAHK = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, studentBase.getMAHS());
+            if (jcbSemester.getSelectedItem().equals("1")) {
+                statement.setString(2, "HK01");
+            } else {
+                statement.setString(2, "HK02");
+            }
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                listDIEM.add(new DIEM(
+                        resultSet.getString("MAMH"),
+                        resultSet.getString("MAHS"),
+                        resultSet.getString("DIEMQT"),
+                        resultSet.getString("DIEMGK"),
+                        resultSet.getString("DIEMCK"),
+                        resultSet.getString("DIEMTBHK"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getString("MAHK")));
+
+            }
+
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH MAHK");
+            }
+
+            
+            model.setRowCount(0);
+            for (int i = 0; i < listDIEM.size(); i++) {
+                String[] stu = {String.valueOf(i),
+                    listDIEM.get(i).getMAHS(),
+                    listDIEM.get(i).getDEIMTBHK(),
+                    listDIEM.get(i).getDIEMCK(),
+                    listDIEM.get(i).getDIEMQT(),
+                    listDIEM.get(i).getMAMH(),
+                    listDIEM.get(i).getGHICHU()};
+                model.addRow(stu);
+            }
+
+            jtStudentResult.revalidate();
+            jtStudentResult.repaint();
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void findSemester() {
+        listMAHK = new ArrayList<>();
+        // tim MAHK
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM HOCKYNAMHOC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                listMAHK.add(resultSet.getString("MAHK"));
+            }
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH MAHK");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // add data vao jComboBox
+        listNAMHOC = new ArrayList<>();
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM HOCKYNAMHOC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            boolean isPresent = false;
+            while (resultSet.next()) {
+                if (listNAMHOC.size() != 0) {
+                    for (int i = 0; i < listNAMHOC.size(); i++) {
+                        if (listNAMHOC.get(i).equals(resultSet.getString("NAMHOC"))) {
+                            isPresent = true;
+                            //System.out.println("Kiem tra");
+                            break;
+                        }
+                    }
+                    if (!isPresent) {
+                        listNAMHOC.add(resultSet.getString("NAMHOC"));
+                        //System.out.println("Kiem tra 1");
+                        isPresent = false;
+                    }
+                } else {
+                    listNAMHOC.add(resultSet.getString("NAMHOC"));
+                    ///System.out.println("Kiem tra 2");
+                }
+
+            }
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH NAMHOC");
+            }
+            jcbSemester.addItem("1");
+            jcbSemester.addItem("2");
+
+            for (String item : listNAMHOC) {
+                if (listNAMHOC == null) {
+                    break;
+                } else {
+                    jcbYear.addItem(item);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void mirrorData() {
+        StudentBase student = studentBase;
+        jlbStudentName.setText(student.getHOTEN());
+        jlbStudentId.setText(student.getMAHS());
     }
 
     /**
@@ -56,13 +209,15 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Năm học");
 
-        jcbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Điểm TB năm học");
 
-        jcbSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbSemester.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbSemesterItemStateChanged(evt);
+            }
+        });
 
         jbSearch.setText("Tìm kiếm");
 
@@ -133,11 +288,6 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jbBack.setBackground(new java.awt.Color(153, 204, 255));
         jbBack.setForeground(new java.awt.Color(255, 255, 255));
         jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-back-48.png"))); // NOI18N
-        jbBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbBackMouseClicked(evt);
-            }
-        });
         jbBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBackActionPerformed(evt);
@@ -259,48 +409,18 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
-
-    }//GEN-LAST:event_jbBackMouseClicked
-
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
         dispose();
     }//GEN-LAST:event_jbBackActionPerformed
 
+    private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSemesterItemStateChanged
+        // TODO add your handling code here:
+        importData();
+    }//GEN-LAST:event_jcbSemesterItemStateChanged
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TeacherSearchResultFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -323,4 +443,5 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
+
 }
