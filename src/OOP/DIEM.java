@@ -17,8 +17,9 @@ public class DIEM {
     private String DEIMTBHK;
     private String GHICHU;
     private String MAHK;
+    private String TenMonHoc;
 
-    public DIEM(String MAMH, String MAHS, String DIEMQT, String DIEMGK, String DIEMCK, String DEIMTBHK, String GHICHU, String MAHK) {
+    public DIEM(String MAMH, String MAHS, String DIEMQT, String DIEMGK, String DIEMCK, String DEIMTBHK, String GHICHU, String MAHK, String TenMonHoc) {
         this.MAMH = MAMH;
         this.MAHS = MAHS;
         this.DIEMQT = DIEMQT;
@@ -27,6 +28,7 @@ public class DIEM {
         this.DEIMTBHK = DEIMTBHK;
         this.GHICHU = GHICHU;
         this.MAHK = MAHK;
+        this.TenMonHoc = TenMonHoc;
     }
 
     public String getMAMH() {
@@ -92,6 +94,16 @@ public class DIEM {
     public void setMAHK(String MAHK) {
         this.MAHK = MAHK;
     }
+
+    public String getTenMonHoc() {
+        return TenMonHoc;
+    }
+
+    public void setTenMonHoc(String TenMonHoc) {
+        this.TenMonHoc = TenMonHoc;
+    }
+
+    
 
     
 }

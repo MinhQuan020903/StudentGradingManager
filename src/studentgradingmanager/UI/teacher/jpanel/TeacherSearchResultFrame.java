@@ -7,6 +7,8 @@ package studentgradingmanager.UI.teacher.jpanel;
 import Database.DBConnect;
 import OOP.DIEM;
 import OOP.StudentBase;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,13 +41,14 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         mirrorData();
         findSemester();
         //importData();
+
     }
 
     private void importData() {
         try {
             java.sql.Connection connection = DBConnect.getConnection();
             //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
-            listDIEM.clear();           
+            listDIEM.clear();
             String sql = "SELECT * FROM DIEM WHERE MAHS = ? AND MAHK = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, studentBase.getMAHS());
@@ -64,7 +68,24 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                         resultSet.getString("DIEMCK"),
                         resultSet.getString("DIEMTBHK"),
                         resultSet.getString("GHICHU"),
-                        resultSet.getString("MAHK")));
+                        resultSet.getString("MAHK"),
+                        null));
+
+            }
+
+            for (int i = 0; i < listDIEM.size(); i++) {
+                System.out.println(listDIEM.get(i).getMAMH());
+            }
+
+            for (int i = 0; i < listDIEM.size(); i++) {
+                sql = "SELECT * FROM MONHOC WHERE MAMH = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, listDIEM.get(i).getMAMH());
+                resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {                    
+                    listDIEM.get(i).setTenMonHoc(resultSet.getString("TENMH"));
+                }
 
             }
 
@@ -73,15 +94,14 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                 System.out.println("Close SEARCH MAHK");
             }
 
-            
             model.setRowCount(0);
             for (int i = 0; i < listDIEM.size(); i++) {
                 String[] stu = {String.valueOf(i),
-                    listDIEM.get(i).getMAHS(),
-                    listDIEM.get(i).getDEIMTBHK(),
-                    listDIEM.get(i).getDIEMCK(),
+                    listDIEM.get(i).getTenMonHoc(),
                     listDIEM.get(i).getDIEMQT(),
-                    listDIEM.get(i).getMAMH(),
+                    listDIEM.get(i).getDIEMGK(),
+                    listDIEM.get(i).getDIEMCK(),
+                    listDIEM.get(i).getDEIMTBHK(),
                     listDIEM.get(i).getGHICHU()};
                 model.addRow(stu);
             }
@@ -246,6 +266,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         ));
         jtStudentResult.setGridColor(new java.awt.Color(0, 0, 0));
         jtStudentResult.setShowGrid(true);
+        jtStudentResult.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtStudentResultMouseClicked(evt);
+            }
+        });
         jspStudentResultTable.setViewportView(jtStudentResult);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -417,6 +442,16 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         importData();
     }//GEN-LAST:event_jcbSemesterItemStateChanged
+
+    private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentResultMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jtStudentResult.rowAtPoint(evt.getPoint());
+        int selectedColumn = jtStudentResult.columnAtPoint(evt.getPoint());
+        boolean a = jtStudentResult.isEditing();
+        if (a == false) {
+            JOptionPane.showMessageDialog(null, "Restricted Editting");
+        }
+    }//GEN-LAST:event_jtStudentResultMouseClicked
 
     /**
      * @param args the command line arguments
