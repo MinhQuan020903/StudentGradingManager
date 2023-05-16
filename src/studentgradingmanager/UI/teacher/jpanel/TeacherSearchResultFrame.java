@@ -4,17 +4,196 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
+import OOP.DIEM;
+import OOP.StudentBase;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Quan
  */
 public class TeacherSearchResultFrame extends javax.swing.JFrame {
 
+    private StudentBase studentBase;
+    private List<String> listMAHK;
+    private List<String> listNAMHOC;
+    private List<DIEM> listDIEM = new ArrayList<>();
+    private DefaultTableModel model;
+    private Boolean ChoPhepChinhSua = false;
+
     /**
      * Creates new form TeacherSearchResultFrame
      */
-    public TeacherSearchResultFrame() {
+    public TeacherSearchResultFrame(StudentBase studentBase) {
         initComponents();
+        this.studentBase = studentBase;
+        model = (DefaultTableModel) jtStudentResult.getModel();
+        mirrorData();
+        findSemester();
+        //importData();
+
+        if (ChoPhepChinhSua == false) {
+            jbEdit.setBackground(Color.red);
+        }
+
+    }
+
+    private void importData() {
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+            listDIEM.clear();
+            String sql = "SELECT * FROM DIEM WHERE MAHS = ? AND MAHK = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, studentBase.getMAHS());
+            if (jcbSemester.getSelectedItem().equals("1")) {
+                statement.setString(2, "HK01");
+            } else {
+                statement.setString(2, "HK02");
+            }
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                listDIEM.add(new DIEM(
+                        resultSet.getString("MAMH"),
+                        resultSet.getString("MAHS"),
+                        resultSet.getString("DIEMQT"),
+                        resultSet.getString("DIEMGK"),
+                        resultSet.getString("DIEMCK"),
+                        resultSet.getString("DIEMTBHK"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getString("MAHK"),
+                        null));
+
+            }
+
+            for (int i = 0; i < listDIEM.size(); i++) {
+                System.out.println(listDIEM.get(i).getMAMH());
+            }
+
+            for (int i = 0; i < listDIEM.size(); i++) {
+                sql = "SELECT * FROM MONHOC WHERE MAMH = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, listDIEM.get(i).getMAMH());
+                resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    listDIEM.get(i).setTenMonHoc(resultSet.getString("TENMH"));
+                }
+
+            }
+
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH MAHK");
+            }
+
+            model.setRowCount(0);
+            for (int i = 0; i < listDIEM.size(); i++) {
+                String[] stu = {String.valueOf(i),
+                    listDIEM.get(i).getTenMonHoc(),
+                    listDIEM.get(i).getDIEMQT(),
+                    listDIEM.get(i).getDIEMGK(),
+                    listDIEM.get(i).getDIEMCK(),
+                    listDIEM.get(i).getDEIMTBHK(),
+                    listDIEM.get(i).getGHICHU()};
+                model.addRow(stu);
+            }
+
+            jtStudentResult.revalidate();
+            jtStudentResult.repaint();
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void findSemester() {
+        listMAHK = new ArrayList<>();
+        // tim MAHK
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM HOCKYNAMHOC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                listMAHK.add(resultSet.getString("MAHK"));
+            }
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH MAHK");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // add data vao jComboBox
+        listNAMHOC = new ArrayList<>();
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM HOCKYNAMHOC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            boolean isPresent = false;
+            while (resultSet.next()) {
+                if (listNAMHOC.size() != 0) {
+                    for (int i = 0; i < listNAMHOC.size(); i++) {
+                        if (listNAMHOC.get(i).equals(resultSet.getString("NAMHOC"))) {
+                            isPresent = true;
+                            //System.out.println("Kiem tra");
+                            break;
+                        }
+                    }
+                    if (!isPresent) {
+                        listNAMHOC.add(resultSet.getString("NAMHOC"));
+                        //System.out.println("Kiem tra 1");
+                        isPresent = false;
+                    }
+                } else {
+                    listNAMHOC.add(resultSet.getString("NAMHOC"));
+                    ///System.out.println("Kiem tra 2");
+                }
+
+            }
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Close SEARCH NAMHOC");
+            }
+            jcbSemester.addItem("1");
+            jcbSemester.addItem("2");
+
+            for (String item : listNAMHOC) {
+                if (listNAMHOC == null) {
+                    break;
+                } else {
+                    jcbYear.addItem(item);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void mirrorData() {
+        StudentBase student = studentBase;
+        jlbStudentName.setText(student.getHOTEN());
+        jlbStudentId.setText(student.getMAHS());
     }
 
     /**
@@ -31,7 +210,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jcbYear = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jcbSemester = new javax.swing.JComboBox<>();
-        jbSearch = new javax.swing.JButton();
+        jbEdit = new javax.swing.JButton();
         jspStudentResultTable = new javax.swing.JScrollPane();
         jtStudentResult = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -45,6 +224,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jbBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jbAddSubject = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,15 +236,23 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Năm học");
 
-        jcbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Điểm TB năm học");
 
-        jcbSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbSemester.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbSemesterItemStateChanged(evt);
+            }
+        });
 
-        jbSearch.setText("Tìm kiếm");
+        jbEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbEdit.setText("CHỈNH SỬA");
+        jbEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditActionPerformed(evt);
+            }
+        });
 
         jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,6 +279,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         ));
         jtStudentResult.setGridColor(new java.awt.Color(0, 0, 0));
         jtStudentResult.setShowGrid(true);
+        jtStudentResult.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtStudentResultMouseClicked(evt);
+            }
+        });
         jspStudentResultTable.setViewportView(jtStudentResult);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -132,12 +325,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
 
         jbBack.setBackground(new java.awt.Color(255, 51, 51));
         jbBack.setForeground(new java.awt.Color(255, 255, 255));
-        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-exit-48.png"))); // NOI18N
-        jbBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbBackMouseClicked(evt);
-            }
-        });
+        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-back-48.png"))); // NOI18N
         jbBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBackActionPerformed(evt);
@@ -173,6 +361,14 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jbAddSubject.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbAddSubject.setText("Thêm Môn Học");
+        jbAddSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAddSubjectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpTeacherSearchResultLayout = new javax.swing.GroupLayout(jpTeacherSearchResult);
         jpTeacherSearchResult.setLayout(jpTeacherSearchResultLayout);
         jpTeacherSearchResultLayout.setHorizontalGroup(
@@ -191,29 +387,32 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                         .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
                         .addContainerGap(130, Short.MAX_VALUE)
-                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTeacherSearchResultLayout.createSequentialGroup()
-                                        .addGap(237, 237, 237)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jlbStudentId))
-                                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlbStudentName)))))
+                                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTeacherSearchResultLayout.createSequentialGroup()
+                                            .addGap(237, 237, 237)
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jlbStudentId))
+                                        .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                                            .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel6))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlbStudentName)))
+                                .addGap(183, 183, 183)
+                                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbAddSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(127, 127, 127))
         );
         jpTeacherSearchResultLayout.setVerticalGroup(
@@ -225,17 +424,21 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jlbStudentName)
                     .addComponent(jLabel7)
-                    .addComponent(jlbStudentId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jlbStudentId)
+                    .addComponent(jbEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpTeacherSearchResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpTeacherSearchResultLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jbAddSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addComponent(jspStudentResultTable, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -244,7 +447,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                     .addComponent(jlbYearResult, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,54 +458,58 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherSearchResult, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(jpTeacherSearchResult, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
-
-    }//GEN-LAST:event_jbBackMouseClicked
-
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
         dispose();
     }//GEN-LAST:event_jbBackActionPerformed
 
+    private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSemesterItemStateChanged
+        // TODO add your handling code here:
+        importData();
+    }//GEN-LAST:event_jcbSemesterItemStateChanged
+
+    private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentResultMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jtStudentResult.rowAtPoint(evt.getPoint());
+        int selectedColumn = jtStudentResult.columnAtPoint(evt.getPoint());
+        if (!ChoPhepChinhSua) {
+            boolean a = jtStudentResult.isEditing();
+            if (a == false) {
+                JOptionPane.showMessageDialog(null, "Restricted Editting");
+            }
+        }
+
+    }//GEN-LAST:event_jtStudentResultMouseClicked
+
+    private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
+        // TODO add your handling code here:
+        if(ChoPhepChinhSua == true) {
+            ChoPhepChinhSua = false;
+            jbEdit.setBackground(Color.red);
+        } else {
+            ChoPhepChinhSua = true;
+            jbEdit.setBackground(Color.green);
+        }
+        
+    }//GEN-LAST:event_jbEditActionPerformed
+
+    private void jbAddSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddSubjectActionPerformed
+        // TODO add your handling code here:
+        TeacherSearchNewSubjectFrame frame = new TeacherSearchNewSubjectFrame();
+        frame.show();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocusInWindow();
+    }//GEN-LAST:event_jbAddSubjectActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TeacherSearchResultFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -313,8 +520,9 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbAddSubject;
     private javax.swing.JButton jbBack;
-    private javax.swing.JButton jbSearch;
+    private javax.swing.JButton jbEdit;
     private javax.swing.JComboBox<String> jcbSemester;
     private javax.swing.JComboBox<String> jcbYear;
     private javax.swing.JLabel jlbSemesterResult;
@@ -325,4 +533,5 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
+
 }

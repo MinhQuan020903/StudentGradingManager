@@ -8,12 +8,12 @@ package studentgradingmanager.UI.teacher.jpanel;
  *
  * @author Quan
  */
-public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFrame {
+public class TeacherSearchUpdateSubjectFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form TeacherGradingManagementUpdateSubjectFrame
      */
-    public TeacherGradingManagementUpdateSubjectFrame() {
+    public TeacherSearchUpdateSubjectFrame() {
         initComponents();
     }
 
@@ -311,20 +311,21 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherSearchUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherSearchUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherSearchUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherSearchUpdateSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TeacherGradingManagementUpdateSubjectFrame().setVisible(true);
+                new TeacherSearchUpdateSubjectFrame().setVisible(true);
             }
         });
     }

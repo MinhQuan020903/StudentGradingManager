@@ -2,6 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
             <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/jpanel/TeacherGradingManagementUpdateSubjectFrame.java</file>
             <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/Database/DBConnect.java</file>
@@ -9,5 +12,6 @@
             <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/frame/Login.java</file>
             <file>file:/C:/Users/Quan/Desktop/LapTrinhJava/Projects/DoAn/StudentGradingManager/src/studentgradingmanager/UI/teacher/TeacherMainScreen.java</file>
         </group>
+>>>>>>> e3a221a595371f0871db32d5272abf7b374f6760
     </open-files>
 </project-private>
