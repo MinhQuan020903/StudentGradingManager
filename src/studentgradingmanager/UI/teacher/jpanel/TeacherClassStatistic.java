@@ -18,6 +18,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
      */
     public TeacherClassStatistic() {
         initComponents();
+        //Set jrbClassStatistic as default
+        jrbClassStatistic.setSelected(true);
         //Add data to chart
         jpGradeStatisticChart.setLayout(new BorderLayout());
         BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");
@@ -47,8 +49,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         jcbSemester = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jcbSubject = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jrbClassStatistic = new javax.swing.JRadioButton();
+        jrbGradeStatistic = new javax.swing.JRadioButton();
         jpGradeStatisticChart = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(760, 540));
@@ -77,24 +79,28 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton1.setText("Thống kê lớp học");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jrbClassStatistic);
+        jrbClassStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jrbClassStatistic.setText("Thống kê lớp học");
+        jrbClassStatistic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jrbClassStatisticActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton2.setText("Thống kê cả khối");
+        buttonGroup1.add(jrbGradeStatistic);
+        jrbGradeStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jrbGradeStatistic.setText("Thống kê cả khối");
+
+        jpGradeStatisticChart.setBackground(new java.awt.Color(255, 255, 255));
+        jpGradeStatisticChart.setForeground(new java.awt.Color(0, 0, 0));
+        jpGradeStatisticChart.setPreferredSize(new java.awt.Dimension(0, 349));
 
         javax.swing.GroupLayout jpGradeStatisticChartLayout = new javax.swing.GroupLayout(jpGradeStatisticChart);
         jpGradeStatisticChart.setLayout(jpGradeStatisticChartLayout);
         jpGradeStatisticChartLayout.setHorizontalGroup(
             jpGradeStatisticChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 553, Short.MAX_VALUE)
         );
         jpGradeStatisticChartLayout.setVerticalGroup(
             jpGradeStatisticChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,25 +113,26 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
             jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
-                .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
+                        .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                        .addContainerGap(110, Short.MAX_VALUE))
                     .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
+                            .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                            .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jcbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(61, 61, 61)
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(110, Short.MAX_VALUE))
+                            .addComponent(jrbGradeStatistic)
+                            .addComponent(jrbClassStatistic)))))
         );
         jpTeacherClassStatisticLayout.setVerticalGroup(
             jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,17 +141,17 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
+                    .addComponent(jrbClassStatistic)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2)
+                    .addComponent(jrbGradeStatistic)
                     .addComponent(jcbSubject))
-                .addGap(34, 34, 34)
+                .addGap(33, 33, 33)
                 .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -159,9 +166,9 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jrbClassStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbClassStatisticActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jrbClassStatisticActionPerformed
 
     private void jcbSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSubjectActionPerformed
         // TODO add your handling code here:
@@ -173,12 +180,12 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JComboBox<String> jcbSemester;
     private javax.swing.JComboBox<String> jcbSubject;
     private javax.swing.JComboBox<String> jcbYear;
     private javax.swing.JPanel jpGradeStatisticChart;
     private javax.swing.JPanel jpTeacherClassStatistic;
+    private javax.swing.JRadioButton jrbClassStatistic;
+    private javax.swing.JRadioButton jrbGradeStatistic;
     // End of variables declaration//GEN-END:variables
 }
