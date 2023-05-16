@@ -6,6 +6,7 @@ package studentgradingmanager.UI.teacher.jpanel;
 
 import Chart.ShowChart;
 import Database.DBConnect;
+import OOP.LOAIDIEM;
 import OOP.MONHOC;
 import OOP.Teacher;
 import java.awt.BorderLayout;
@@ -432,11 +433,11 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 bcGradeStatisticChart.addData(count9To10, "Điểm từ 9 - 10");
                 jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
 
-                List<String> listData = new ArrayList<>();
-                listData.add(String.valueOf(count0To5));
-                listData.add(String.valueOf(count5To7));
-                listData.add(String.valueOf(count7To9));
-                listData.add(String.valueOf(count9To10));
+                List<LOAIDIEM> listData = new ArrayList<>();
+                listData.add(new LOAIDIEM(String.valueOf(count0To5), "Điểm từ 0 - 5"));
+                listData.add(new LOAIDIEM(String.valueOf(count5To7), "Điểm từ 5 - 7"));
+                listData.add(new LOAIDIEM(String.valueOf(count7To9), "Điểm từ 7 - 9"));
+                listData.add(new LOAIDIEM(String.valueOf(count9To10), "Điểm từ 9 - 10"));
 
                 ShowChart sc = new ShowChart(monhocchuaxuli, listData);
                 sc.show();
@@ -459,7 +460,67 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
             }
 
         } else {
+            try {
+                String namhoc = jcbYear.getSelectedItem().toString();
+                String hocki = jcbYear.getSelectedItem().toString();
+                String monhocchuaxuli = jcbSubject.getSelectedItem().toString();
 
+                int index = monhocchuaxuli.indexOf('-');
+
+                String mamonhoc = monhocchuaxuli.substring(0, index);
+                System.err.println(mamonhoc);
+                java.sql.Connection connection = DBConnect.getConnection();
+                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+                List<String> dsLop = new ArrayList<>();
+
+                String sql = "SELECT * FROM LOP";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    dsLop.add(resultSet.getString("MALOP"));
+                }
+                List<LOAIDIEM> listData = new ArrayList<>();
+                for (int i = 0; i < dsLop.size(); i++) {
+                    sql = "SELECT * FROM DIEM, LOP, HOCSINH WHERE DIEM.MAHS = HOCSINH.MAHS AND LOP.MALOP = HOCSINH.MALOP AND DIEM.MAMH = ? AND LOP.MALOP = ?";
+                    statement = connection.prepareCall(sql);
+                    statement.setString(1, mamonhoc.trim() + dsLop.get(i).charAt(1));
+                    statement.setString(2, dsLop.get(i));
+                    resultSet = statement.executeQuery();
+                    int j = 0;
+                    double sum = 0;
+                    while (resultSet.next()) {
+                        String value = resultSet.getString("DIEMTBHK");
+                        if (value != null && !value.isEmpty()) {
+                            try {
+                                double diemTBHK = Double.parseDouble(value);
+                                j++;
+                                sum += diemTBHK;
+                                System.err.println(sum);
+                            } catch (NumberFormatException e) {
+                                System.err.println("Giá trị không hợp lệ: " + value);
+                            }
+                        } else {
+                            System.err.println("null");
+                        }
+                    }
+                    int intValue = (int) Math.round(sum);
+                    listData.add(new LOAIDIEM(String.valueOf(intValue), dsLop.get(i)));
+
+                }
+
+                ShowChart sc = new ShowChart(monhocchuaxuli, listData);
+                sc.show();
+
+                if (!statement.isClosed()) {
+                    statement.close();
+                    System.out.println("Close SEARCH MAHK");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TeacherClassStatistic.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jbtThongKeActionPerformed
 
