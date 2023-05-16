@@ -5,6 +5,11 @@
 package Chart;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartPanel;
 import studentgradingmanager.utils.BarChart;
 
@@ -13,15 +18,34 @@ import studentgradingmanager.utils.BarChart;
  * @author quocd
  */
 public class ShowChart extends javax.swing.JFrame {
+
     private BarChart bcGradeStatisticChart;
+    private List<String> listData;
+    private String tenMH;
+
     /**
      * Creates new form ShowChart
      */
-    public ShowChart(BarChart bcGradeStatisticChart) {
+    public ShowChart(String tenMH, List<String> listData) {
         initComponents();
-        this.bcGradeStatisticChart = bcGradeStatisticChart;
-        
+        this.listData = listData;
+        this.tenMH = tenMH;
+
+        jpnChart.setLayout(new BorderLayout());
+        bcGradeStatisticChart = new BarChart("Thống kê môn " + tenMH);
+        bcGradeStatisticChart.addData(Integer.valueOf(listData.get(0)), "Điểm từ 0 - 5");
+        bcGradeStatisticChart.addData(Integer.valueOf(listData.get(1)), "Điểm từ 5 - 7");
+        bcGradeStatisticChart.addData(Integer.valueOf(listData.get(2)), "Điểm từ 7 - 59");
+        bcGradeStatisticChart.addData(Integer.valueOf(listData.get(3)), "Điểm từ 9 - 10");
         jpnChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
+        
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+         this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
     }
 
     /**
@@ -65,7 +89,6 @@ public class ShowChart extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpnChart;

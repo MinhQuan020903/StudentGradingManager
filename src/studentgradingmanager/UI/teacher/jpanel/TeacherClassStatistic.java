@@ -4,6 +4,7 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Chart.ShowChart;
 import Database.DBConnect;
 import OOP.MONHOC;
 import OOP.Teacher;
@@ -31,7 +32,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 
 /**
  *
@@ -421,22 +421,26 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                     }
 
                 }
-                
-                
+
                 jpGradeStatisticChart.remove(bcGradeStatisticChart);
                 jpGradeStatisticChart.revalidate();
-                jpGradeStatisticChart.repaint(); 
+                jpGradeStatisticChart.repaint();
                 bcGradeStatisticChart = new BarChart("Thông Kê Môn " + monhocchuaxuli);
                 bcGradeStatisticChart.addData(count0To5, "Điểm từ 0 - 5");
                 bcGradeStatisticChart.addData(count5To7, "Điểm từ 5 - 7");
                 bcGradeStatisticChart.addData(count7To9, "Điểm từ 7 - 9");
                 bcGradeStatisticChart.addData(count9To10, "Điểm từ 9 - 10");
                 jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
-                
-                
 
-                
-                
+                List<String> listData = new ArrayList<>();
+                listData.add(String.valueOf(count0To5));
+                listData.add(String.valueOf(count5To7));
+                listData.add(String.valueOf(count7To9));
+                listData.add(String.valueOf(count9To10));
+
+                ShowChart sc = new ShowChart(monhocchuaxuli, listData);
+                sc.show();
+
 //                System.err.println(count0To5 + " " + count5To7 + " " + count7To9 + " " + count9To10);
 //                jpGradeStatisticChart.setLayout(new BorderLayout());
 //                BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");     
