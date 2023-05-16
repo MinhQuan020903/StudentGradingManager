@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import studentgradingmanager.UI.teacher.jpanel.TeacherAccountInfo;
-import studentgradingmanager.UI.teacher.jpanel.TeacherGradingManagement;
 import studentgradingmanager.UI.teacher.jpanel.TeacherSearch;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.utils.NavController;
@@ -135,10 +134,7 @@ public class TeacherNavController extends NavController {
                     node = new TeacherSearch(teacherItem);
                     break;
                 }
-                case "Quản lý điểm lớp học": {
-                    node = new TeacherGradingManagement(teacherItem);
-                    break;
-                }
+                
                 default: {
                     node = new TeacherAccountInfo();
                     break;

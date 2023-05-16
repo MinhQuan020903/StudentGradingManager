@@ -168,7 +168,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             .addGroup(jpTeacherAccountInfoSelectorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlbTeacherAccountInfoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jpTeacherAccountInfoSelectorLayout.setVerticalGroup(
             jpTeacherAccountInfoSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +254,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         jlbTeacherGradingManagementSelector.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlbTeacherGradingManagementSelector.setForeground(new java.awt.Color(255, 255, 255));
         jlbTeacherGradingManagementSelector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-report-card-16.png"))); // NOI18N
-        jlbTeacherGradingManagementSelector.setText("Quản lý điểm lớp học");
+        jlbTeacherGradingManagementSelector.setText("Thống kê điểm lớp học");
         jlbTeacherGradingManagementSelector.setPreferredSize(new java.awt.Dimension(90, 48));
 
         javax.swing.GroupLayout jpTeacherGradingManagementSelectorLayout = new javax.swing.GroupLayout(jpTeacherGradingManagementSelector);
@@ -281,15 +281,15 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jlbTeacherId))
-            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+            .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
             .addComponent(jpTeacherAccountInfoSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTeacherName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
         );
         jpMainScreenSelectorLayout.setVerticalGroup(
             jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +345,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 960, Short.MAX_VALUE)
+            .addComponent(jpMainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

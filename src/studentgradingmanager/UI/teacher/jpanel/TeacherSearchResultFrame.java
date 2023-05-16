@@ -498,7 +498,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
 
     private void jbAddSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddSubjectActionPerformed
         // TODO add your handling code here:
-        TeacherGradingManagementNewSubjectFrame frame = new TeacherGradingManagementNewSubjectFrame();
+        TeacherSearchNewSubjectFrame frame = new TeacherSearchNewSubjectFrame();
         frame.show();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
