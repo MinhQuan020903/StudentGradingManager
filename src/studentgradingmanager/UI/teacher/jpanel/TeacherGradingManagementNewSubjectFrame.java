@@ -5,23 +5,9 @@
 package studentgradingmanager.UI.teacher.jpanel;
 
 import Database.DBConnect;
-import OOP.DIEM;
 import OOP.StudentBase;
 import TransferData.MessageBroker;
 import java.awt.Dimension;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-
-import java.util.ArrayList;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +16,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,11 +26,13 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
     private StudentBase studentBase;
     private List<String> listMAHK;
     private List<String> listNAMHOC;
-
-    /**
-     * Creates new form TeacherGradingManagementNewSubjectFrame
-     */
-    public TeacherSearchNewSubjectFrame() {
+    
+    public TeacherGradingManagementNewSubjectFrame() {
+        
+        mirrorData();
+        findSemester();
+    }
+    public TeacherGradingManagementNewSubjectFrame(StudentBase studentBase) {
         initComponents();
 
         this.studentBase = studentBase;
@@ -129,6 +116,97 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private void updateDB() {
+        System.err.println("Chay upate");
+        if (jtfNewSubjectName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui Lòng Điền Tên Môn Học");
+        } else {
+            try {
+                String fullMon = jtfNewSubjectName.getText().toString().trim();
+                String[] tachTungTu = fullMon.split(" ");
+                String maMHNew = "";
+                for (String item : tachTungTu) {
+                    maMHNew += item.substring(0, 1).toUpperCase();
+                }
+                maMHNew += studentBase.getMALOP().substring(1, 2);
+                System.err.println(maMHNew);
+
+                java.sql.Connection connection = DBConnect.getConnection();
+                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+                String checkSql = "SELECT MAMH FROM MONHOC WHERE MAMH = ?";
+                PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+                checkStatement.setString(1, maMHNew);
+                ResultSet _resultSet = checkStatement.executeQuery();
+
+                if (_resultSet.next()) {
+                    JOptionPane.showMessageDialog(null, maMHNew + " Đã tồn tại không thể thêm mới môn này!");
+                } else {
+                    // them mon hoc moi
+                    String sql = "INSERT INTO MONHOC VALUES (?, ?)";
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement.setString(1, maMHNew);
+                    statement.setString(2, fullMon.toUpperCase());
+
+                    int rowsInserted = statement.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                        System.out.println("Dữ liệu môn học đã được thêm thành công vào cơ sở dữ liệu.");
+                    }
+
+                    sql = "INSERT INTO DIEM VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    statement = connection.prepareCall(sql);
+
+                    String ghichu = jtfNewSubjectNote.getText().toString().trim();
+                    String mahk;
+                    if (jcbSemester.getSelectedItem().equals("1")) {
+                        mahk = "HK01";
+                    } else {
+                        mahk = "HK02";
+                    }
+
+                    String namhoc = jcbYear.getSelectedItem().toString();
+
+                    String diemQT = !jtfNewSubjectProgressGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectProgressGrade.getText().toString().trim() : "";
+
+                    String diemGk = !jtfNewSubjectMidTermGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectMidTermGrade.getText().toString().toString().trim() : "";
+
+                    String diemCK = !jtfNewSubjectFinalTermScore.getText().toString().trim().isEmpty() ? jtfNewSubjectFinalTermScore.getText().toString().toString().trim() : "";
+
+                    String diemTBHK = !diemQT.equals("") || !diemGk.equals("") || !diemCK.equals("")
+                            ? String.valueOf((Double.valueOf(diemGk) + Double.valueOf(diemQT) + Double.valueOf(diemCK)) / 3) : "";
+
+                    System.err.println(jtfNewSubjectProgressGrade.getText().toString().trim());
+
+                    statement.setString(1, maMHNew);
+                    statement.setString(2, studentBase.getMAHS());
+                    statement.setString(3, diemQT);
+                    statement.setString(4, diemGk);
+                    statement.setString(5, diemCK);
+                    statement.setString(6, diemTBHK);
+                    statement.setString(7, ghichu);
+                    statement.setString(8, mahk);
+
+                    rowsInserted = statement.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                        System.err.println("Thêm Điểm Và Môn Học Thành Công");
+                    }
+                    System.err.println(maMHNew + " " + studentBase.getMAHS() + " " + diemQT + " " + diemGk + " " + diemCK + " " + diemTBHK + " " + ghichu + " " + mahk);
+                    statement.close();
+                }
+
+                checkStatement.close();
+                connection.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }      
+    /**
+     * Creates new form NewJFrame
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,9 +229,9 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
         jLabel5 = new javax.swing.JLabel();
         jtfNewSubjectFinalTermScore = new javax.swing.JTextField();
         jbSaveNewSubject = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jlbAddSubjectFor = new javax.swing.JLabel();
-        jbBack = new javax.swing.JButton();
+        jbExit = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jcbSemester = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
@@ -265,8 +343,8 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(51, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(51, 255, 255));
 
         jlbAddSubjectFor.setBackground(new java.awt.Color(0, 0, 0));
         jlbAddSubjectFor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -283,24 +361,26 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
                 .addComponent(jlbAddSubjectFor, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlbAddSubjectFor, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlbAddSubjectFor, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -323,7 +403,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
         jpTeacherGradingManagementNewSubjectPanelLayout.setHorizontalGroup(
             jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createSequentialGroup()
                 .addGap(158, 158, 158)
@@ -340,7 +420,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
                         .addComponent(jLabel5)
                         .addGap(28, 28, 28)
                         .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(282, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createSequentialGroup()
                         .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createSequentialGroup()
@@ -356,7 +436,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
                                 .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                                 .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jcbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -367,7 +447,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
         jpTeacherGradingManagementNewSubjectPanelLayout.setVerticalGroup(
             jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpTeacherGradingManagementNewSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -397,18 +477,20 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
                     .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherGradingManagementNewSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
+            .addComponent(jpTeacherGradingManagementNewSubjectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherGradingManagementNewSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpTeacherGradingManagementNewSubjectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -470,106 +552,51 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_jbSaveNewSubjectActionPerformed
-    private void updateDB() {
-        System.err.println("Chay upate");
-        if (jtfNewSubjectName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vui Lòng Điền Tên Môn Học");
-        } else {
-            try {
-                String fullMon = jtfNewSubjectName.getText().toString().trim();
-                String[] tachTungTu = fullMon.split(" ");
-                String maMHNew = "";
-                for (String item : tachTungTu) {
-                    maMHNew += item.substring(0, 1).toUpperCase();
-                }
-                maMHNew += studentBase.getMALOP().substring(1, 2);
-                System.err.println(maMHNew);
 
-                java.sql.Connection connection = DBConnect.getConnection();
-                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
-
-                String checkSql = "SELECT MAMH FROM MONHOC WHERE MAMH = ?";
-                PreparedStatement checkStatement = connection.prepareStatement(checkSql);
-                checkStatement.setString(1, maMHNew);
-                ResultSet _resultSet = checkStatement.executeQuery();
-
-                if (_resultSet.next()) {
-                    JOptionPane.showMessageDialog(null, maMHNew + " Đã tồn tại không thể thêm mới môn này!");
-                } else {
-                    // them mon hoc moi
-                    String sql = "INSERT INTO MONHOC VALUES (?, ?)";
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    statement.setString(1, maMHNew);
-                    statement.setString(2, fullMon.toUpperCase());
-
-                    int rowsInserted = statement.executeUpdate();
-
-                    if (rowsInserted > 0) {
-                        System.out.println("Dữ liệu môn học đã được thêm thành công vào cơ sở dữ liệu.");
-                    }
-
-                    sql = "INSERT INTO DIEM VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    statement = connection.prepareCall(sql);
-
-                    String ghichu = jtfNewSubjectNote.getText().toString().trim();
-                    String mahk;
-                    if (jcbSemester.getSelectedItem().equals("1")) {
-                        mahk = "HK01";
-                    } else {
-                        mahk = "HK02";
-                    }
-
-                    String namhoc = jcbYear.getSelectedItem().toString();
-
-                    String diemQT = !jtfNewSubjectProgressGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectProgressGrade.getText().toString().trim() : "";
-
-                    String diemGk = !jtfNewSubjectMidTermGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectMidTermGrade.getText().toString().toString().trim() : "";
-
-                    String diemCK = !jtfNewSubjectFinalTermScore.getText().toString().trim().isEmpty() ? jtfNewSubjectFinalTermScore.getText().toString().toString().trim() : "";
-
-                    String diemTBHK = !diemQT.equals("") || !diemGk.equals("") || !diemCK.equals("")
-                            ? String.valueOf((Double.valueOf(diemGk) + Double.valueOf(diemQT) + Double.valueOf(diemCK)) / 3) : "";
-
-                    System.err.println(jtfNewSubjectProgressGrade.getText().toString().trim());
-
-                    statement.setString(1, maMHNew);
-                    statement.setString(2, studentBase.getMAHS());
-                    statement.setString(3, diemQT);
-                    statement.setString(4, diemGk);
-                    statement.setString(5, diemCK);
-                    statement.setString(6, diemTBHK);
-                    statement.setString(7, ghichu);
-                    statement.setString(8, mahk);
-
-                    rowsInserted = statement.executeUpdate();
-
-                    if (rowsInserted > 0) {
-                        System.err.println("Thêm Điểm Và Môn Học Thành Công");
-                    }
-                    System.err.println(maMHNew + " " + studentBase.getMAHS() + " " + diemQT + " " + diemGk + " " + diemCK + " " + diemTBHK + " " + ghichu + " " + mahk);
-                    statement.close();
-                }
-
-                checkStatement.close();
-                connection.close();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
+    private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
+        
         dispose();
     }//GEN-LAST:event_jbExitActionPerformed
 
     private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSemesterItemStateChanged
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jcbSemesterItemStateChanged
 
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TeacherGradingManagementNewSubjectFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
@@ -579,7 +606,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbExit;
     private javax.swing.JButton jbSaveNewSubject;
     private javax.swing.JComboBox<String> jcbSemester;
