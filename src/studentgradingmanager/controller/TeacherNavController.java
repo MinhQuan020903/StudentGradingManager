@@ -13,12 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import studentgradingmanager.UI.teacher.jpanel.TeacherAccountInfo;
+import studentgradingmanager.UI.teacher.jpanel.TeacherClassStatistic;
 import studentgradingmanager.UI.teacher.jpanel.TeacherSearch;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.utils.NavController;
@@ -126,12 +124,16 @@ public class TeacherNavController extends NavController {
             switch (type) {
                 case "Thông tin tài khoản": {
                     node = new TeacherAccountInfo(teacherItem);
-                    System.out.println("Create new panel");
                     break;
                 }
 
                 case "Tra cứu kết quả học sinh": {
                     node = new TeacherSearch(teacherItem);
+                    break;
+                }
+                
+                case "Thống kê điểm học sinh": {
+                    node = new TeacherClassStatistic();
                     break;
                 }
                 
