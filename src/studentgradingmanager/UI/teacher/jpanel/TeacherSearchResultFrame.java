@@ -7,6 +7,8 @@ package studentgradingmanager.UI.teacher.jpanel;
 import Database.DBConnect;
 import OOP.DIEM;
 import OOP.StudentBase;
+import TransferData.MessageBroker;
+import TransferData.MessageListener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Quan
  */
-public class TeacherSearchResultFrame extends javax.swing.JFrame {
+public class TeacherSearchResultFrame extends javax.swing.JFrame implements MessageListener {
 
     private StudentBase studentBase;
     private List<String> listMAHK;
@@ -39,10 +41,15 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     public TeacherSearchResultFrame(StudentBase studentBase) {
         initComponents();
         this.studentBase = studentBase;
+
+        jLabel1.setText("THÔNG TIN HỌC SINH " + studentBase.getHOTEN());
+
         model = (DefaultTableModel) jtStudentResult.getModel();
         mirrorData();
         findSemester();
         //importData();
+
+        MessageBroker.getInstance().addListener(this);
 
         if (ChoPhepChinhSua == false) {
             jbEdit.setBackground(Color.red);
@@ -99,9 +106,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                 statement.close();
                 System.out.println("Close SEARCH MAHK");
             }
-
+            double semesterResult = 0.0;
             model.setRowCount(0);
-            for (int i = 0; i < listDIEM.size(); i++) {
+            int i;
+
+            for (i = 0; i < listDIEM.size(); i++) {
                 String[] stu = {String.valueOf(i),
                     listDIEM.get(i).getTenMonHoc(),
                     listDIEM.get(i).getDIEMQT(),
@@ -110,10 +119,92 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
                     listDIEM.get(i).getDEIMTBHK(),
                     listDIEM.get(i).getGHICHU()};
                 model.addRow(stu);
+                if (listDIEM.get(i).getDEIMTBHK() == null || listDIEM.get(i).getDEIMTBHK().isEmpty()) {
+                    System.err.println("Diem trong");
+                } else {
+                    semesterResult += Double.valueOf(listDIEM.get(i).getDEIMTBHK());
+                }
             }
 
             jtStudentResult.revalidate();
             jtStudentResult.repaint();
+
+            jlbSemesterResult.setText(String.valueOf(Math.round(semesterResult / i * 100) / 100.0));
+
+            jlbYearResult.setText("Name hoc ");
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void TinhDiemTBNam() {
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+
+            String sql = "SELECT * FROM DIEM WHERE MAHS = ? AND MAHK = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, studentBase.getMAHS());
+            statement.setString(2, "HK01");
+            ResultSet resultSet = statement.executeQuery();
+
+            // hoc ki 1
+            while (resultSet.next()) {
+                listDIEM.add(new DIEM(
+                        resultSet.getString("MAMH"),
+                        resultSet.getString("MAHS"),
+                        resultSet.getString("DIEMQT"),
+                        resultSet.getString("DIEMGK"),
+                        resultSet.getString("DIEMCK"),
+                        resultSet.getString("DIEMTBHK"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getString("MAHK"),
+                        null));
+            }
+
+            double semesterResultHK1 = 0.0;
+            int i;
+
+            for (i = 0; i < listDIEM.size(); i++) {
+                if (listDIEM.get(i).getDEIMTBHK() == null || listDIEM.get(i).getDEIMTBHK().isEmpty()) {
+                    System.err.println("Diem trong");
+                } else {
+                    semesterResultHK1 += Double.valueOf(listDIEM.get(i).getDEIMTBHK());
+                }
+            }
+
+            semesterResultHK1 = Math.round(semesterResultHK1 / i * 100) / 100.0;
+
+            // hoc ki 2
+            statement.setString(1, studentBase.getMAHS());
+            statement.setString(2, "HK02");
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                listDIEM.add(new DIEM(
+                        resultSet.getString("MAMH"),
+                        resultSet.getString("MAHS"),
+                        resultSet.getString("DIEMQT"),
+                        resultSet.getString("DIEMGK"),
+                        resultSet.getString("DIEMCK"),
+                        resultSet.getString("DIEMTBHK"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getString("MAHK"),
+                        null));
+
+            }
+            double semesterResultHK2 = 0.0;
+            i = 0;
+            listDIEM.clear();
+            for (i = 0; i < listDIEM.size(); i++) {
+                if (listDIEM.get(i).getDEIMTBHK() == null || listDIEM.get(i).getDEIMTBHK().isEmpty()) {
+                    System.err.println("Diem trong");
+                } else {
+                    semesterResultHK2 += Double.valueOf(listDIEM.get(i).getDEIMTBHK());
+                }
+            }
+
+            semesterResultHK2 = Math.round(semesterResultHK2 / i * 100) / 100.0;
+
+            jlbYearResult.setText(String.valueOf((semesterResultHK1 + semesterResultHK2) / 2));
         } catch (SQLException ex) {
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -297,7 +388,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jlbYearResult.setBackground(new java.awt.Color(255, 255, 255));
         jlbYearResult.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlbYearResult.setForeground(new java.awt.Color(255, 0, 51));
-        jlbYearResult.setText("1.0");
+        jlbYearResult.setText("0.0");
 
         jlbSemesterResult.setBackground(new java.awt.Color(255, 255, 255));
         jlbSemesterResult.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -343,11 +434,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(334, 334, 334)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addGap(24, 24, 24)
+                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,6 +562,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSemesterItemStateChanged
         // TODO add your handling code here:
         importData();
+        TinhDiemTBNam();
     }//GEN-LAST:event_jcbSemesterItemStateChanged
 
     private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentResultMouseClicked
@@ -488,19 +580,19 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
 
     private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
         // TODO add your handling code here:
-        if(ChoPhepChinhSua == true) {
+        if (ChoPhepChinhSua == true) {
             ChoPhepChinhSua = false;
             jbEdit.setBackground(Color.red);
         } else {
             ChoPhepChinhSua = true;
             jbEdit.setBackground(Color.green);
         }
-        
+
     }//GEN-LAST:event_jbEditActionPerformed
 
     private void jbAddSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddSubjectActionPerformed
         // TODO add your handling code here:
-        TeacherSearchNewSubjectFrame frame = new TeacherSearchNewSubjectFrame();
+        TeacherGradingManagementNewSubjectFrame frame = new TeacherGradingManagementNewSubjectFrame(studentBase);
         frame.show();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -533,5 +625,12 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onMessageReceived(String message) {
+        importData();
+        TinhDiemTBNam();
+        System.out.println("Update Mon Hoc");
+    }
 
 }
