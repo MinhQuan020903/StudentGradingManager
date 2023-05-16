@@ -4,7 +4,6 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
-import Chart.ShowChart;
 import Database.DBConnect;
 import OOP.MONHOC;
 import OOP.Teacher;
@@ -33,6 +32,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+
 /**
  *
  * @author Quan
@@ -43,6 +43,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
     private List<String> listMAHK;
     private List<String> listNAMHOC;
     private List<MONHOC> listMONHOC = new ArrayList<>();
+    private BarChart bcGradeStatisticChart;
 
     /**
      * Creates new form TeacherClassStatistic
@@ -57,13 +58,13 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         importData();
         findSemester();
         setSubject();
-        jpnChart.setLayout(new BorderLayout());
-        BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");
+        jpGradeStatisticChart.setLayout(new BorderLayout());
+        bcGradeStatisticChart = new BarChart("Thống kê môn Toán");
         bcGradeStatisticChart.addData(100, "1");
         bcGradeStatisticChart.addData(3, "2");
         bcGradeStatisticChart.addData(6, "3");
         bcGradeStatisticChart.addData(9, "4");
-        jpnChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
+        jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
     }
 
     private void importData() {
@@ -253,7 +254,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jbtThongKe = new javax.swing.JButton();
-        jpnChart = new javax.swing.JPanel();
+        jpGradeStatisticChart = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(760, 540));
 
@@ -296,14 +297,14 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jpnChartLayout = new javax.swing.GroupLayout(jpnChart);
-        jpnChart.setLayout(jpnChartLayout);
-        jpnChartLayout.setHorizontalGroup(
-            jpnChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpGradeStatisticChartLayout = new javax.swing.GroupLayout(jpGradeStatisticChart);
+        jpGradeStatisticChart.setLayout(jpGradeStatisticChartLayout);
+        jpGradeStatisticChartLayout.setHorizontalGroup(
+            jpGradeStatisticChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 587, Short.MAX_VALUE)
         );
-        jpnChartLayout.setVerticalGroup(
-            jpnChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpGradeStatisticChartLayout.setVerticalGroup(
+            jpGradeStatisticChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 355, Short.MAX_VALUE)
         );
 
@@ -314,7 +315,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
             .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpnChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -352,7 +353,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jbtThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -420,35 +421,22 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                     }
 
                 }
+                
+                
+                jpGradeStatisticChart.remove(bcGradeStatisticChart);
+                jpGradeStatisticChart.revalidate();
+                jpGradeStatisticChart.repaint(); 
+                bcGradeStatisticChart = new BarChart("Thông Kê Môn " + monhocchuaxuli);
+                bcGradeStatisticChart.addData(count0To5, "Điểm từ 0 - 5");
+                bcGradeStatisticChart.addData(count5To7, "Điểm từ 5 - 7");
+                bcGradeStatisticChart.addData(count7To9, "Điểm từ 7 - 9");
+                bcGradeStatisticChart.addData(count9To10, "Điểm từ 9 - 10");
+                jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
+                
+                
 
-                jpnChart.removeAll();
-                System.err.println("Bam Bam");
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.addValue(count0To5, "Loai 1", "Danh muc1");
-
-                JFreeChart chart = ChartFactory.createBarChart(
-                        "Thống Kê",
-                        "Số Lượng",
-                        "Khoảng Điểm",
-                        dataset,
-                        PlotOrientation.VERTICAL,
-                        true,
-                        true,
-                        false
-                );
-
-                ChartPanel chartPanel = new ChartPanel(chart);
-
-                BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");
-                bcGradeStatisticChart.addData(100, "1");
-                bcGradeStatisticChart.addData(3, "2");
-                bcGradeStatisticChart.addData(6, "3");
-                bcGradeStatisticChart.addData(9, "4");
-                jpnChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
-
-                ShowChart sc = new ShowChart(bcGradeStatisticChart);
-                sc.show();
-
+                
+                
 //                System.err.println(count0To5 + " " + count5To7 + " " + count7To9 + " " + count9To10);
 //                jpGradeStatisticChart.setLayout(new BorderLayout());
 //                BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");     
@@ -483,7 +471,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbSemester;
     private javax.swing.JComboBox<String> jcbSubject;
     private javax.swing.JComboBox<String> jcbYear;
+    private javax.swing.JPanel jpGradeStatisticChart;
     private javax.swing.JPanel jpTeacherClassStatistic;
-    private javax.swing.JPanel jpnChart;
     // End of variables declaration//GEN-END:variables
 }
