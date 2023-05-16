@@ -136,7 +136,7 @@ public class TeacherNavController extends NavController {
                     break;
                 }
                 case "Quản lý điểm lớp học": {
-                    node = new TeacherGradingManagement();
+                    node = new TeacherGradingManagement(teacherItem);
                     break;
                 }
                 default: {

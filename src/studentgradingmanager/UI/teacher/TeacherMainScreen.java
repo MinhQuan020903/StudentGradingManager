@@ -62,6 +62,9 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         listCategory.add(new Category("Tra cứu kết quả học sinh", jpTeacherSearchSelector, jlbTeacherSearchSelector));
         listCategory.add(new Category("Quản lý điểm lớp học", jpTeacherGradingManagementSelector, jlbTeacherGradingManagementSelector));
         controller.setEvent(listCategory);
+        
+        
+        //jpTeacherGradingManagementSelector.setVisible(false);
 
     }
 

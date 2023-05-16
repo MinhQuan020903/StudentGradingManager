@@ -4,8 +4,20 @@
  */
 package studentgradingmanager.UI.teacher.jpanel;
 
+import Database.DBConnect;
+import OOP.DIEM;
+import OOP.StudentBase;
+import OOP.Teacher;
 import java.awt.BorderLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import studentgradingmanager.UI.frame.Login;
 
 /**
@@ -13,14 +25,82 @@ import studentgradingmanager.UI.frame.Login;
  * @author Quan
  */
 public class TeacherGradingManagement extends javax.swing.JPanel {
-
+    private Teacher teacherItem;
+    private List<StudentBase> listStudent = new ArrayList<>();
+    private List<StudentBase> searchList;
+    private List<DIEM> listDIEM = new ArrayList<>();
     /**
      * Creates new form TeacherGradingManagement
      */
-    public TeacherGradingManagement() {
+    public TeacherGradingManagement(Teacher teacherItem) {
         initComponents();
+        this.teacherItem = teacherItem;
+        
+        importDataToStudent();
     }
 
+    private void importDataToStudent() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) jtStudentResult.getModel();
+            int i = 0;
+
+            List<String> listClass = new ArrayList<>();
+
+            java.sql.Connection connection = DBConnect.getConnection();
+            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+
+            String sql = "SELECT * FROM GIANGDAY WHERE MAGV = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, teacherItem.getMaGV());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                if (!listClass.contains(resultSet.getString("MALOP"))) {
+                    listClass.add(resultSet.getString("MALOP"));
+                    System.out.println(listClass);
+                }
+            }
+
+            for (String item : listClass) {
+                sql = "SELECT * FROM HOCSINH WHERE MALOP = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, item);
+                resultSet = statement.executeQuery();
+                System.out.println(item);
+
+                while (resultSet.next()) {
+                    if (resultSet.getString("MALOP").equals(item)) {
+                        listStudent.add(new StudentBase(resultSet.getString("MAHS"),
+                                resultSet.getString("HOTEN"),
+                                resultSet.getString("MALOP"),
+                                resultSet.getString("SDT"),
+                                resultSet.getString("NGSINH"),
+                                resultSet.getString("GIOITINH"),
+                                resultSet.getString("MATK")));
+                    }
+
+                }
+            }
+
+            System.out.println(listStudent.get(1));
+            if (!statement.isClosed()) {
+                statement.close();
+                System.out.println("Closed to database import data student!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherSearch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jtStudentResult.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < listStudent.size(); i++) {
+            String[] stu = {String.valueOf(i), listStudent.get(i).getMAHS(), listStudent.get(i).getHOTEN(), listStudent.get(i).getMALOP(), teacherItem.getHotenGV()};
+            model.addRow(stu);
+            System.out.println("Add row");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,9 +139,7 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
             }
         });
 
-        jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
         jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
         jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -110,11 +188,16 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
 
         jtfSearchForStudent.setBackground(new java.awt.Color(217, 217, 217));
         jtfSearchForStudent.setForeground(new java.awt.Color(153, 153, 153));
-        jtfSearchForStudent.setText("Nhập tên / mã học sinh cần tìm");
+        jtfSearchForStudent.setText("Nhập mã học sinh cần tìm");
         jtfSearchForStudent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfSearchForStudent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtfSearchForStudentMouseClicked(evt);
+            }
+        });
+        jtfSearchForStudent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfSearchForStudentKeyReleased(evt);
             }
         });
 
@@ -203,6 +286,53 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
             jtfSearchForStudent.setText("");
         }
     }//GEN-LAST:event_jtfSearchForStudentMouseClicked
+
+    private void jtfSearchForStudentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchForStudentKeyReleased
+        // TODO add your handling code here:
+        String searchString = jtfSearchForStudent.getText().trim();
+        // Thực hiện các hành động tương ứng khi người dùng gõ phím
+
+        if (searchString.equals("Nhập tên / mã học sinh cần tìm") || searchString.isEmpty()) {
+            searchList = listStudent;
+            //System.out.println("Vo day");
+        } else {
+            searchList = new ArrayList<>(); // Gán lại giá trị cho searchList trước khi tìm kiếm mới
+
+            for (int i = 0; i < listStudent.size(); i++) {
+                if (listStudent.get(i).getMAHS().toLowerCase().contains(searchString.toLowerCase())
+                        || listStudent.get(i).getHOTEN().toLowerCase().contains(searchString.toLowerCase())) {
+                    //System.out.println("Them Phan Tu");
+                    searchList.add(listStudent.get(i));
+                } else {
+                    //System.out.println("Ra khoi if");
+                }
+            }
+            // System.out.println("Click");
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jtStudentResult.getModel();
+
+        // Xóa bỏ các dòng hiện có trong JTable
+        model.setRowCount(0);
+
+        // Thêm dữ liệu mới vào JTable
+//        for (int i = 0; i < searchList.size(); i++) {
+//            String[] stu = {String.valueOf(i),
+//                searchList.get(i).getMAHS(),
+//                searchList.get(i).getHOTEN(),
+//                searchList.get(i).getMALOP(),
+//                teacherItem.getHotenGV()};
+//            model.addRow(stu);
+//        }
+
+        
+
+        // Cập nhật lại giao diện JTable
+        jtStudentResult.revalidate();
+        jtStudentResult.repaint();
+
+        //System.out.println(searchList.size());
+    }//GEN-LAST:event_jtfSearchForStudentKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
