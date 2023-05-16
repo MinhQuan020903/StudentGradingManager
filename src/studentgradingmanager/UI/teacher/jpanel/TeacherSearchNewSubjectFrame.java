@@ -16,8 +16,6 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
      */
     public TeacherSearchNewSubjectFrame() {
         initComponents();
-        
-        
     }
 
     /**
@@ -43,7 +41,7 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
         jbSaveNewSubject = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jAddSubjectFor = new javax.swing.JLabel();
-        jbBack = new javax.swing.JButton();
+        jbExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,12 +160,12 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
         jAddSubjectFor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jAddSubjectFor.setText("THÊM MÔN HỌC");
 
-        jbBack.setBackground(new java.awt.Color(153, 204, 255));
-        jbBack.setForeground(new java.awt.Color(255, 255, 255));
-        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-back-48.png"))); // NOI18N
-        jbBack.addActionListener(new java.awt.event.ActionListener() {
+        jbExit.setBackground(new java.awt.Color(255, 51, 51));
+        jbExit.setForeground(new java.awt.Color(255, 255, 255));
+        jbExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-exit-48.png"))); // NOI18N
+        jbExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBackActionPerformed(evt);
+                jbExitActionPerformed(evt);
             }
         });
 
@@ -177,7 +175,7 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(240, 240, 240)
                 .addComponent(jAddSubjectFor, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(325, Short.MAX_VALUE))
@@ -187,7 +185,7 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jAddSubjectFor, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -316,9 +314,9 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSaveNewSubjectActionPerformed
 
-    private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
+    private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
         dispose();
-    }//GEN-LAST:event_jbBackActionPerformed
+    }//GEN-LAST:event_jbExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,7 +362,7 @@ public class TeacherSearchNewSubjectFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton jbBack;
+    private javax.swing.JButton jbExit;
     private javax.swing.JButton jbSaveNewSubject;
     private javax.swing.JPanel jpTeacherGradingManagementNewSubjectPanel;
     private javax.swing.JTextField jtfNewSubjectFinalTermScore;

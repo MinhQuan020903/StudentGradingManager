@@ -308,7 +308,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jbBack" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jbExit" min="-2" pref="64" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
                       <Component id="jAddSubjectFor" min="-2" pref="295" max="-2" attributes="0"/>
                       <EmptySpace pref="325" max="32767" attributes="0"/>
@@ -320,7 +320,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jbBack" max="32767" attributes="0"/>
+                          <Component id="jbExit" max="32767" attributes="0"/>
                           <Component id="jAddSubjectFor" pref="61" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -344,20 +344,20 @@
                 <Property name="text" type="java.lang.String" value="TH&#xca;M M&#xd4;N H&#x1ecc;C"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jbBack">
+            <Component class="javax.swing.JButton" name="jbExit">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="99" type="rgb"/>
+                  <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/studentgradingmanager/images/icon-back-48.png"/>
+                  <Image iconType="3" name="/studentgradingmanager/images/icon-exit-48.png"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBackActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExitActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
