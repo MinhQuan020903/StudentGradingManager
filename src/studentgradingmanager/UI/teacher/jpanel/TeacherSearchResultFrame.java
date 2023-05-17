@@ -44,6 +44,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
 
         jLabel1.setText("THÔNG TIN HỌC SINH " + studentBase.getHOTEN());
 
+        //model = (DefaultTableModel) jtStudentResult.getModel();
         model = (DefaultTableModel) jtStudentResult.getModel();
         mirrorData();
         findSemester();
@@ -573,8 +574,23 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             boolean a = jtStudentResult.isEditing();
             if (a == false) {
                 JOptionPane.showMessageDialog(null, "Restricted Editting");
+            } else {
+
+            }
+        } else {
+            System.err.println("Nhay vo day");
+            if (selectedColumn < 2) {
+                JOptionPane.showMessageDialog(null, "Restricted Editting");
             }
         }
+//        for (int i = 0; i < 1; i++) {
+//            for (int j = 0; j < jtStudentResult.getColumnCount(); j++) {
+//                boolean a = jtStudentResult.isEditing();
+//                if (a == false) {
+//                    JOptionPane.showMessageDialog(null, "Restricted Editting");
+//                }
+//            }
+//        }
 
     }//GEN-LAST:event_jtStudentResultMouseClicked
 
