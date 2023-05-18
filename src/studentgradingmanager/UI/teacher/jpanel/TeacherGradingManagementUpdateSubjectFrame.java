@@ -369,40 +369,61 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
         // TODO add your handling code here:
     }// GEN-LAST:event_jtfNewSubjectFinalTermScoreActionPerformed
 
+    private boolean checkNumber(String input) {
+        if (input.matches("-?\\d+")) {
+            System.out.println("Giá trị nhập vào là số nguyên.");
+            return true;
+        } else {
+            System.out.println("Giá trị nhập vào không phải là số nguyên.");
+            return false;
+        }
+    }
+
     private void jbSaveEditSubjectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSaveEditSubjectActionPerformed
         try {
             // TODO add your handling code here:
-
-            System.err.println(jtfNewSubjectProgressGrade.getText().trim() + "-"
-                    + jtfNewSubjectMidTermGrade.getText().trim() + "-" + jtfNewSubjectFinalTermScore.getText().trim());
-            System.err.println(data.getMaMH());
-            // cap nhat
-            java.sql.Connection connection = DBConnect.getConnection();
-            // JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
-            String sql = "UPDATE DIEM SET DIEMQT = ?, DIEMGK = ?, DIEMCK = ?, GHICHU = ? WHERE MAHS = ? AND MAHK = ? AND MAMH = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, jtfNewSubjectProgressGrade.getText().trim());
-            statement.setString(2, jtfNewSubjectMidTermGrade.getText().trim());
-            statement.setString(3, jtfNewSubjectFinalTermScore.getText().trim());
-            statement.setString(4, jtfNewNote.getText().trim());
-            statement.setString(5, data.getMaHS());
-            System.err.println(data.getHocki());
-            if (data.getHocki().equals("1")) {
-                statement.setString(6, "HK01");
-            } else if (data.getHocki().equals("2")) {
-                statement.setString(6, "HK02");
-            }
-            statement.setString(7, data.getMaMH());
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Cập nhật thành công.");
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
-                MessageBroker.getInstance().sendMessage("Data mon hoc");
-                dispose();
+            if (checkNumber(jtfNewSubjectProgressGrade.getText().trim())) {
+                if (checkNumber(jtfNewSubjectMidTermGrade.getText().trim())) {
+                    if (checkNumber(jtfNewSubjectFinalTermScore.getText().trim())) {
+                        System.err.println(jtfNewSubjectProgressGrade.getText().trim() + "-"
+                                + jtfNewSubjectMidTermGrade.getText().trim() + "-" + jtfNewSubjectFinalTermScore.getText().trim());
+                        System.err.println(data.getMaMH());
+                        // cap nhat
+                        java.sql.Connection connection = DBConnect.getConnection();
+                        // JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+                        String sql = "UPDATE DIEM SET DIEMQT = ?, DIEMGK = ?, DIEMCK = ?, GHICHU = ? WHERE MAHS = ? AND MAHK = ? AND MAMH = ?";
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.setString(1, jtfNewSubjectProgressGrade.getText().trim());
+                        statement.setString(2, jtfNewSubjectMidTermGrade.getText().trim());
+                        statement.setString(3, jtfNewSubjectFinalTermScore.getText().trim());
+                        statement.setString(4, jtfNewNote.getText().trim());
+                        statement.setString(5, data.getMaHS());
+                        System.err.println(data.getHocki());
+                        if (data.getHocki().equals("1")) {
+                            statement.setString(6, "HK01");
+                        } else if (data.getHocki().equals("2")) {
+                            statement.setString(6, "HK02");
+                        }
+                        statement.setString(7, data.getMaMH());
+                        int rowsAffected = statement.executeUpdate();
+                        if (rowsAffected > 0) {
+                            System.out.println("Cập nhật thành công.");
+                            JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
+                            MessageBroker.getInstance().sendMessage("Data mon hoc");
+                            dispose();
+                        } else {
+                            System.out.println("Có lỗi xảy ra khi cập nhật.");
+                            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật.");
+                            dispose();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Điểm Cuối Kì Phải Là Số");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số");
+                }
             } else {
-                System.out.println("Có lỗi xảy ra khi cập nhật.");
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật.");
-                dispose();
+                JOptionPane.showMessageDialog(null, "Điểm Quá Trình Phải Là Số");
             }
 
         } catch (SQLException ex) {

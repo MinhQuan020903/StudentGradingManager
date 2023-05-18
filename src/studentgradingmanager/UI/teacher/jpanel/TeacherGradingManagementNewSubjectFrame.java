@@ -26,12 +26,13 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
     private StudentBase studentBase;
     private List<String> listMAHK;
     private List<String> listNAMHOC;
-    
+
     public TeacherGradingManagementNewSubjectFrame() {
-        
+
         mirrorData();
         findSemester();
     }
+
     public TeacherGradingManagementNewSubjectFrame(StudentBase studentBase) {
         initComponents();
 
@@ -116,98 +117,121 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private boolean checkNumber(String input) {
+        if (input.matches("-?\\d+")) {
+            System.out.println("Giá trị nhập vào là số nguyên.");
+            return true;
+        } else {
+            System.out.println("Giá trị nhập vào không phải là số nguyên.");
+            return false;
+        }
+    }
+
     private void updateDB() {
         System.err.println("Chay upate");
         if (jtfNewSubjectName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Vui Lòng Điền Tên Môn Học");
         } else {
             try {
-                String fullMon = jtfNewSubjectName.getText().toString().trim();
-                String[] tachTungTu = fullMon.split(" ");
-                String maMHNew = "";
-                for (String item : tachTungTu) {
-                    maMHNew += item.substring(0, 1).toUpperCase();
-                }
-                maMHNew += studentBase.getMALOP().substring(1, 2);
-                System.err.println(maMHNew);
+                if (checkNumber(jtfNewSubjectProgressGrade.getText().trim())) {
+                    if (checkNumber(jtfNewSubjectMidTermGrade.getText().trim())) {
+                        if (checkNumber(jtfNewSubjectFinalTermScore.getText().trim())) {
+                            String fullMon = jtfNewSubjectName.getText().toString().trim();
+                            String[] tachTungTu = fullMon.split(" ");
+                            String maMHNew = "";
+                            for (String item : tachTungTu) {
+                                maMHNew += item.substring(0, 1).toUpperCase();
+                            }
+                            maMHNew += studentBase.getMALOP().substring(1, 2);
+                            System.err.println(maMHNew);
 
-                java.sql.Connection connection = DBConnect.getConnection();
-                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+                            java.sql.Connection connection = DBConnect.getConnection();
+                            //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
-                String checkSql = "SELECT MAMH FROM MONHOC WHERE MAMH = ?";
-                PreparedStatement checkStatement = connection.prepareStatement(checkSql);
-                checkStatement.setString(1, maMHNew);
-                ResultSet _resultSet = checkStatement.executeQuery();
+                            String checkSql = "SELECT MAMH FROM MONHOC WHERE MAMH = ?";
+                            PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+                            checkStatement.setString(1, maMHNew);
+                            ResultSet _resultSet = checkStatement.executeQuery();
 
-                if (_resultSet.next()) {
-                    JOptionPane.showMessageDialog(null, maMHNew + " Đã tồn tại không thể thêm mới môn này!");
-                } else {
-                    // them mon hoc moi
-                    String sql = "INSERT INTO MONHOC VALUES (?, ?)";
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    statement.setString(1, maMHNew);
-                    statement.setString(2, fullMon.toUpperCase());
+                            if (_resultSet.next()) {
+                                JOptionPane.showMessageDialog(null, maMHNew + " Đã tồn tại không thể thêm mới môn này!");
+                            } else {
+                                // them mon hoc moi
+                                String sql = "INSERT INTO MONHOC VALUES (?, ?)";
+                                PreparedStatement statement = connection.prepareStatement(sql);
+                                statement.setString(1, maMHNew);
+                                statement.setString(2, fullMon.toUpperCase());
 
-                    int rowsInserted = statement.executeUpdate();
+                                int rowsInserted = statement.executeUpdate();
 
-                    if (rowsInserted > 0) {
-                        System.out.println("Dữ liệu môn học đã được thêm thành công vào cơ sở dữ liệu.");
-                    }
+                                if (rowsInserted > 0) {
+                                    System.out.println("Dữ liệu môn học đã được thêm thành công vào cơ sở dữ liệu.");
+                                }
 
-                    sql = "INSERT INTO DIEM VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    statement = connection.prepareCall(sql);
+                                sql = "INSERT INTO DIEM VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                                statement = connection.prepareCall(sql);
 
-                    String ghichu = jtfNewSubjectNote.getText().toString().trim();
-                    String mahk;
-                    if (jcbSemester.getSelectedItem().equals("1")) {
-                        mahk = "HK01";
+                                String ghichu = jtfNewSubjectNote.getText().toString().trim();
+                                String mahk;
+                                if (jcbSemester.getSelectedItem().equals("1")) {
+                                    mahk = "HK01";
+                                } else {
+                                    mahk = "HK02";
+                                }
+
+                                String namhoc = jcbYear.getSelectedItem().toString();
+
+                                String diemQT = !jtfNewSubjectProgressGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectProgressGrade.getText().toString().trim() : "";
+
+                                String diemGk = !jtfNewSubjectMidTermGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectMidTermGrade.getText().toString().toString().trim() : "";
+
+                                String diemCK = !jtfNewSubjectFinalTermScore.getText().toString().trim().isEmpty() ? jtfNewSubjectFinalTermScore.getText().toString().toString().trim() : "";
+
+                                String diemTBHK = !diemQT.equals("") || !diemGk.equals("") || !diemCK.equals("")
+                                        ? String.valueOf((Double.valueOf(diemGk) + Double.valueOf(diemQT) + Double.valueOf(diemCK)) / 3) : "";
+
+                                System.err.println(jtfNewSubjectProgressGrade.getText().toString().trim());
+
+                                statement.setString(1, maMHNew);
+                                statement.setString(2, studentBase.getMAHS());
+                                statement.setString(3, diemQT);
+                                statement.setString(4, diemGk);
+                                statement.setString(5, diemCK);
+                                statement.setString(6, diemTBHK);
+                                statement.setString(7, ghichu);
+                                statement.setString(8, mahk);
+
+                                rowsInserted = statement.executeUpdate();
+
+                                if (rowsInserted > 0) {
+                                    System.err.println("Thêm Điểm Và Môn Học Thành Công");
+                                }
+                                System.err.println(maMHNew + " " + studentBase.getMAHS() + " " + diemQT + " " + diemGk + " " + diemCK + " " + diemTBHK + " " + ghichu + " " + mahk);
+                                statement.close();
+                            }
+
+                            checkStatement.close();
+                            connection.close();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Điểm Cuối Kì Phải Là Số");
+                        }
                     } else {
-                        mahk = "HK02";
+                        JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số");
                     }
-
-                    String namhoc = jcbYear.getSelectedItem().toString();
-
-                    String diemQT = !jtfNewSubjectProgressGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectProgressGrade.getText().toString().trim() : "";
-
-                    String diemGk = !jtfNewSubjectMidTermGrade.getText().toString().trim().isEmpty() ? jtfNewSubjectMidTermGrade.getText().toString().toString().trim() : "";
-
-                    String diemCK = !jtfNewSubjectFinalTermScore.getText().toString().trim().isEmpty() ? jtfNewSubjectFinalTermScore.getText().toString().toString().trim() : "";
-
-                    String diemTBHK = !diemQT.equals("") || !diemGk.equals("") || !diemCK.equals("")
-                            ? String.valueOf((Double.valueOf(diemGk) + Double.valueOf(diemQT) + Double.valueOf(diemCK)) / 3) : "";
-
-                    System.err.println(jtfNewSubjectProgressGrade.getText().toString().trim());
-
-                    statement.setString(1, maMHNew);
-                    statement.setString(2, studentBase.getMAHS());
-                    statement.setString(3, diemQT);
-                    statement.setString(4, diemGk);
-                    statement.setString(5, diemCK);
-                    statement.setString(6, diemTBHK);
-                    statement.setString(7, ghichu);
-                    statement.setString(8, mahk);
-
-                    rowsInserted = statement.executeUpdate();
-
-                    if (rowsInserted > 0) {
-                        System.err.println("Thêm Điểm Và Môn Học Thành Công");
-                    }
-                    System.err.println(maMHNew + " " + studentBase.getMAHS() + " " + diemQT + " " + diemGk + " " + diemCK + " " + diemTBHK + " " + ghichu + " " + mahk);
-                    statement.close();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Điểm Quá Trình Phải Là Số");
                 }
-
-                checkStatement.close();
-                connection.close();
 
             } catch (SQLException ex) {
                 Logger.getLogger(TeacherGradingManagementNewSubjectFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }      
+    }
+
     /**
      * Creates new form NewJFrame
      */
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -554,7 +578,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
     }//GEN-LAST:event_jbSaveNewSubjectActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
-        
+
         dispose();
     }//GEN-LAST:event_jbExitActionPerformed
 
