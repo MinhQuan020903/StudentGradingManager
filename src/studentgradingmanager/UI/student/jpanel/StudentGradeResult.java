@@ -36,6 +36,7 @@ public class StudentGradeResult extends javax.swing.JPanel {
         this.namHocArrayList = namHocArray;
         this.id = id;
         addDataForCb();
+        jtStudentResult.setEnabled(false);
         TaoTable();
     }
     
