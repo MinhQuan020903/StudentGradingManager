@@ -8,9 +8,16 @@ import Database.DBConnect;
 import java.awt.desktop.ScreenSleepEvent;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import TransferData.MessageBroker;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.UI.teacher.TeacherMainScreen;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,13 +25,21 @@ import studentgradingmanager.UI.teacher.TeacherMainScreen;
  */
 public class ChangePhoneNumber extends javax.swing.JFrame {
 
+    private String matkGV;
+    private String sdtGV;
+
     /**
      * Creates new form ChangePhoneNumbere
      */
     private String maHS;
     private StudentMainScreen mainScreen;
     public ChangePhoneNumber() {
+    }
+
+    public ChangePhoneNumber(String matkGV, String sdtGV) {
         initComponents();
+        this.matkGV = matkGV;
+        this.sdtGV = sdtGV;
     }
     public ChangePhoneNumber(String maHS, StudentMainScreen screen) {
         initComponents();
@@ -119,6 +134,14 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
         jtfConfirmPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfConfirmPhoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         jtfConfirmPhoneNumber.setText("Nhập lại SĐT mới...");
+        jtfConfirmPhoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfConfirmPhoneNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfConfirmPhoneNumberFocusLost(evt);
+            }
+        });
         jtfConfirmPhoneNumber.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtfConfirmPhoneNumberMouseClicked(evt);
@@ -176,7 +199,7 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpChangePhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+            .addComponent(jpChangePhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 976, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,24 +215,70 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
     }//GEN-LAST:event_jbBackActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
+        if (jtfNewPhoneNumber.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu Mới! ");
+        } else {
+            if (jtfConfirmPhoneNumber.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Xác Nhận Mật Khẩu Mới!");
+            } else {
+                if (!jtfNewPhoneNumber.getText().equals(jtfConfirmPhoneNumber.getText())) {
+                    JOptionPane.showMessageDialog(this, "Mật Khẩu Không Trùng Khớp, Vui Lòng Nhập Lại");
+                    jtfConfirmPhoneNumber.setText("");
+                    jtfNewPhoneNumber.setText("");
+                } else {
+                    if (jtfNewPhoneNumber.getText().equals(sdtGV)) {
+                        JOptionPane.showMessageDialog(this, "Mật Khẩu Mới Phải Khác Mật Khẩu Cũ!");
+                        jtfConfirmPhoneNumber.setText("");
+                        jtfNewPhoneNumber.setText("");
+                    } else {
+                        try {
+                            String newSdtGV = jtfConfirmPhoneNumber.getText().toString().trim();
 
         // Navigate to Login screen when finish change password
-        try {
+       
             
             
-            if (checkValueValid()){
-            } else {
-                return;
-            }
-            changePhoneNumberInDatabase();
-            Login login = new Login();
-            login.show();
-            login.setLocationRelativeTo(null);
-            login.requestFocusInWindow();
-            dispose();
+            // if (checkValueValid()){
+            // } else {
+            //     return;
+            // }
+            // changePhoneNumberInDatabase();
+            // Login login = new Login();
+            // login.show();
+            // login.setLocationRelativeTo(null);
+            // login.requestFocusInWindow();
+            // dispose();
+                            // udpate password
+                            java.sql.Connection connection = DBConnect.getConnection();
+                            String sql = "Update GIAOVIEN Set SDT = ? Where MATK = ? ";
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+                            try {
+                                PreparedStatement ps = connection.prepareCall(sql);
+                                ps.setString(1, newSdtGV);
+                                ps.setString(2, matkGV);
+                                ps.executeUpdate();
+                                if (!ps.isClosed()) {
+                                    ps.close();
+                                    System.out.println("Closed to database ChangePhoneNumber!");
+                                }
+                            } catch (Exception e) {
+                                Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, e);
+                            }
+
+                            // Navigate to Login screen when finish change password
+                            try {
+                                MessageBroker.getInstance().sendMessage("Data updated");
+                                dispose();
+
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_jbSaveActionPerformed
 
@@ -224,6 +293,20 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
             jtfConfirmPhoneNumber.setText("");
         }
     }//GEN-LAST:event_jtfConfirmPhoneNumberMouseClicked
+
+    private void jtfConfirmPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfConfirmPhoneNumberFocusGained
+        // TODO add your handling code here:
+        if (jtfConfirmPhoneNumber.getText().equals("Nhập lại SĐT mới...")) {
+            jtfConfirmPhoneNumber.setText("");
+        }
+    }//GEN-LAST:event_jtfConfirmPhoneNumberFocusGained
+
+    private void jtfConfirmPhoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfConfirmPhoneNumberFocusLost
+        // TODO add your handling code here:
+        if (jtfNewPhoneNumber.getText().equals("")) {
+            jtfNewPhoneNumber.setText("Nhập SĐT...");
+        }
+    }//GEN-LAST:event_jtfConfirmPhoneNumberFocusLost
 
     /**
      * @param args the command line arguments

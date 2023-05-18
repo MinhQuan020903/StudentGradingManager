@@ -9,9 +9,19 @@ import java.awt.GraphicsEnvironment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import TransferData.MessageBroker;
+import java.awt.GraphicsEnvironment;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
 import studentgradingmanager.UI.teacher.TeacherMainScreen;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,12 +29,18 @@ import studentgradingmanager.UI.teacher.TeacherMainScreen;
  */
 public class ChangePassword extends javax.swing.JFrame {
 
+    private String passoword;
+    private String matkGV;
+
     /**
      * Creates new form ChangePassword
      */
     private String maTK;
     private StudentMainScreen mainScreen;
     public ChangePassword() {
+    }
+
+    public ChangePassword(String matkGV, String passoword) {
         initComponents();
     }
     public ChangePassword(String maTK, StudentMainScreen screen) {
@@ -34,6 +50,9 @@ public class ChangePassword extends javax.swing.JFrame {
         this.maTK = maTK;
         this.mainScreen = screen;
         continueInitComponents();
+
+        this.passoword = passoword;
+        this.matkGV = matkGV;
     }
 
     /**
@@ -217,7 +236,7 @@ public class ChangePassword extends javax.swing.JFrame {
 
         if (jbShowPassword.isSelected()) {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-eye-30.png")));
-            jtfNewPassword.setEchoChar((char)0);
+            jtfNewPassword.setEchoChar((char) 0);
 
         } else {
             jbShowPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png")));
@@ -227,11 +246,11 @@ public class ChangePassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jbShowPasswordActionPerformed
 
     private void jbShowConfirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbShowConfirmPasswordActionPerformed
-        
+
         // Check conditions for show / hide password buttons
         if (jbShowConfirmPassword.isSelected()) {
             jbShowConfirmPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-eye-30.png")));
-            jtfConfirmPassword.setEchoChar((char)0);
+            jtfConfirmPassword.setEchoChar((char) 0);
 
         } else {
             jbShowConfirmPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-hide-30.png")));
@@ -244,27 +263,79 @@ public class ChangePassword extends javax.swing.JFrame {
     
         // Navigate to Login screen when finish change password
         
-        try {
-            if (!checkValueValid())
-                return;
-            changePasswordInDatabse();
+    
+            // if (!checkValueValid())
+            //     return;
+            // changePasswordInDatabse();
             
-            Login login = new Login();
-            login.show();
-            login.setLocationRelativeTo(null);
-            login.requestFocusInWindow();
+            // Login login = new Login();
+            // login.show();
+            // login.setLocationRelativeTo(null);
+            // login.requestFocusInWindow();
             
+        if (jtfNewPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu Mới! ");
+        } else {
+            if (jtfConfirmPassword.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Xác Nhận Mật Khẩu Mới!");
+            } else {
+                if (!jtfNewPassword.getText().equals(jtfConfirmPassword.getText())) {
+                    JOptionPane.showMessageDialog(this, "Mật Khẩu Không Trùng Khớp, Vui Lòng Nhập Lại");
+                    jtfConfirmPassword.setText("");
+                    jtfNewPassword.setText("");
+                } else {
+                    if (jtfNewPassword.getText().equals(passoword)) {
+                        JOptionPane.showMessageDialog(this, "Mật Khẩu Mới Phải Khác Mật Khẩu Cũ!");
+                        jtfConfirmPassword.setText("");
+                        jtfNewPassword.setText("");
+                    } else {
+                        try {
+                            String newPassword = jtfConfirmPassword.getText().toString().trim();
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+                            // udpate password
+                            java.sql.Connection connection = DBConnect.getConnection();
+                            String sql = "Update TAIKHOAN Set MATKHAU = ? Where MATK = ? ";
+
+                            try {
+                                PreparedStatement ps = connection.prepareCall(sql);
+                                ps.setString(1, newPassword);
+                                ps.setString(2, matkGV);
+                                ps.executeUpdate();
+                                if (!ps.isClosed()) {
+                                    ps.close();
+                                    System.out.println("Closed to database ChangePassword!");
+                                }
+                            } catch (Exception e) {
+                                Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, e);
+                            }
+
+                            // Navigate to Login screen when finish change password
+                            try {
+                                MessageBroker.getInstance().sendMessage("Data updated");
+                                dispose();
+
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                }
+            }
         }
+
+        
+
+
     }//GEN-LAST:event_jbSaveActionPerformed
 
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackActionPerformed
-       
+
         // Navigate to Login screen when click Back
         switch (message) {
-            case "FROM_LOGIN" : {
+            case "FROM_LOGIN": {
                 Login login = new Login();
                 login.show();
                 login.setLocationRelativeTo(null);
@@ -272,13 +343,13 @@ public class ChangePassword extends javax.swing.JFrame {
                 login.requestFocusInWindow();
                 dispose();
                 break;
-            }     
+            }
             default: {
                 dispose();
                 break;
             }
         }
-            
+
 
     }//GEN-LAST:event_jbBackActionPerformed
 
@@ -312,11 +383,11 @@ public class ChangePassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ChangePassword changePassword = new ChangePassword();  
-                
+                ChangePassword changePassword = new ChangePassword();
+
                 changePassword.setLocationRelativeTo(null);
                 changePassword.setVisible(true);
-                changePassword.requestFocusInWindow();       
+                changePassword.requestFocusInWindow();
             }
         });
     }
