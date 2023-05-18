@@ -373,11 +373,11 @@ public class TeacherSearch extends javax.swing.JPanel {
                     null,
                     null,
                     null);
-        TeacherSearchResultFrame frame = new TeacherSearchResultFrame(studentBase);
-        frame.show();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.requestFocusInWindow();
+            TeacherSearchResultFrame frame = new TeacherSearchResultFrame(studentBase);
+            frame.show();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            frame.requestFocusInWindow();
 
         }
 
