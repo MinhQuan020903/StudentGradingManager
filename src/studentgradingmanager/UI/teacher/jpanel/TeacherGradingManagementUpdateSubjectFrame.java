@@ -373,7 +373,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
         try {
             double number = Double.parseDouble(input);
             if (number >= 0 && number <= 10) {
-                System.out.println("Giá trị nhập vào là số từ 0 đến 10.");
+                System.out.println("Gia Tri Hop He");
                 return true;
             } else {
                 System.out.println("Giá trị nhập vào không nằm trong khoảng từ 0 đến 10.");
@@ -411,7 +411,8 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
                             statement.setString(6, "HK02");
                         }
                         statement.setString(7, data.getMaMH());
-                        int rowsAffected = statement.executeUpdate();
+                        int rowsAffected = statement.executeUpdate();                     
+           
                         if (rowsAffected > 0) {
                             System.out.println("Cập nhật thành công.");
                             JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
@@ -427,16 +428,14 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
                             System.out.println("Closed to database import data student!");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Điểm Cuối Kì Phải Là Số");
+                        JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số");
+                    JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Điểm Quá Trình Phải Là Số");
-
+                JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class
                     .getName()).log(Level.SEVERE, null, ex);

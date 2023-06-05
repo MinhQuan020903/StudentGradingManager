@@ -223,6 +223,8 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
     }
 
     private void TinhDiemTBNam() {
+        List<DIEM> listDIEMHK1 = new ArrayList<>();
+        List<DIEM> listDIEMHK2 = new ArrayList<>();
         try {
             java.sql.Connection connection = DBConnect.getConnection();
 
@@ -235,7 +237,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             // hoc ki 1
             while (resultSet.next()) {
 
-                listDIEM.add(new DIEM(
+                listDIEMHK1.add(new DIEM(
                         resultSet.getString("MAMH"),
                         resultSet.getString("MAHS"),
                         resultSet.getString("DIEMQT"),
@@ -250,11 +252,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             double semesterResultHK1 = 0.0;
             int i;
 
-            for (i = 0; i < listDIEM.size(); i++) {
-                if (listDIEM.get(i).getDEIMTBHK() == null || listDIEM.get(i).getDEIMTBHK().isEmpty()) {
+            for (i = 0; i < listDIEMHK1.size(); i++) {
+                if (listDIEMHK1.get(i).getDEIMTBHK() == null || listDIEMHK1.get(i).getDEIMTBHK().isEmpty()) {
                     System.err.println("Diem trong");
                 } else {
-                    semesterResultHK1 += Double.valueOf(listDIEM.get(i).getDEIMTBHK());
+                    semesterResultHK1 += Double.valueOf(listDIEMHK1.get(i).getDEIMTBHK());
                 }
             }
 
@@ -265,7 +267,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             statement.setString(2, "HK02");
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                listDIEM.add(new DIEM(
+                listDIEMHK2.add(new DIEM(
                         resultSet.getString("MAMH"),
                         resultSet.getString("MAHS"),
                         resultSet.getString("DIEMQT"),
@@ -279,12 +281,12 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             }
             double semesterResultHK2 = 0.0;
             i = 0;
-            listDIEM.clear();
-            for (i = 0; i < listDIEM.size(); i++) {
-                if (listDIEM.get(i).getDEIMTBHK() == null || listDIEM.get(i).getDEIMTBHK().isEmpty()) {
+            //listDIEM.clear();
+            for (i = 0; i < listDIEMHK2.size(); i++) {
+                if (listDIEMHK2.get(i).getDEIMTBHK() == null || listDIEMHK2.get(i).getDEIMTBHK().isEmpty()) {
                     System.err.println("Diem trong");
                 } else {
-                    semesterResultHK2 += Double.valueOf(listDIEM.get(i).getDEIMTBHK());
+                    semesterResultHK2 += Double.valueOf(listDIEMHK2.get(i).getDEIMTBHK());
                 }
             }
 
@@ -714,11 +716,12 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
         } else {
             int selectedRow = jtStudentResult.rowAtPoint(evt.getPoint());
             int selecredColumn = jtStudentResult.columnAtPoint(evt.getPoint());
-            System.err.println("Nhay vo day");
-
+            System.err.println("Nhay vo day" + listDIEM.size());
+            
             JTable table = jtStudentResult;
             String mamonhoc = "";
             for (int i = 0; i < listDIEM.size(); i++) {
+                System.err.println("DANG CHAY VONG FOR");
                 System.err.println(table.getValueAt(selectedRow, 1) + "-" + listDIEM.get(i).getTenMonHoc());
                 if (table.getValueAt(selectedRow, 1).equals(listDIEM.get(i).getTenMonHoc())) {
                     mamonhoc = listDIEM.get(i).getMAMH();
@@ -759,9 +762,9 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
                         table.getValueAt(selectedRow, 3).toString(),
                         table.getValueAt(selectedRow, 4).toString(),
                         table.getValueAt(selectedRow, 6).toString());
-
-                TeacherGradingManagementUpdateSubjectFrame update = new TeacherGradingManagementUpdateSubjectFrame(
-                        data);
+                
+                
+                TeacherGradingManagementUpdateSubjectFrame update = new TeacherGradingManagementUpdateSubjectFrame(data);
                 update.show();
                 update.setLocationRelativeTo(null);
                 update.setVisible(true);
