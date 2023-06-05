@@ -215,6 +215,8 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             jlbSemesterResult.setText(String.valueOf(Math.round(semesterResult / i * 100) / 100.0));
 
             //jlbYearResult.setText("Name hoc ");
+            
+            //TinhDiemTBNam();
         } catch (SQLException ex) {
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -698,7 +700,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
     private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jcbSemesterItemStateChanged
         // TODO add your handling code here:
         importData();
-        TinhDiemTBNam();
+       // TinhDiemTBNam();
     }// GEN-LAST:event_jcbSemesterItemStateChanged
 
     private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jtStudentResultMouseClicked

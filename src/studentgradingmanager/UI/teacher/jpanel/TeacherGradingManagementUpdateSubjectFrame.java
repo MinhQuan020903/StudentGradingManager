@@ -422,6 +422,10 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
                             JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật.");
                             dispose();
                         }
+                        if (!statement.isClosed()) {
+                            statement.close();
+                            System.out.println("Closed to database import data student!");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Điểm Cuối Kì Phải Là Số");
                     }
@@ -437,6 +441,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
             Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+
     }// GEN-LAST:event_jbSaveEditSubjectActionPerformed
 
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbBackActionPerformed
