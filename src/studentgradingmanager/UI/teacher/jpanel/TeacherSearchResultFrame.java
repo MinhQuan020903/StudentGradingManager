@@ -67,7 +67,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
                 dispose();
             }
         });
-
+        TinhDiemTBNam();
     }
 
     private void importData() {
@@ -162,7 +162,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
                 statement.setString(3, listDIEM.get(i).getMAMH());
 
                 resultSet = statement.executeQuery();
-                if(resultSet.next()) {
+                if (resultSet.next()) {
                     listDIEM.get(i).setGHICHU(resultSet.getString("GHICHU"));
                 }
 
@@ -214,7 +214,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
 
             jlbSemesterResult.setText(String.valueOf(Math.round(semesterResult / i * 100) / 100.0));
 
-            jlbYearResult.setText("Name hoc ");
+            //jlbYearResult.setText("Name hoc ");
         } catch (SQLException ex) {
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -715,20 +715,20 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             System.err.println("Nhay vo day");
 
             JTable table = jtStudentResult;
-             String mamonhoc = "";
+            String mamonhoc = "";
             for (int i = 0; i < listDIEM.size(); i++) {
-                    System.err.println(table.getValueAt(selectedRow, 1) + "-" + listDIEM.get(i).getTenMonHoc());
-                    if (table.getValueAt(selectedRow, 1).equals(listDIEM.get(i).getTenMonHoc())) {
-                        mamonhoc = listDIEM.get(i).getMAMH();
-                        
-                        System.err.println(mamonhoc + " - " + listDIEM.get(i).getMAMH());
-                        if(mamonhoc == "") {
-                            System.err.println("nulllll");
-                        } else {
-                            System.err.println(mamonhoc);
-                        }
+                System.err.println(table.getValueAt(selectedRow, 1) + "-" + listDIEM.get(i).getTenMonHoc());
+                if (table.getValueAt(selectedRow, 1).equals(listDIEM.get(i).getTenMonHoc())) {
+                    mamonhoc = listDIEM.get(i).getMAMH();
+
+                    System.err.println(mamonhoc + " - " + listDIEM.get(i).getMAMH());
+                    if (mamonhoc == "") {
+                        System.err.println("nulllll");
+                    } else {
+                        System.err.println(mamonhoc);
                     }
                 }
+            }
             if (selectedRow != -1) {
 //                JTable table = jtStudentResult;
 //                String mamonhoc = "";

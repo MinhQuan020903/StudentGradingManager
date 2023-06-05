@@ -370,11 +370,17 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
     }// GEN-LAST:event_jtfNewSubjectFinalTermScoreActionPerformed
 
     private boolean checkNumber(String input) {
-        if (input.matches("-?\\d+")) {
-            System.out.println("Giá trị nhập vào là số nguyên.");
-            return true;
-        } else {
-            System.out.println("Giá trị nhập vào không phải là số nguyên.");
+        try {
+            double number = Double.parseDouble(input);
+            if (number >= 0 && number <= 10) {
+                System.out.println("Giá trị nhập vào là số từ 0 đến 10.");
+                return true;
+            } else {
+                System.out.println("Giá trị nhập vào không nằm trong khoảng từ 0 đến 10.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Giá trị nhập vào không phải là số.");
             return false;
         }
     }
@@ -424,10 +430,12 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Điểm Quá Trình Phải Là Số");
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }// GEN-LAST:event_jbSaveEditSubjectActionPerformed
 
