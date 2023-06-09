@@ -5,6 +5,9 @@
 package studentgradingmanager.UI.frame;
 
 import Database.DBConnect;
+import java.awt.desktop.ScreenSleepEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import TransferData.MessageBroker;
 import javax.swing.JOptionPane;
 import studentgradingmanager.UI.student.StudentMainScreen;
@@ -28,6 +31,8 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
     /**
      * Creates new form ChangePhoneNumbere
      */
+    private String maHS;
+    private StudentMainScreen mainScreen;
     public ChangePhoneNumber() {
     }
 
@@ -35,6 +40,11 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
         initComponents();
         this.matkGV = matkGV;
         this.sdtGV = sdtGV;
+    }
+    public ChangePhoneNumber(String maHS, StudentMainScreen screen) {
+        initComponents();
+        this.maHS = maHS;
+        this.mainScreen = screen;
     }
 
     /**
@@ -224,6 +234,20 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
                         try {
                             String newSdtGV = jtfConfirmPhoneNumber.getText().toString().trim();
 
+        // Navigate to Login screen when finish change password
+       
+            
+            
+            // if (checkValueValid()){
+            // } else {
+            //     return;
+            // }
+            // changePhoneNumberInDatabase();
+            // Login login = new Login();
+            // login.show();
+            // login.setLocationRelativeTo(null);
+            // login.requestFocusInWindow();
+            // dispose();
                             // udpate password
                             java.sql.Connection connection = DBConnect.getConnection();
                             String sql = "Update GIAOVIEN Set SDT = ? Where MATK = ? ";
@@ -330,4 +354,38 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
     private javax.swing.JTextField jtfConfirmPhoneNumber;
     private javax.swing.JTextField jtfNewPhoneNumber;
     // End of variables declaration//GEN-END:variables
+
+    private void changePhoneNumberInDatabase() throws SQLException{
+        String newPhone = jtfNewPhoneNumber.getText().toString();
+        java.sql.Connection connection = DBConnect.getConnection();
+        
+        String sql = "UPDATE HOCSINH SET SDT = ? WHERE MAHS = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, newPhone);
+        statement.setString(2, maHS);
+        statement.execute();
+        JOptionPane.showMessageDialog(null, "Đổi số điện thoại thành công! Mời đăng nhập lại!");
+        this.mainScreen.setVisible(false);
+        this.setVisible(false);
+    }
+
+    private boolean checkValueValid() {
+       String newPhone = jtfNewPhoneNumber.getText().toString();
+       String confirmPhoneNumber = jtfConfirmPhoneNumber.getText().toString();
+       if (!newPhone.equals(confirmPhoneNumber)) {
+           JOptionPane.showMessageDialog(null, "Số điện thoại mới và xác nhận số điện thoại không giống nhau!");
+            return false;
+       }
+       if (newPhone.length() != 10) {
+           JOptionPane.showMessageDialog(null, "Số điện thoại mới không hợp lệ!");
+            return false;
+       }
+       try {
+           long newPhoneNumber = Long.parseLong(newPhone);
+           return true;
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Số điện thoại mới không hợp lệ!");
+            return false;
+       }
+    }
 }

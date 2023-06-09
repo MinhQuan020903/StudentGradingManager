@@ -303,8 +303,9 @@ public class Login extends javax.swing.JFrame {
                                 dispose();
                                 break;
                             } else if (rs.getString("VAITRO").equals("HS")) {
+                                String maTKstudent = rs.getString("MATK");
                                 JOptionPane.showMessageDialog(this, "Xin chào học sinh " + email);
-                                StudentMainScreen studentMainScreen = new StudentMainScreen(email, password);
+                                StudentMainScreen studentMainScreen = new StudentMainScreen(email, password, maTKstudent);
                                 studentMainScreen.show();
                                 studentMainScreen.setLocationRelativeTo(null);
                                 studentMainScreen.requestFocusInWindow();
