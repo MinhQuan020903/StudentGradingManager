@@ -142,7 +142,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             .addGroup(jpUserAvatarLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jlbUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jpUserAvatarLayout.setVerticalGroup(
             jpUserAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +181,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         jlbTeacherName.setBackground(new java.awt.Color(255, 255, 255));
         jlbTeacherName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlbTeacherName.setForeground(new java.awt.Color(255, 255, 255));
+        jlbTeacherName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbTeacherName.setText("TÊN GIÁO VIÊN");
 
         jlbTeacherId.setBackground(new java.awt.Color(255, 255, 255));
@@ -278,18 +279,24 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         jpMainScreenSelector.setLayout(jpMainScreenSelectorLayout);
         jpMainScreenSelectorLayout.setHorizontalGroup(
             jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jlbTeacherId))
             .addComponent(jpTeacherClassStatisticSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
             .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
             .addComponent(jpTeacherAccountInfoSelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbTeacherName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+            .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
+                        .addComponent(jlbTeacherName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainScreenSelectorLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainScreenSelectorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbTeacherId)
+                .addGap(63, 63, 63))
         );
         jpMainScreenSelectorLayout.setVerticalGroup(
             jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +307,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
                 .addComponent(jlbTeacherName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlbTeacherId)
-                .addGap(30, 30, 30)
+                .addGap(36, 36, 36)
                 .addComponent(jpTeacherAccountInfoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTeacherSearchSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,7 +315,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
                 .addComponent(jpTeacherClassStatisticSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTeacherSignOutSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jpMainScreenContent.setBackground(new java.awt.Color(255, 255, 255));
