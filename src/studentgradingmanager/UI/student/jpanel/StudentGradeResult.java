@@ -4,6 +4,17 @@
  */
 package studentgradingmanager.UI.student.jpanel;
 
+import Class.Mark;
+import Database.DBConnect;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Quan
@@ -13,10 +24,22 @@ public class StudentGradeResult extends javax.swing.JPanel {
     /**
      * Creates new form StudentGradeResutl
      */
-    public StudentGradeResult() {
+    private DefaultTableModel tbModelTT;
+    ArrayList<String> hocKyArrayList;
+    ArrayList<String> namHocArrayList;
+    String id;
+    ArrayList<Mark> markArrayList = new ArrayList<Mark>();
+    ArrayList<String> tenMH = new ArrayList<String>();
+    public StudentGradeResult(ArrayList<String> hocKyArray, ArrayList<String> namHocArray, String id) {
         initComponents();
+        this.hocKyArrayList = hocKyArray;
+        this.namHocArrayList = namHocArray;
+        this.id = id;
+        addDataForCb();
+        jtStudentResult.setEnabled(false);
+        TaoTable();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,23 +68,24 @@ public class StudentGradeResult extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Năm học");
 
         jcbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Điểm TB năm học");
 
         jcbSemester1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbSearch.setText("Tìm kiếm");
+        jbSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSearchActionPerformed(evt);
+            }
+        });
 
-        jtStudentResult.setBackground(new java.awt.Color(255, 255, 255));
         jtStudentResult.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jtStudentResult.setForeground(new java.awt.Color(0, 0, 0));
         jtStudentResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -98,12 +122,10 @@ public class StudentGradeResult extends javax.swing.JPanel {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Học kỳ");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Điểm TB học kỳ");
 
         jlbYearResult.setBackground(new java.awt.Color(255, 255, 255));
@@ -189,6 +211,14 @@ public class StudentGradeResult extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
+        try {
+            finDataSubjectFromIdSemesterAndYear();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentGradeResult.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
@@ -204,4 +234,79 @@ public class StudentGradeResult extends javax.swing.JPanel {
     private javax.swing.JScrollPane jspStudentResultTable;
     private javax.swing.JTable jtStudentResult;
     // End of variables declaration//GEN-END:variables
+
+    private void addDataForCb(){
+        jcbSemester1.removeAllItems();
+        jcbYear.removeAllItems();
+        for (String hocky : hocKyArrayList) {
+            jcbSemester1.addItem(hocky);
+        }
+        for(String namHoc : namHocArrayList) {
+            jcbYear.addItem(namHoc);
+        }
+        jcbSemester1.setSelectedIndex(0);
+        jcbYear.setSelectedIndex(0);
+    }
+
+    private void finDataSubjectFromIdSemesterAndYear() throws SQLException{
+            
+        markArrayList.clear();
+        tbModelTT.setRowCount(0);
+        
+        String semesterSelected = jcbSemester1.getSelectedItem().toString();
+        int yearSelected = Integer.parseInt(jcbYear.getSelectedItem().toString());
+        java.sql.Connection connection = DBConnect.getConnection();
+        
+        String sql = "SELECT * FROM DIEM, HOCKYNAMHOC, MONHOC WHERE MAHS = ? and DIEM.MAHK = ? and NAMHOC = ? and DIEM.MAMH = MONHOC.MAMH and "
+                + "DIEM.MAHK = HOCKYNAMHOC.MAHK";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
+        statement.setString(2, semesterSelected);
+        statement.setInt(3, yearSelected);
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()) {
+            String tenMH = resultSet.getString("TENMH");
+            double diemQT = resultSet.getDouble("DIEMQT");
+            double diemGK = resultSet.getDouble("DIEMGK");
+            double diemCK = resultSet.getDouble("DIEMCK");
+            double diemTBHK = resultSet.getDouble("DIEMTBHK");
+            String ghiChu = resultSet.getString("GHICHU");
+            Mark mark = new Mark(tenMH, diemQT, diemGK, diemCK,  diemTBHK, ghiChu);
+            markArrayList.add(mark);
+        }
+        fillDataIntoTable();
+    }
+
+    private void fillDataIntoTable() {
+        ArrayList<Double> diemTBHKArray = new ArrayList<Double>();
+        // Lấy thông tin điểm của tất cả các môn để add vào table
+        for (int i = 0; i < markArrayList.size(); i++) {
+            String[] row = new String[7];
+            row[0] = String.valueOf(i + 1);
+            row[1] = markArrayList.get(i).getTenMH();
+            row[2] = String.valueOf(markArrayList.get(i).getDiemQT());
+            row[3] = String.valueOf(markArrayList.get(i).getDiemGK());
+            row[4] = String.valueOf(markArrayList.get(i).getDiemCK());
+            row[5] = String.valueOf(markArrayList.get(i).getDiemTBHK());
+            diemTBHKArray.add(markArrayList.get(i).getDiemTBHK());
+            row[6] = markArrayList.get(i).getGhiChu();
+            tbModelTT.addRow(row);
+         }
+        // Tính điểm trung bình học kỳ;
+        double tongDiem = 0;
+        for (double diem : diemTBHKArray) {
+            tongDiem += diem;
+        }
+        double diemTBHK = tongDiem / diemTBHKArray.size();
+        jlbSemesterResult.setText(String.valueOf(diemTBHK));
+    }
+    public void TaoTable(){
+        tbModelTT = new DefaultTableModel();
+        String tieuDe[] = {"STT", "Tên môn học", "Điểm QT", "Điểm GK", "Điểm CK", "Điểm TBHK", "Ghi chú"};
+        tbModelTT.setColumnIdentifiers(tieuDe);
+        jtStudentResult.setModel(tbModelTT);
+        setVisible(true);
+    }
+
+    
 }

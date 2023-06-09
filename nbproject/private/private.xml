@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/UI/frame/ChangePhoneNumber.java</file>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/UI/student/jpanel/StudentAccountInfo.java</file>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/controller/StudentNavController.java</file>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/UI/student/StudentMainScreen.java</file>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/UI/frame/Login.java</file>
+            <file>file:/D:/StudentGradingManager/src/studentgradingmanager/UI/frame/ChangePassword.java</file>
+        </group>
+>>>>>>> c7fcaccb3377a7248f05126c8ebbf1b5b0341464
     </open-files>
 </project-private>
