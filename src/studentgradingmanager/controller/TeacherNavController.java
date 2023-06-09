@@ -133,7 +133,7 @@ public class TeacherNavController extends NavController {
                 }
                 
                 case "Thống kê điểm học sinh": {
-                    node = new TeacherClassStatistic();
+                    node = new TeacherClassStatistic(teacherItem);
                     break;
                 }
                 
