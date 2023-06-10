@@ -47,6 +47,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
         initComponents();
         this.studentBase = studentBase;
 
+        jlbYearResult.setVisible(false);
         jLabel1.setText("THÔNG TIN HỌC SINH " + studentBase.getHOTEN());
 
         // model = (DefaultTableModel) jtStudentResult.getModel();
@@ -122,7 +123,9 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
                 double diemgkValue = Double.parseDouble(item.getDIEMGK());
                 double diemckValue = Double.parseDouble(item.getDIEMCK());
                 double s = diemqtValue * 0.2 + diemgkValue * 0.3 + diemckValue * 0.5;
-                item.setDEIMTBHK(String.valueOf(s));
+                double roundedS = Math.round(s * 10.0) / 10.0;
+
+                item.setDEIMTBHK(String.valueOf(roundedS));
 
                 listDIEM.add(item);
             }
@@ -222,7 +225,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
     }
 
     private void TinhDiemTBNam() {
-        double sum = 0; 
+        double sum = 0;
         int count = 0;
         try {
             java.sql.Connection connection = DBConnect.getConnection();
@@ -235,7 +238,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             // hoc ki 2
             if (resultSet.next()) {
                 sum = resultSet.getDouble(1);
-                count = resultSet.getInt(2);                
+                count = resultSet.getInt(2);
             }
 
             // Close the ResultSet, statement, and connection
@@ -654,6 +657,11 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
         // TODO add your handling code here:
         importData();
         TinhDiemTBNam();
+        if (jcbSemester.getSelectedItem() == "2") {
+            jlbYearResult.setVisible(true);
+        } else {
+            jlbYearResult.setVisible(false);
+        }
     }// GEN-LAST:event_jcbSemesterItemStateChanged
 
     private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jtStudentResultMouseClicked
