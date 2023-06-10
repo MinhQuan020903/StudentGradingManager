@@ -266,11 +266,11 @@ public class TeacherGradingManagement extends javax.swing.JPanel {
     }//GEN-LAST:event_jbSearchActionPerformed
 
     private void jbUpdateSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpdateSubjectActionPerformed
-        TeacherGradingManagementUpdateSubjectFrame frame = new TeacherGradingManagementUpdateSubjectFrame();
-        frame.show();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.requestFocusInWindow();
+//        TeacherGradingManagementUpdateSubjectFrame frame = new TeacherGradingManagementUpdateSubjectFrame();
+//        frame.show();
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//        frame.requestFocusInWindow();
     }//GEN-LAST:event_jbUpdateSubjectActionPerformed
 
     private void jbNewSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewSubjectActionPerformed

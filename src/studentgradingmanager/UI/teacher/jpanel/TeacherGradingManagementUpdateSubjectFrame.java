@@ -82,7 +82,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jpTeacherGradingManagementEditSubjectPanel = new javax.swing.JPanel();
@@ -113,8 +113,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
 
         jtfNewSubjectProgressGrade.setBackground(new java.awt.Color(217, 217, 217));
         jtfNewSubjectProgressGrade.setForeground(new java.awt.Color(153, 153, 153));
-        jtfNewSubjectProgressGrade
-                .setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtfNewSubjectProgressGrade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfNewSubjectProgressGrade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtfNewSubjectProgressGradeMouseClicked(evt);
@@ -132,8 +131,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
 
         jtfNewSubjectMidTermGrade.setBackground(new java.awt.Color(217, 217, 217));
         jtfNewSubjectMidTermGrade.setForeground(new java.awt.Color(153, 153, 153));
-        jtfNewSubjectMidTermGrade
-                .setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtfNewSubjectMidTermGrade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfNewSubjectMidTermGrade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtfNewSubjectMidTermGradeMouseClicked(evt);
@@ -147,8 +145,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
 
         jtfNewSubjectFinalTermScore.setBackground(new java.awt.Color(217, 217, 217));
         jtfNewSubjectFinalTermScore.setForeground(new java.awt.Color(153, 153, 153));
-        jtfNewSubjectFinalTermScore
-                .setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtfNewSubjectFinalTermScore.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfNewSubjectFinalTermScore.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtfNewSubjectFinalTermScoreMouseClicked(evt);
@@ -191,8 +188,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
 
         jbBack.setBackground(new java.awt.Color(255, 51, 51));
         jbBack.setForeground(new java.awt.Color(255, 255, 255));
-        jbBack.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-exit-48.png"))); // NOI18N
+        jbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/studentgradingmanager/images/icon-exit-48.png"))); // NOI18N
         jbBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBackActionPerformed(evt);
@@ -202,28 +198,26 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 679,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(20, Short.MAX_VALUE)));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -243,104 +237,79 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
             }
         });
 
-        javax.swing.GroupLayout jpTeacherGradingManagementEditSubjectPanelLayout = new javax.swing.GroupLayout(
-                jpTeacherGradingManagementEditSubjectPanel);
+        javax.swing.GroupLayout jpTeacherGradingManagementEditSubjectPanelLayout = new javax.swing.GroupLayout(jpTeacherGradingManagementEditSubjectPanel);
         jpTeacherGradingManagementEditSubjectPanel.setLayout(jpTeacherGradingManagementEditSubjectPanelLayout);
         jpTeacherGradingManagementEditSubjectPanelLayout.setHorizontalGroup(
-                jpTeacherGradingManagementEditSubjectPanelLayout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                                .addGap(150, 150, 150)
+            jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                .addContainerGap(156, Short.MAX_VALUE)
+                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 137,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                                        .addContainerGap(153, Short.MAX_VALUE)
-                                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                                        .createSequentialGroup()
-                                                        .addComponent(jLabel7)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jtfNewNote))
-                                                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                                        .createSequentialGroup()
-                                                        .addComponent(jLabel3)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jtfNewSubjectProgressGrade,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 77,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabel4)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jtfNewSubjectMidTermGrade,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 77,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(33, 33, 33)
-                                                        .addComponent(jLabel5)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jtfNewSubjectFinalTermScore,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 77,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(63, 63, 63)
-                                        .addComponent(jbSaveEditSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(153, 153, 153)));
+                                .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfNewSubjectProgressGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfNewNote)))
+                .addGap(92, 92, 92)
+                .addComponent(jbSaveEditSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(124, 124, 124))
+        );
         jpTeacherGradingManagementEditSubjectPanelLayout.setVerticalGroup(
-                jpTeacherGradingManagementEditSubjectPanelLayout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21,
-                                        Short.MAX_VALUE)
-                                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jtfNewSubjectProgressGrade,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jtfNewSubjectFinalTermScore,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jbSaveEditSubject))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jtfNewNote, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(290, 290, 290)));
+            jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(52, 52, 52)
+                        .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfNewSubjectProgressGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jtfNewSubjectMidTermGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jtfNewSubjectFinalTermScore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53))
+                    .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(jbSaveEditSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)))
+                .addGroup(jpTeacherGradingManagementEditSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jtfNewNote, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(161, 161, 161))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                960, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpTeacherGradingManagementEditSubjectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -369,45 +338,78 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
         // TODO add your handling code here:
     }// GEN-LAST:event_jtfNewSubjectFinalTermScoreActionPerformed
 
+    private boolean checkNumber(String input) {
+        try {
+            double number = Double.parseDouble(input);
+            if (number >= 0 && number <= 10) {
+                System.out.println("Gia Tri Hop He");
+                return true;
+            } else {
+                System.out.println("Giá trị nhập vào không nằm trong khoảng từ 0 đến 10.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Giá trị nhập vào không phải là số.");
+            return false;
+        }
+    }
+
     private void jbSaveEditSubjectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSaveEditSubjectActionPerformed
         try {
             // TODO add your handling code here:
-
-            System.err.println(jtfNewSubjectProgressGrade.getText().trim() + "-"
-                    + jtfNewSubjectMidTermGrade.getText().trim() + "-" + jtfNewSubjectFinalTermScore.getText().trim());
-            System.err.println(data.getMaMH());
-            // cap nhat
-            java.sql.Connection connection = DBConnect.getConnection();
-            // JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
-            String sql = "UPDATE DIEM SET DIEMQT = ?, DIEMGK = ?, DIEMCK = ?, GHICHU = ? WHERE MAHS = ? AND MAHK = ? AND MAMH = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, jtfNewSubjectProgressGrade.getText().trim());
-            statement.setString(2, jtfNewSubjectMidTermGrade.getText().trim());
-            statement.setString(3, jtfNewSubjectFinalTermScore.getText().trim());
-            statement.setString(4, jtfNewNote.getText().trim());
-            statement.setString(5, data.getMaHS());
-            System.err.println(data.getHocki());
-            if (data.getHocki().equals("1")) {
-                statement.setString(6, "HK01");
-            } else if (data.getHocki().equals("2")) {
-                statement.setString(6, "HK02");
-            }
-            statement.setString(7, data.getMaMH());
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Cập nhật thành công.");
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
-                MessageBroker.getInstance().sendMessage("Data mon hoc");
-                dispose();
+            if (checkNumber(jtfNewSubjectProgressGrade.getText().trim())) {
+                if (checkNumber(jtfNewSubjectMidTermGrade.getText().trim())) {
+                    if (checkNumber(jtfNewSubjectFinalTermScore.getText().trim())) {
+                        System.err.println(jtfNewSubjectProgressGrade.getText().trim() + "-"
+                                + jtfNewSubjectMidTermGrade.getText().trim() + "-" + jtfNewSubjectFinalTermScore.getText().trim());
+                        System.err.println(data.getMaMH());
+                        // cap nhat
+                        java.sql.Connection connection = DBConnect.getConnection();
+                        // JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
+                        String sql = "UPDATE DIEM SET DIEMQT = ?, DIEMGK = ?, DIEMCK = ?, GHICHU = ? WHERE MAHS = ? AND MAHK = ? AND MAMH = ?";
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.setString(1, jtfNewSubjectProgressGrade.getText().trim());
+                        statement.setString(2, jtfNewSubjectMidTermGrade.getText().trim());
+                        statement.setString(3, jtfNewSubjectFinalTermScore.getText().trim());
+                        statement.setString(4, jtfNewNote.getText().trim());
+                        statement.setString(5, data.getMaHS());
+                        System.err.println(data.getHocki());
+                        if (data.getHocki().equals("1")) {
+                            statement.setString(6, "HK01");
+                        } else if (data.getHocki().equals("2")) {
+                            statement.setString(6, "HK02");
+                        }
+                        statement.setString(7, data.getMaMH());
+                        int rowsAffected = statement.executeUpdate();                     
+           
+                        if (rowsAffected > 0) {
+                            System.out.println("Cập nhật thành công.");
+                            JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
+                            MessageBroker.getInstance().sendMessage("Data mon hoc");
+                            dispose();
+                        } else {
+                            System.out.println("Có lỗi xảy ra khi cập nhật.");
+                            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật.");
+                            dispose();
+                        }
+                        if (!statement.isClosed()) {
+                            statement.close();
+                            System.out.println("Closed to database import data student!");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
+                }
             } else {
-                System.out.println("Có lỗi xảy ra khi cập nhật.");
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật.");
-                dispose();
+                JOptionPane.showMessageDialog(null, "Điểm Giữa Kì Phải Là Số Hợp Lệ");
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TeacherGradingManagementUpdateSubjectFrame.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
+
     }// GEN-LAST:event_jbSaveEditSubjectActionPerformed
 
     private void jbBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbBackActionPerformed
