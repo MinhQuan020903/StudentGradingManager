@@ -215,84 +215,35 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             jlbSemesterResult.setText(String.valueOf(Math.round(semesterResult / i * 100) / 100.0));
 
             //jlbYearResult.setText("Name hoc ");
-            
-            //TinhDiemTBNam();
+            TinhDiemTBNam();
         } catch (SQLException ex) {
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void TinhDiemTBNam() {
-        List<DIEM> listDIEMHK1 = new ArrayList<>();
-        List<DIEM> listDIEMHK2 = new ArrayList<>();
+        double sum = 0; 
+        int count = 0;
         try {
             java.sql.Connection connection = DBConnect.getConnection();
 
-            String sql = "SELECT * FROM DIEM WHERE MAHS = ? AND MAHK = ?";
+            String sql = "SELECT SUM(DIEMTBHK), COUNT(*) FROM DIEM WHERE MAHS = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, studentBase.getMAHS());
-            statement.setString(2, "HK01");
             ResultSet resultSet = statement.executeQuery();
 
-            // hoc ki 1
-            while (resultSet.next()) {
-
-                listDIEMHK1.add(new DIEM(
-                        resultSet.getString("MAMH"),
-                        resultSet.getString("MAHS"),
-                        resultSet.getString("DIEMQT"),
-                        resultSet.getString("DIEMGK"),
-                        resultSet.getString("DIEMCK"),
-                        resultSet.getString("DIEMTBHK"),
-                        resultSet.getString("GHICHU"),
-                        resultSet.getString("MAHK"),
-                        null));
-            }
-
-            double semesterResultHK1 = 0.0;
-            int i;
-
-            for (i = 0; i < listDIEMHK1.size(); i++) {
-                if (listDIEMHK1.get(i).getDEIMTBHK() == null || listDIEMHK1.get(i).getDEIMTBHK().isEmpty()) {
-                    System.err.println("Diem trong");
-                } else {
-                    semesterResultHK1 += Double.valueOf(listDIEMHK1.get(i).getDEIMTBHK());
-                }
-            }
-
-            semesterResultHK1 = Math.round(semesterResultHK1 / i * 100) / 100.0;
-
             // hoc ki 2
-            statement.setString(1, studentBase.getMAHS());
-            statement.setString(2, "HK02");
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                listDIEMHK2.add(new DIEM(
-                        resultSet.getString("MAMH"),
-                        resultSet.getString("MAHS"),
-                        resultSet.getString("DIEMQT"),
-                        resultSet.getString("DIEMGK"),
-                        resultSet.getString("DIEMCK"),
-                        resultSet.getString("DIEMTBHK"),
-                        resultSet.getString("GHICHU"),
-                        resultSet.getString("MAHK"),
-                        null));
-
-            }
-            double semesterResultHK2 = 0.0;
-            i = 0;
-            //listDIEM.clear();
-            for (i = 0; i < listDIEMHK2.size(); i++) {
-                if (listDIEMHK2.get(i).getDEIMTBHK() == null || listDIEMHK2.get(i).getDEIMTBHK().isEmpty()) {
-                    System.err.println("Diem trong");
-                } else {
-                    semesterResultHK2 += Double.valueOf(listDIEMHK2.get(i).getDEIMTBHK());
-                }
+            if (resultSet.next()) {
+                sum = resultSet.getDouble(1);
+                count = resultSet.getInt(2);                
             }
 
-            semesterResultHK2 = Math.round(semesterResultHK2 / i * 100) / 100.0;
+            // Close the ResultSet, statement, and connection
+            resultSet.close();
+            statement.close();
+            connection.close();
 
-            jlbYearResult.setText(String.valueOf((semesterResultHK1 + semesterResultHK2) / 2));
+            jlbYearResult.setText(String.valueOf(Math.round(sum / count * 100) / 100.0));
         } catch (SQLException ex) {
             Logger.getLogger(TeacherSearchResultFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -702,7 +653,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
     private void jcbSemesterItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jcbSemesterItemStateChanged
         // TODO add your handling code here:
         importData();
-       // TinhDiemTBNam();
+        TinhDiemTBNam();
     }// GEN-LAST:event_jcbSemesterItemStateChanged
 
     private void jtStudentResultMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jtStudentResultMouseClicked
@@ -717,7 +668,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
             int selectedRow = jtStudentResult.rowAtPoint(evt.getPoint());
             int selecredColumn = jtStudentResult.columnAtPoint(evt.getPoint());
             System.err.println("Nhay vo day" + listDIEM.size());
-            
+
             JTable table = jtStudentResult;
             String mamonhoc = "";
             for (int i = 0; i < listDIEM.size(); i++) {
@@ -762,8 +713,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
                         table.getValueAt(selectedRow, 3).toString(),
                         table.getValueAt(selectedRow, 4).toString(),
                         table.getValueAt(selectedRow, 6).toString());
-                
-                
+
                 TeacherGradingManagementUpdateSubjectFrame update = new TeacherGradingManagementUpdateSubjectFrame(data);
                 update.show();
                 update.setLocationRelativeTo(null);
