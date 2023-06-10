@@ -99,7 +99,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
             .addGroup(jpUserAvatarLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jlbUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jpUserAvatarLayout.setVerticalGroup(
             jpUserAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,12 +138,14 @@ public class StudentMainScreen extends javax.swing.JFrame {
         jlbStudentName.setBackground(new java.awt.Color(255, 255, 255));
         jlbStudentName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlbStudentName.setForeground(new java.awt.Color(255, 255, 255));
+        jlbStudentName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbStudentName.setText("TÊN HỌC SINH");
 
         jlbStudentId.setBackground(new java.awt.Color(255, 255, 255));
         jlbStudentId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbStudentId.setForeground(new java.awt.Color(255, 255, 255));
-        jlbStudentId.setText("ID HỌC SINH");
+        jlbStudentId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbStudentId.setText("ID01");
 
         jpStudentGradeResultSelector.setBackground(new java.awt.Color(111, 142, 222));
         jpStudentGradeResultSelector.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -214,12 +216,13 @@ public class StudentMainScreen extends javax.swing.JFrame {
                         .addComponent(jpStudentAccountInfoSelector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(jpMainScreenSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jpUserAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jlbStudentId)))
+                        .addGap(86, 86, 86)
+                        .addComponent(jlbStudentId))
+                    .addGroup(jpMainScreenSelectorLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jlbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainScreenSelectorLayout.setVerticalGroup(

@@ -42,6 +42,11 @@ public class ChangePassword extends javax.swing.JFrame {
 
     public ChangePassword(String matkGV, String passoword) {
         initComponents();
+        this.maTK = maTK;
+        continueInitComponents();
+
+        this.passoword = passoword;
+        this.matkGV = matkGV;
     }
     public ChangePassword(String maTK, StudentMainScreen screen) {
         initComponents();
