@@ -28,14 +28,19 @@ public class StudentGradeResult extends javax.swing.JPanel {
     ArrayList<String> hocKyArrayList;
     ArrayList<String> namHocArrayList;
     String id;
-    ArrayList<Mark> markArrayList = new ArrayList<Mark>();
+    ArrayList<Mark> markArrayListSemester1 = new ArrayList<Mark>();
+    ArrayList<Mark> markArrayListSemester2 = new ArrayList<Mark>();
     ArrayList<String> tenMH = new ArrayList<String>();
+    Double diemTBHK1;
+    Double diemTBHK2;
     public StudentGradeResult(ArrayList<String> hocKyArray, ArrayList<String> namHocArray, String id) {
         initComponents();
         this.hocKyArrayList = hocKyArray;
         this.namHocArrayList = namHocArray;
         this.id = id;
         addDataForCb();
+        jlbSemesterResult.setText("Chưa có dữ liệu");
+        jlbYearResult.setText("Chưa có dữ liệu");
         jtStudentResult.setEnabled(false);
         TaoTable();
     }
@@ -250,7 +255,7 @@ public class StudentGradeResult extends javax.swing.JPanel {
 
     private void finDataSubjectFromIdSemesterAndYear() throws SQLException{
             
-        markArrayList.clear();
+        markArrayListSemester1.clear();
         tbModelTT.setRowCount(0);
         
         String semesterSelected = jcbSemester1.getSelectedItem().toString();
@@ -269,10 +274,10 @@ public class StudentGradeResult extends javax.swing.JPanel {
             double diemQT = resultSet.getDouble("DIEMQT");
             double diemGK = resultSet.getDouble("DIEMGK");
             double diemCK = resultSet.getDouble("DIEMCK");
-            double diemTBHK = resultSet.getDouble("DIEMTBHK");
+            double diemTBHK = Math.round((diemQT * 0.2 + diemGK * 0.3 + diemCK * 0.5)*10) / 10.0;
             String ghiChu = resultSet.getString("GHICHU");
             Mark mark = new Mark(tenMH, diemQT, diemGK, diemCK,  diemTBHK, ghiChu);
-            markArrayList.add(mark);
+            markArrayListSemester1.add(mark);
         }
         fillDataIntoTable();
     }
@@ -280,16 +285,16 @@ public class StudentGradeResult extends javax.swing.JPanel {
     private void fillDataIntoTable() {
         ArrayList<Double> diemTBHKArray = new ArrayList<Double>();
         // Lấy thông tin điểm của tất cả các môn để add vào table
-        for (int i = 0; i < markArrayList.size(); i++) {
+        for (int i = 0; i < markArrayListSemester1.size(); i++) {
             String[] row = new String[7];
             row[0] = String.valueOf(i + 1);
-            row[1] = markArrayList.get(i).getTenMH();
-            row[2] = String.valueOf(markArrayList.get(i).getDiemQT());
-            row[3] = String.valueOf(markArrayList.get(i).getDiemGK());
-            row[4] = String.valueOf(markArrayList.get(i).getDiemCK());
-            row[5] = String.valueOf(markArrayList.get(i).getDiemTBHK());
-            diemTBHKArray.add(markArrayList.get(i).getDiemTBHK());
-            row[6] = markArrayList.get(i).getGhiChu();
+            row[1] = markArrayListSemester1.get(i).getTenMH();
+            row[2] = String.valueOf(markArrayListSemester1.get(i).getDiemQT());
+            row[3] = String.valueOf(markArrayListSemester1.get(i).getDiemGK());
+            row[4] = String.valueOf(markArrayListSemester1.get(i).getDiemCK());
+            row[5] = String.valueOf(markArrayListSemester1.get(i).getDiemTBHK());
+            diemTBHKArray.add(markArrayListSemester1.get(i).getDiemTBHK());
+            row[6] = markArrayListSemester1.get(i).getGhiChu();
             tbModelTT.addRow(row);
          }
         // Tính điểm trung bình học kỳ;
@@ -297,8 +302,20 @@ public class StudentGradeResult extends javax.swing.JPanel {
         for (double diem : diemTBHKArray) {
             tongDiem += diem;
         }
-        double diemTBHK = tongDiem / diemTBHKArray.size();
+        double diemTBHK = Math.round(tongDiem / diemTBHKArray.size() *100) / 100.0;
+        if (jcbSemester1.getSelectedItem().equals("HK01")) {
+            diemTBHK1 = diemTBHK;
+        } else {
+            diemTBHK2 = diemTBHK;
+        }
+        
+        if (diemTBHK1 != null && diemTBHK2 != null) {
+            double diemTBCN = Math.round((diemTBHK1 + diemTBHK2 * 2) / 3 * 100) / 100.0;
+            jlbYearResult.setText(String.valueOf(diemTBCN));
+        }
         jlbSemesterResult.setText(String.valueOf(diemTBHK));
+        
+       
     }
     public void TaoTable(){
         tbModelTT = new DefaultTableModel();
