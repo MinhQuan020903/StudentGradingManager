@@ -427,14 +427,17 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 int index = monhocchuaxuli.indexOf('-');
 
                 String mamonhoc = monhocchuaxuli.substring(0, index - 1);
+                String mahocki = "HK"+hocki;
 
                 java.sql.Connection connection = DBConnect.getConnection();
                 //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
-                String sql = "SELECT * FROM DIEM WHERE MAMH = ?";
+                String sql = "SELECT * FROM DIEM WHERE MAMH = ? and MAHK = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, mamonhoc);
+                statement.setString(2, mahocki);
                 ResultSet resultSet = statement.executeQuery();
+                
                 int count0To5 = 0;
                 int count5To7 = 0;
                 int count7To9 = 0;
