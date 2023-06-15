@@ -337,7 +337,13 @@ public class StudentAccountInfo extends javax.swing.JPanel {
         jlbStudentEmail.setText(student.getEmail());
         jlbStudentPassword.setText(student.getMatKhau());
         jlbStudentPhoneNumber.setText(student.getSdt());
-        jlbStudentDob.setText(student.getNgaySinh());
+        String ngaySinh = student.getNgaySinh();
+        String[] date = ngaySinh.split("-");
+        String s = date[2];
+        date[2] = date[0];
+        date[0] = s;
+        String dob = String.join("-", date);
+        jlbStudentDob.setText(dob);
         jlbStudentGender.setText(student.getGioiTinh());
         jlbStudentGrade.setText(student.getKhoi());
         jlbStudentClass.setText(student.getLop());
