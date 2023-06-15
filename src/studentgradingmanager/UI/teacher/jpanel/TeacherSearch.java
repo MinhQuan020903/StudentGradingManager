@@ -75,40 +75,52 @@ public class TeacherSearch extends javax.swing.JPanel {
             java.sql.Connection connection = DBConnect.getConnection();
             //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
-            String sql = "SELECT * FROM GIANGDAY WHERE MAGV = ?";
+            //String sql = "SELECT * FROM GIANGDAY WHERE MAGV = ?";
+            String sql = "select DISTINCT HOCSINH.MAHS, HOCSINH.HOTEN as TENHS, HOCSINH.MALOP, GIAOVIEN.HOTEN AS TENGV\n"
+                    + "from HOCSINH, DIEM, GIAOVIEN, LOP\n"
+                    + "WHERE LOP.MAGVCN = GIAOVIEN.MAGV \n"
+                    + "AND HOCSINH.MALOP = LOP.MALOP\n"
+                    + "AND HOCSINH.MAHS = DIEM.MAHS\n"
+                    + "AND GIAOVIEN.MAGV = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, teacherItem.getMaGV());
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                if (!listClass.contains(resultSet.getString("MALOP"))) {
-                    listClass.add(resultSet.getString("MALOP"));
-                    System.out.println(listClass);
-                }
+//                if (!listClass.contains(resultSet.getString("MALOP"))) {
+//                    listClass.add(resultSet.getString("MALOP"));
+//                    System.out.println(listClass);
+//                }
+                listStudent.add(new StudentBase(resultSet.getString("MAHS"),
+                        resultSet.getString("TENHS"),
+                        resultSet.getString("MALOP"),
+                        null,
+                        null,
+                        null,
+                        resultSet.getString("TENGV")));
             }
 
-            for (String item : listClass) {
-                sql = "SELECT * FROM HOCSINH WHERE MALOP = ?";
-                statement = connection.prepareStatement(sql);
-                statement.setString(1, item);
-                resultSet = statement.executeQuery();
-                System.out.println(item);
+//            for (String item : listClass) {
+//                sql = "SELECT * FROM HOCSINH WHERE MALOP = ?";
+//                statement = connection.prepareStatement(sql);
+//                statement.setString(1, item);
+//                resultSet = statement.executeQuery();
+//                System.out.println(item);
+//
+//                while (resultSet.next()) {
+//                    if (resultSet.getString("MALOP").equals(item)) {
+//                        listStudent.add(new StudentBase(resultSet.getString("MAHS"),
+//                                resultSet.getString("HOTEN"),
+//                                resultSet.getString("MALOP"),
+//                                resultSet.getString("SDT"),
+//                                resultSet.getString("NGSINH"),
+//                                resultSet.getString("GIOITINH"),
+//                                resultSet.getString("MATK")));
+//                    }
+//
+//                }
+//            }
 
-                while (resultSet.next()) {
-                    if (resultSet.getString("MALOP").equals(item)) {
-                        listStudent.add(new StudentBase(resultSet.getString("MAHS"),
-                                resultSet.getString("HOTEN"),
-                                resultSet.getString("MALOP"),
-                                resultSet.getString("SDT"),
-                                resultSet.getString("NGSINH"),
-                                resultSet.getString("GIOITINH"),
-                                resultSet.getString("MATK")));
-                    }
-
-                }
-            }
-
-            System.out.println(listStudent.get(1));
             if (!statement.isClosed()) {
                 statement.close();
                 System.out.println("Closed to database import data student!");
@@ -121,7 +133,7 @@ public class TeacherSearch extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jtStudents.getModel();
 
         for (int i = 0; i < listStudent.size(); i++) {
-            String[] stu = {String.valueOf(i), listStudent.get(i).getMAHS(), listStudent.get(i).getHOTEN(), listStudent.get(i).getMALOP(), teacherItem.getHotenGV()};
+            String[] stu = {String.valueOf(i), listStudent.get(i).getMAHS(), listStudent.get(i).getHOTEN(), listStudent.get(i).getMALOP(), listStudent.get(i).getMATK()};
             model.addRow(stu);
         }
     }
