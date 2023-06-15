@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Quan
@@ -35,7 +34,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
      * Creates new form TeacherAccountInfo
      */
     public TeacherAccountInfo() {
-        
+
     }
 
     public TeacherAccountInfo(Teacher teacherItem) {
@@ -45,6 +44,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         jbChangePhoneNumber.setContentAreaFilled(false);
         MessageBroker.getInstance().addListener(this);
         setInfomationToPanel();
+        tinhToanDiem();
     }
 
     private void setInfomationToPanel() {
@@ -327,7 +327,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         changePhoneNumber.show();
         changePhoneNumber.setLocationRelativeTo(null);
         changePhoneNumber.requestFocusInWindow();
-        
+
     }//GEN-LAST:event_jbChangePhoneNumberActionPerformed
 
     private void jbChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangePasswordActionPerformed
@@ -339,7 +339,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
     }//GEN-LAST:event_jbChangePasswordActionPerformed
 
     private void jpTeacherAccountInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpTeacherAccountInfoMouseClicked
-       
+
     }//GEN-LAST:event_jpTeacherAccountInfoMouseClicked
 
 
@@ -377,7 +377,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
             Logger.getLogger(TeacherAccountInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void findInformationTeacher() throws SQLException {
         java.sql.Connection connection = DBConnect.getConnection();
         //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
@@ -390,26 +390,66 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         if (resultSet.next()) {
             teacherItem.setMatkhauGV(resultSet.getString("MATKHAU"));
         }
-        
+
         sql = "SELECT * FROM GIAOVIEN WHERE MATK = ?";
         statement = connection.prepareStatement(sql);
         statement.setString(1, teacherItem.getMatkGV());
         resultSet = statement.executeQuery();
         if (resultSet.next()) {
             teacherItem.setSdtGV(resultSet.getString("SDT"));
-        }      
-      
-        if(!statement.isClosed()) {
+        }
+
+        if (!statement.isClosed()) {
             statement.close();
             System.out.println("Close update Info");
         }
     }
+
     private void updatePasswordAndPhoneNumber() {
         jlbTeacherPassword.setText(teacherItem.getMatkhauGV());
         jlbTeacherPhoneNumber.setText(teacherItem.getSdtGV());
         //System.out.println("updated");
     }
 
+    private void tinhToanDiem() {
+        try {
+            java.sql.Connection connection = DBConnect.getConnection();
+            String sql = "select DIEM.MAMH, DIEM.MAHS, DIEM.DIEMQT, DIEM.DIEMGK, DIEM.DIEMCK, DIEM.MAHK\n"
+                    + "from DIEM, GIAOVIEN, HOCSINH, LOP\n"
+                    + "WHERE DIEM.MAHS = HOCSINH.MAHS \n"
+                    + "AND HOCSINH.MALOP = LOP.MALOP\n"
+                    + "AND LOP.MAGVCN = GIAOVIEN.MAGV\n"
+                    + "AND GIAOVIEN.MAGV = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, teacherItem.getMaGV());
 
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                double diemqtValue = Double.parseDouble(resultSet.getString("DIEMQT"));
+                double diemgkValue = Double.parseDouble(resultSet.getString("DIEMGK"));
+                double diemckValue = Double.parseDouble(resultSet.getString("DIEMCK"));
+                double s = diemqtValue * 0.2 + diemgkValue * 0.3 + diemckValue * 0.5;
+                double roundedS = Math.round(s * 10.0) / 10.0;
+
+                String SQL = "UPDATE DIEM SET DIEMTBHK = ?, GHICHU = ? WHERE MAHS = ? AND MAHK = ? AND MAMH = ?";
+                PreparedStatement statement1 = connection.prepareStatement(SQL);
+                statement1.setString(1, String.valueOf(roundedS));
+                statement1.setString(2, "None");
+                statement1.setString(3, resultSet.getString("MAHS"));
+                statement1.setString(4, resultSet.getString("MAHK"));
+                statement1.setString(5, resultSet.getString("MAMH"));
+                int rowsAffected = statement1.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Cập nhật thành công.");
+                } else {
+                    System.out.println("Có lỗi xảy ra khi cập nhật.");
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherAccountInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
