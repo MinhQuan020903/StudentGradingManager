@@ -139,7 +139,10 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
                         if (checkNumber(jtfNewSubjectFinalTermScore.getText().trim())) {
                             String fullMon = jtfNewSubjectName.getText().toString().trim();
                             String[] tachTungTu = fullMon.split(" ");
-                            String maMHNew = "";
+                            if(tachTungTu.length > 2) {
+                                JOptionPane.showMessageDialog(this, "Tên môn học quá dài");
+                            } else {
+                                String maMHNew = "";
                             for (String item : tachTungTu) {
                                 maMHNew += item.substring(0, 1).toUpperCase();
                             }
@@ -213,6 +216,9 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
 
                             checkStatement.close();
                             connection.close();
+                            }
+                                 
+                            
                         } else {
                             JOptionPane.showMessageDialog(null, "Điểm Cuối Kì Phải Là Số");
                         }
