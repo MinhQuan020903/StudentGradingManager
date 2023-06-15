@@ -215,9 +215,10 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
     }//GEN-LAST:event_jbBackActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
-        if (jtfNewPhoneNumber.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu Mới! ");
-        } else {
+        if (matkGV != null && maHS == null) {
+            if (jtfNewPhoneNumber.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu Mới! ");
+            } else {
             if (jtfConfirmPhoneNumber.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui Lòng Xác Nhận Mật Khẩu Mới!");
             } else {
@@ -237,17 +238,7 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
         // Navigate to Login screen when finish change password
        
             
-            
-            // if (checkValueValid()){
-            // } else {
-            //     return;
-            // }
-            // changePhoneNumberInDatabase();
-            // Login login = new Login();
-            // login.show();
-            // login.setLocationRelativeTo(null);
-            // login.requestFocusInWindow();
-            // dispose();
+        
                             // udpate password
                             java.sql.Connection connection = DBConnect.getConnection();
                             String sql = "Update GIAOVIEN Set SDT = ? Where MATK = ? ";
@@ -273,13 +264,30 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, ex);
                             }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 }
             }
+        } else {
+             if (checkValueValid()){
+             } else {
+                 return;
+             }
+            try {
+                changePhoneNumberInDatabase();
+            } catch (SQLException ex) {
+                Logger.getLogger(ChangePhoneNumber.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             Login login = new Login();
+             login.show();
+             login.setLocationRelativeTo(null);
+             login.requestFocusInWindow();
+             dispose();
         }
+        
     }//GEN-LAST:event_jbSaveActionPerformed
 
     private void jtfNewPhoneNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfNewPhoneNumberMouseClicked

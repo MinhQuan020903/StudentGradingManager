@@ -338,7 +338,7 @@ public class StudentAccountInfo extends javax.swing.JPanel {
         jlbStudentPassword.setText(student.getMatKhau());
         jlbStudentPhoneNumber.setText(student.getSdt());
         jlbStudentDob.setText(student.getNgaySinh());
-        jlbStudentGender.setText(student.getLop());
+        jlbStudentGender.setText(student.getGioiTinh());
         jlbStudentGrade.setText(student.getKhoi());
         jlbStudentClass.setText(student.getLop());
     }
