@@ -54,8 +54,6 @@ public class Login extends javax.swing.JFrame {
         jtfUserEmail = new javax.swing.JTextField();
         jlbUserPassword = new javax.swing.JLabel();
         jtfUserPassword = new javax.swing.JPasswordField();
-        jcbRememberPassword = new javax.swing.JCheckBox();
-        jbForgetPassword = new javax.swing.JButton();
         jbLogin = new javax.swing.JButton();
         jbShowPassword = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -118,25 +116,6 @@ public class Login extends javax.swing.JFrame {
         jtfUserPassword.setForeground(new java.awt.Color(153, 153, 153));
         jtfUserPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jcbRememberPassword.setBackground(new java.awt.Color(255, 255, 255));
-        jcbRememberPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jcbRememberPassword.setText(" Nhớ mật khẩu");
-        jcbRememberPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbRememberPasswordActionPerformed(evt);
-            }
-        });
-
-        jbForgetPassword.setBackground(new java.awt.Color(255, 255, 255));
-        jbForgetPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jbForgetPassword.setText("Quên mật khẩu?");
-        jbForgetPassword.setBorder(null);
-        jbForgetPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbForgetPasswordActionPerformed(evt);
-            }
-        });
-
         jbLogin.setBackground(new java.awt.Color(111, 142, 222));
         jbLogin.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jbLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,10 +167,6 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(jpLoginScreenLayout.createSequentialGroup()
                             .addGroup(jpLoginScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jpLoginScreenLayout.createSequentialGroup()
-                                    .addComponent(jcbRememberPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(116, 116, 116)
-                                    .addComponent(jbForgetPassword))
-                                .addGroup(jpLoginScreenLayout.createSequentialGroup()
                                     .addComponent(jlbUserPassword)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jtfUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,11 +199,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jpLoginScreenLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jbShowPassword)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpLoginScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbForgetPassword)
-                    .addComponent(jcbRememberPassword))
-                .addGap(19, 19, 19)
+                .addGap(55, 55, 55)
                 .addComponent(jbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlbLoginFailed)
@@ -248,27 +219,6 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jcbRememberPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRememberPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbRememberPasswordActionPerformed
-
-    private void jbForgetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbForgetPasswordActionPerformed
-
-        // Navigate to ChangePassword screen
-        try {
-            ChangePassword changePassword = new ChangePassword();
-            changePassword.setMessage("FROM_LOGIN");
-            changePassword.show();
-            changePassword.setLocationRelativeTo(null);
-            changePassword.requestFocusInWindow();
-            dispose();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-
-    }//GEN-LAST:event_jbForgetPasswordActionPerformed
 
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
 
@@ -404,11 +354,9 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton jbForgetPassword;
     private javax.swing.JButton jbLogin;
     private javax.swing.JToggleButton jbShowPassword;
     private javax.swing.JLabel jbUserIcon;
-    private javax.swing.JCheckBox jcbRememberPassword;
     private javax.swing.JLabel jlbLoginFailed;
     private javax.swing.JLabel jlbTitle;
     private javax.swing.JLabel jlbUserPassword;
