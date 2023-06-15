@@ -72,9 +72,16 @@ public class TeacherNavController extends NavController {
         resultSet = statement.executeQuery();
         if (resultSet.next()) {
             this.mamonhocGV = resultSet.getString("MAMH");
+        }
+        
+        
+        sql = "SELECT * FROM LOP WHERE MAGVCN = ?";
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, maGV);
+        resultSet = statement.executeQuery();
+        if (resultSet.next()) {
             this.malopchunhiemGV = resultSet.getString("MALOP");
         }
-
         if (!statement.isClosed()) {
             statement.close();
             System.out.println("Closed to database findInformationTeacher!");
