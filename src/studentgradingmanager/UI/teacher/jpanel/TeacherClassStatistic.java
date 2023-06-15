@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -406,10 +407,10 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbClassStatisticActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void jrbClassStatisticActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         setSubject();
-    }                                             
+    }
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
@@ -421,23 +422,24 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         if (jrbClassStatistic.isSelected() == true) {
             try {
                 String namhoc = jcbYear.getSelectedItem().toString();
-                String hocki = jcbYear.getSelectedItem().toString();
+                String hocki = jcbSemester.getSelectedItem().toString();
                 String monhocchuaxuli = jcbSubject.getSelectedItem().toString();
 
                 int index = monhocchuaxuli.indexOf('-');
 
                 String mamonhoc = monhocchuaxuli.substring(0, index - 1);
-                String mahocki = "HK"+hocki;
+                String mahocki = "HK0" + hocki;
+                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + mamonhoc + "-" + mahocki);
 
                 java.sql.Connection connection = DBConnect.getConnection();
                 //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
-                String sql = "SELECT * FROM DIEM WHERE MAMH = ? and MAHK = ?";
+                String sql = "select * FROM DIEM WHERE MAMH = ? AND MAHK = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, mamonhoc);
                 statement.setString(2, mahocki);
                 ResultSet resultSet = statement.executeQuery();
-                
+
                 int count0To5 = 0;
                 int count5To7 = 0;
                 int count7To9 = 0;
