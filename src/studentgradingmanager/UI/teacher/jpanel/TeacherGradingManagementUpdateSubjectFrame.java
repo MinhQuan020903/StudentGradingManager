@@ -50,6 +50,7 @@ public class TeacherGradingManagementUpdateSubjectFrame extends javax.swing.JFra
      */
     public TeacherGradingManagementUpdateSubjectFrame(CapNhatDiem data) {
         initComponents();
+        setTitle("CẬP NHẬT ĐIỂM");
         this.data = data;
 
         System.err.println(data.toString());

@@ -35,7 +35,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
 
     public TeacherGradingManagementNewSubjectFrame(StudentBase studentBase) {
         initComponents();
-
+        setTitle("THÊM MÔN HỌC MỚI");
         this.studentBase = studentBase;
         mirrorData();
         findSemester();

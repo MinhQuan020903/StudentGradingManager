@@ -38,11 +38,13 @@ public class ChangePhoneNumber extends javax.swing.JFrame {
 
     public ChangePhoneNumber(String matkGV, String sdtGV) {
         initComponents();
+        setTitle("ĐỔI SĐT");
         this.matkGV = matkGV;
         this.sdtGV = sdtGV;
     }
     public ChangePhoneNumber(String maHS, StudentMainScreen screen) {
         initComponents();
+        setTitle("ĐỔI SĐT");
         this.maHS = maHS;
         this.mainScreen = screen;
     }
