@@ -45,6 +45,7 @@ public class TeacherSearchResultFrame extends javax.swing.JFrame implements Mess
      */
     public TeacherSearchResultFrame(StudentBase studentBase) {
         initComponents();
+        setTitle("THÔNG TIN HỌC SINH");
         this.studentBase = studentBase;
 
         jlbYearResult.setVisible(false);

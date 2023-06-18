@@ -37,6 +37,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
 
     public StudentMainScreen(String email, String password, String maTK) throws SQLException {
         initComponents();
+        setTitle("QUẢN LÝ ĐIỂM HỌC SINH");
 
         this.email = email;
         this.password = password;

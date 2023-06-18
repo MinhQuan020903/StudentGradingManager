@@ -48,6 +48,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
 
     public TeacherMainScreen(String email, String matkhauGV, String matkGV) throws SQLException {
         initComponents();
+        setTitle("QUẢN LÝ ĐIỂM HỌC SINH");
         this.matkhauGV = matkhauGV;
         this.emailGV = email;
         this.matkGV = matkGV;
