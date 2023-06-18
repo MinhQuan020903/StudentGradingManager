@@ -55,8 +55,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         this.teacherItem = teacherItem;
         //Add data to chart
 
-        jrbClassStatistic.setSelected(true);
-
+        jrbGradeStatistic.setSelected(true);
+        System.err.println(teacherItem.getMalopchunghiemGV());
         importData();
         findSemester();
         setSubject();
@@ -77,7 +77,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         listMONHOC.clear();
         jcbSubject.removeAllItems();
 
-        if (jrbClassStatistic.isSelected() == true) {
+        if (jrbGradeStatistic.isSelected() == true) {
             try {
                 java.sql.Connection connection = DBConnect.getConnection();
                 //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
@@ -111,27 +111,6 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery();
                 boolean isPresent = false;
-//                while (resultSet.next()) {
-//                    //listMONHOC.add(new MONHOC(resultSet.getString("MAMH"), resultSet.getString("TENMH")));
-//                    System.err.println(resultSet.getString("TENMH"));
-//                    if (listMONHOC.size() != 0) {
-//                        for (int i = 0; i < listMONHOC.size(); i++) {
-//                            if (listMONHOC.get(i).getMAMH().substring(0,2).equals(resultSet.getString("MAMH").substring(0,2))) {
-//                                isPresent = true;
-//                                System.out.println(listMONHOC.get(i).getMAMH().substring(0,2) + " -  " + resultSet.getString("MAMH").substring(0,2));
-//                                break;
-//                            }
-//                        }
-//                        if (isPresent == false) {
-//                            listMONHOC.add(new MONHOC(resultSet.getString("MAMH"), resultSet.getString("TENMH")));
-//                            //System.out.println("Kiem tra 1");
-//                            isPresent = false;
-//                        }
-//                    } else {
-//                        listMONHOC.add(new MONHOC(resultSet.getString("MAMH"), resultSet.getString("TENMH")));
-//                        ///System.out.println("Kiem tra 2");
-//                    }
-//                }
 
                 Set<String> distinctPrefixes = new HashSet<>();
 
@@ -253,8 +232,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         jcbSemester = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jcbSubject = new javax.swing.JComboBox<>();
-        jrbClassStatistic = new javax.swing.JRadioButton();
         jrbGradeStatistic = new javax.swing.JRadioButton();
+        jrbClassStatistic = new javax.swing.JRadioButton();
         jbtThongKe = new javax.swing.JButton();
         jpGradeStatisticChart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -279,19 +258,19 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Môn học");
 
-        buttonGroup1.add(jrbClassStatistic);
-        jrbClassStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jrbClassStatistic.setText("Thống kê lớp học");
-        jrbClassStatistic.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jrbGradeStatistic);
+        jrbGradeStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jrbGradeStatistic.setText("Thống kê theo khối");
+        jrbGradeStatistic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbClassStatisticActionPerformed(evt);
+                jrbGradeStatisticActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jrbGradeStatistic);
-        jrbGradeStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jrbGradeStatistic.setText("Thống kê cả khối");
-        jrbGradeStatistic.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jrbClassStatistic);
+        jrbClassStatistic.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jrbClassStatistic.setText("Thống kê lớp chủ nhiệm ");
+        jrbClassStatistic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
@@ -307,7 +286,6 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         });
 
         jpGradeStatisticChart.setBackground(new java.awt.Color(255, 255, 255));
-        jpGradeStatisticChart.setForeground(new java.awt.Color(0, 0, 0));
         jpGradeStatisticChart.setPreferredSize(new java.awt.Dimension(0, 349));
 
         javax.swing.GroupLayout jpGradeStatisticChartLayout = new javax.swing.GroupLayout(jpGradeStatisticChart);
@@ -332,9 +310,9 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(jrbClassStatistic)
+                        .addComponent(jrbGradeStatistic)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jrbGradeStatistic))
+                        .addComponent(jrbClassStatistic))
                     .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -386,8 +364,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jpTeacherClassStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jrbClassStatistic)
-                                    .addComponent(jrbGradeStatistic)))
+                                    .addComponent(jrbGradeStatistic)
+                                    .addComponent(jrbClassStatistic)))
                             .addComponent(jpGradeStatisticChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpTeacherClassStatisticLayout.createSequentialGroup()
                         .addGap(147, 147, 147)
@@ -399,7 +377,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTeacherClassStatistic, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addComponent(jpTeacherClassStatistic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,19 +385,15 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbClassStatisticActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        setSubject();
-    }
-
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
         setSubject();
+        jcbSemester.setVisible(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jbtThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThongKeActionPerformed
         // TODO add your handling code here:
-        if (jrbClassStatistic.isSelected() == true) {
+        if (jrbGradeStatistic.isSelected() == true) {
             try {
                 String namhoc = jcbYear.getSelectedItem().toString();
                 String hocki = jcbSemester.getSelectedItem().toString();
@@ -429,6 +403,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
 
                 String mamonhoc = monhocchuaxuli.substring(0, index - 1);
                 String mahocki = "HK0" + hocki;
+                System.err.println(mamonhoc);
                 //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + mamonhoc + "-" + mahocki);
 
                 java.sql.Connection connection = DBConnect.getConnection();
@@ -509,9 +484,9 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 int index = monhocchuaxuli.indexOf('-');
 
                 String mamonhoc = monhocchuaxuli.substring(0, index);
-                System.err.println(mamonhoc);
+                System.err.println("MA MON HOC" + mamonhoc);
+
                 java.sql.Connection connection = DBConnect.getConnection();
-                //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
                 List<String> dsLop = new ArrayList<>();
 
@@ -522,34 +497,53 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 while (resultSet.next()) {
                     dsLop.add(resultSet.getString("MALOP"));
                 }
+
                 List<LOAIDIEM> listData = new ArrayList<>();
-                for (int i = 0; i < dsLop.size(); i++) {
-                    sql = "SELECT * FROM DIEM, LOP, HOCSINH WHERE DIEM.MAHS = HOCSINH.MAHS AND LOP.MALOP = HOCSINH.MALOP AND DIEM.MAMH = ? AND LOP.MALOP = ?";
-                    statement = connection.prepareCall(sql);
-                    statement.setString(1, mamonhoc.trim() + dsLop.get(i).charAt(1));
-                    statement.setString(2, dsLop.get(i));
-                    resultSet = statement.executeQuery();
-                    int j = 0;
-                    double sum = 0;
-                    while (resultSet.next()) {
-                        String value = resultSet.getString("DIEMTBHK");
-                        if (value != null && !value.isEmpty()) {
-                            try {
-                                double diemTBHK = Double.parseDouble(value);
-                                j++;
-                                sum += diemTBHK;
-                                System.err.println(sum);
-                            } catch (NumberFormatException e) {
-                                System.err.println("Giá trị không hợp lệ: " + value);
-                            }
+                sql = "SELECT * FROM HOCSINH, DIEM, LOP WHERE DIEM.MAHS = HOCSINH.MAHS AND LOP.MALOP = HOCSINH.MALOP AND LOP.MALOP = ? and DIEM.MAMH = ?";
+                statement = connection.prepareCall(sql);
+                System.err.println(mamonhoc.trim() + teacherItem.getMalopchunghiemGV().charAt(1));
+                statement.setString(1, teacherItem.getMalopchunghiemGV());
+                statement.setString(2, mamonhoc.trim() + teacherItem.getMalopchunghiemGV().charAt(1));
+                resultSet = statement.executeQuery();
+
+                int count0To5 = 0;
+                int count5To7 = 0;
+                int count7To9 = 0;
+                int count9To10 = 0;
+                while (resultSet.next()) {
+                    String value = resultSet.getString("DIEMTBHK");
+                    if (value != null && !value.isEmpty()) {
+                        // Thực hiện các thao tác với chuỗi khi nó không rỗng
+                        if (Double.valueOf(resultSet.getString("DIEMTBHK")) >= 0 && Double.valueOf(resultSet.getString("DIEMTBHK")) < 5) {
+                            count0To5++;
+                        } else if (Double.valueOf(resultSet.getString("DIEMTBHK")) < 7) {
+                            count5To7++;
+                        } else if (Double.valueOf(resultSet.getString("DIEMTBHK")) < 9) {
+                            count7To9++;
                         } else {
-                            System.err.println("null");
+                            count9To10++;
                         }
+                    } else {
+                        // Xử lý trường hợp chuỗi là null hoặc rỗng
+                        System.err.println("nul;");
                     }
-                    int intValue = (int) Math.round(sum);
-                    listData.add(new LOAIDIEM(String.valueOf(intValue), dsLop.get(i)));
 
                 }
+
+                jpGradeStatisticChart.remove(bcGradeStatisticChart);
+                jpGradeStatisticChart.revalidate();
+                jpGradeStatisticChart.repaint();
+                bcGradeStatisticChart = new BarChart("Thông Kê Môn " + teacherItem.getMalopchunghiemGV() + " " +monhocchuaxuli);
+                bcGradeStatisticChart.addData(count0To5, "Điểm từ 0 - 5");
+                bcGradeStatisticChart.addData(count5To7, "Điểm từ 5 - 7");
+                bcGradeStatisticChart.addData(count7To9, "Điểm từ 7 - 9");
+                bcGradeStatisticChart.addData(count9To10, "Điểm từ 9 - 10");
+                jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
+
+                listData.add(new LOAIDIEM(String.valueOf(count0To5), "Điểm từ 0 - 5"));
+                listData.add(new LOAIDIEM(String.valueOf(count5To7), "Điểm từ 5 - 7"));
+                listData.add(new LOAIDIEM(String.valueOf(count7To9), "Điểm từ 7 - 9"));
+                listData.add(new LOAIDIEM(String.valueOf(count9To10), "Điểm từ 9 - 10"));
 
                 ShowChart sc = new ShowChart(monhocchuaxuli, listData);
                 sc.show();
@@ -580,6 +574,12 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         bcGradeStatisticChart.addData(5, "4");
         jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
     }//GEN-LAST:event_jbChangeActionPerformed
+
+    private void jrbGradeStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGradeStatisticActionPerformed
+        // TODO add your handling code here:
+        setSubject();
+        jcbSemester.setVisible(true);
+    }//GEN-LAST:event_jrbGradeStatisticActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

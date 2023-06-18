@@ -164,7 +164,7 @@ public class TeacherGradingManagementNewSubjectFrame extends javax.swing.JFrame 
                                 String sql = "INSERT INTO MONHOC VALUES (?, ?)";
                                 PreparedStatement statement = connection.prepareStatement(sql);
                                 statement.setString(1, maMHNew);
-                                statement.setString(2, fullMon.toUpperCase());
+                                statement.setString(2, fullMon);
 
                                 int rowsInserted = statement.executeUpdate();
 
