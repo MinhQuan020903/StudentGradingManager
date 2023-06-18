@@ -18,6 +18,7 @@ import studentgradingmanager.UI.dialog.SignOut;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.StudentNavController;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Quan
@@ -38,6 +39,8 @@ public class StudentMainScreen extends javax.swing.JFrame {
     public StudentMainScreen(String email, String password, String maTK) throws SQLException {
         initComponents();
         setTitle("QUẢN LÝ ĐIỂM HỌC SINH");
+        
+     
 
         this.email = email;
         this.password = password;
@@ -415,6 +418,15 @@ public class StudentMainScreen extends javax.swing.JFrame {
             this.hoTen = resultSet.getString("HOTEN");
             this.id = resultSet.getString("MAHS");
             
+            String femalePersonImagePath = JLabel.class.getResource("/studentgradingmanager/images/icon_person_female.png").getPath();
+            ImageIcon imageIcon = new ImageIcon(femalePersonImagePath);
+            
+            String gioiTinh = resultSet.getString("GIOITINH");
+            if (gioiTinh.equals("Nam")) {
+                
+            } else {
+                jlbUserAvatar.setIcon(imageIcon);
+            }
             jlbStudentName.setText(hoTen);
             jlbStudentId.setText(id);
 

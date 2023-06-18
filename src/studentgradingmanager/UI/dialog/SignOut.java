@@ -18,6 +18,7 @@ public class SignOut extends java.awt.Dialog {
      */
     public SignOut(JFrame parent, boolean modal) {
         super(parent, modal);
+        setTitle("ĐĂNG XUẤT");
         this.parent = parent;
         initComponents();
     }

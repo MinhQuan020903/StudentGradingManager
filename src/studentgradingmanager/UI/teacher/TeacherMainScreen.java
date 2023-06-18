@@ -6,6 +6,8 @@ package studentgradingmanager.UI.teacher;
 
 import Database.DBConnect;
 import TransferData.MessageListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -53,7 +57,11 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
         this.emailGV = email;
         this.matkGV = matkGV;
         //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkhauGV);
-        findInformationTeacher();
+        try {
+            findInformationTeacher();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         TeacherNavController controller = new TeacherNavController(jpMainScreenContent, emailGV, matkhauGV, matkGV);
         controller.setView(jpTeacherAccountInfoSelector, jlbTeacherAccountInfoSelector);
@@ -69,7 +77,7 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
 
     }
 
-    private void findInformationTeacher() throws SQLException {
+    private void findInformationTeacher() throws SQLException, IOException {
         java.sql.Connection connection = DBConnect.getConnection();
         //JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + matkGV);
 
@@ -88,6 +96,16 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
 
             jlbTeacherName.setText(hotenGV);
             jlbTeacherId.setText(maGV);
+
+        String imagePath = "/studentgradingmanager/images/icon_person_female.png";
+        InputStream inputStream = getClass().getResourceAsStream(imagePath);     
+        ImageIcon imageIcon = new ImageIcon(inputStream.readAllBytes());
+            String gioiTinh = resultSet.getString("GIOITINH");
+            if (gioiTinh.equals("Nam")) {
+                
+            } else {
+                jlbUserAvatar.setIcon(imageIcon);
+            }
 
             JOptionPane.showMessageDialog(this, "Xin chào giáo viên " + hotenGV);
         }
@@ -427,6 +445,8 @@ public class TeacherMainScreen extends javax.swing.JFrame implements MessageList
             findInformationTeacher();
             System.err.println("Tranfers");
         } catch (SQLException ex) {
+            Logger.getLogger(TeacherMainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(TeacherMainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
