@@ -39,8 +39,8 @@ public class StudentGradeResult extends javax.swing.JPanel {
         this.namHocArrayList = namHocArray;
         this.id = id;
         addDataForCb();
-        jlbSemesterResult.setText("Chưa có dữ liệu");
-        jlbYearResult.setText("Chưa có dữ liệu");
+        jlbSemesterResult.setVisible(false);
+        jlbYearResult.setVisible(false);
         jtStudentResult.setEnabled(false);
         TaoTable();
     }
@@ -311,8 +311,10 @@ public class StudentGradeResult extends javax.swing.JPanel {
         
         if (diemTBHK1 != null && diemTBHK2 != null) {
             double diemTBCN = Math.round((diemTBHK1 + diemTBHK2 * 2) / 3 * 100) / 100.0;
+            jlbYearResult.setVisible(true);
             jlbYearResult.setText(String.valueOf(diemTBCN));
         }
+        jlbSemesterResult.setVisible(true);
         jlbSemesterResult.setText(String.valueOf(diemTBHK));
         
        
