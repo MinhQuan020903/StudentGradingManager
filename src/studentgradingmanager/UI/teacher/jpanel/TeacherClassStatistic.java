@@ -388,7 +388,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
         setSubject();
-        jcbSemester.setVisible(false);
+        //jcbSemester.setVisible(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jbtThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThongKeActionPerformed
@@ -457,15 +457,6 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
 
                 ShowChart sc = new ShowChart(monhocchuaxuli, listData);
                 sc.show();
-
-//                System.err.println(count0To5 + " " + count5To7 + " " + count7To9 + " " + count9To10);
-//                jpGradeStatisticChart.setLayout(new BorderLayout());
-//                BarChart bcGradeStatisticChart = new BarChart("Thống kê môn Toán");     
-//                bcGradeStatisticChart.addData(count0To5, "Điểm từ 0 - 5");
-//                bcGradeStatisticChart.addData(count5To7, "Điểm từ 5 - 7");
-//                bcGradeStatisticChart.addData(count7To9, "Điểm từ 7 - 9");
-//                bcGradeStatisticChart.addData(count9To10, "Điểm từ 9 - 10");
-//                jpGradeStatisticChart.add(bcGradeStatisticChart, BorderLayout.CENTER);
                 if (!statement.isClosed()) {
                     statement.close();
                     System.out.println("Close SEARCH MAHK");
@@ -478,7 +469,8 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
         } else {
             try {
                 String namhoc = jcbYear.getSelectedItem().toString();
-                String hocki = jcbYear.getSelectedItem().toString();
+                String hocki = jcbSemester.getSelectedItem().toString();
+                String mahocki = "HK0" + hocki;
                 String monhocchuaxuli = jcbSubject.getSelectedItem().toString();
 
                 int index = monhocchuaxuli.indexOf('-');
@@ -499,11 +491,13 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 }
 
                 List<LOAIDIEM> listData = new ArrayList<>();
-                sql = "SELECT * FROM HOCSINH, DIEM, LOP WHERE DIEM.MAHS = HOCSINH.MAHS AND LOP.MALOP = HOCSINH.MALOP AND LOP.MALOP = ? and DIEM.MAMH = ?";
+                sql = "SELECT * FROM HOCSINH, DIEM, LOP WHERE DIEM.MAHS = HOCSINH.MAHS AND LOP.MALOP = HOCSINH.MALOP AND LOP.MALOP = ? and DIEM.MAMH = ? and DIEM.MAHK = ?";
                 statement = connection.prepareCall(sql);
                 System.err.println(mamonhoc.trim() + teacherItem.getMalopchunghiemGV().charAt(1));
                 statement.setString(1, teacherItem.getMalopchunghiemGV());
                 statement.setString(2, mamonhoc.trim() + teacherItem.getMalopchunghiemGV().charAt(1));
+                statement.setString(3, mahocki);
+
                 resultSet = statement.executeQuery();
 
                 int count0To5 = 0;
@@ -533,7 +527,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
                 jpGradeStatisticChart.remove(bcGradeStatisticChart);
                 jpGradeStatisticChart.revalidate();
                 jpGradeStatisticChart.repaint();
-                bcGradeStatisticChart = new BarChart("Thông Kê Môn " + teacherItem.getMalopchunghiemGV() + " " +monhocchuaxuli);
+                bcGradeStatisticChart = new BarChart("Thông Kê Môn " + teacherItem.getMalopchunghiemGV() + " " + monhocchuaxuli);
                 bcGradeStatisticChart.addData(count0To5, "Điểm từ 0 - 5");
                 bcGradeStatisticChart.addData(count5To7, "Điểm từ 5 - 7");
                 bcGradeStatisticChart.addData(count7To9, "Điểm từ 7 - 9");
@@ -578,7 +572,7 @@ public class TeacherClassStatistic extends javax.swing.JPanel {
     private void jrbGradeStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGradeStatisticActionPerformed
         // TODO add your handling code here:
         setSubject();
-        jcbSemester.setVisible(true);
+        //jcbSemester.setVisible(true);
     }//GEN-LAST:event_jrbGradeStatisticActionPerformed
 
 
