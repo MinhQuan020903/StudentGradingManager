@@ -7,6 +7,7 @@ package studentgradingmanager.UI.frame;
 import Database.DBConnect;
 import com.sun.jdi.connect.spi.Connection;
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -256,7 +257,12 @@ public class Login extends javax.swing.JFrame {
                             } else if (rs.getString("VAITRO").equals("HS")) {
                                 String maTKstudent = rs.getString("MATK");
                                 JOptionPane.showMessageDialog(this, "Xin chào học sinh " + email);
-                                StudentMainScreen studentMainScreen = new StudentMainScreen(email, password, maTKstudent);
+                                StudentMainScreen studentMainScreen = null;
+                                try {
+                                    studentMainScreen = new StudentMainScreen(email, password, maTKstudent);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 studentMainScreen.show();
                                 studentMainScreen.setLocationRelativeTo(null);
                                 studentMainScreen.requestFocusInWindow();
