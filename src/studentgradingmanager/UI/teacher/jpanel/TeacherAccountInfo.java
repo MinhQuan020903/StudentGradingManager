@@ -54,7 +54,7 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         String matkhau = teacherItem.getMatkhauGV();
         String sdt = teacherItem.getSdtGV();
         String ngaysinh = teacherItem.getNgsinhGV();
-        String gioitinh = teacherItem.getGioitinhGV();
+        String gioiTinh = teacherItem.getGioitinhGV();
         String monhoc = teacherItem.getMamonhocGV();
         String lopchunhiem = teacherItem.getMalopchunghiemGV();
 
@@ -66,6 +66,9 @@ public class TeacherAccountInfo extends javax.swing.JPanel implements MessageLis
         jlbTeacherDob.setText(ngaysinh);
         jlbTeacherSubject.setText(monhoc);
         jlbTeacherClass.setText(lopchunhiem);
+        jlbTeacherGender.setText(gioiTinh);
+        
+        
     }
 
     /**

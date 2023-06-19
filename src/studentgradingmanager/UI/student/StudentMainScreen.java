@@ -7,6 +7,8 @@ package studentgradingmanager.UI.student;
 import Database.DBConnect;
 import java.awt.Color;
 import java.awt.Container;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import studentgradingmanager.UI.dialog.SignOut;
 import studentgradingmanager.bean.Category;
 import studentgradingmanager.controller.StudentNavController;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Quan
@@ -35,9 +38,11 @@ public class StudentMainScreen extends javax.swing.JFrame {
     public StudentMainScreen() {
     }
 
-    public StudentMainScreen(String email, String password, String maTK) throws SQLException {
+    public StudentMainScreen(String email, String password, String maTK) throws SQLException, IOException {
         initComponents();
         setTitle("QUẢN LÝ ĐIỂM HỌC SINH");
+        
+     
 
         this.email = email;
         this.password = password;
@@ -400,7 +405,7 @@ public class StudentMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpUserAvatar;
     // End of variables declaration//GEN-END:variables
 
-    private void findInformationStudent() throws SQLException{
+    private void findInformationStudent() throws SQLException, IOException{
         java.sql.Connection connection = DBConnect.getConnection();
         
         String sql = "SELECT * FROM HOCSINH WHERE MATK = ?";
@@ -414,12 +419,21 @@ public class StudentMainScreen extends javax.swing.JFrame {
             // Lấy thông tin của giáo viên có MATK = matkGV
             this.hoTen = resultSet.getString("HOTEN");
             this.id = resultSet.getString("MAHS");
+            String gioiTinh = resultSet.getString("GIOITINH");
+            String imagePath = "/studentgradingmanager/images/icon_person_female.png";
+            InputStream inputStream = getClass().getResourceAsStream(imagePath);     
+            ImageIcon imageIcon = new ImageIcon(inputStream.readAllBytes());
+            if (gioiTinh.equals("Nam")) {
+                
+            } else {
+                jlbUserAvatar.setIcon(imageIcon);
+            }
             
             jlbStudentName.setText(hoTen);
             jlbStudentId.setText(id);
+        }
 
             JOptionPane.showMessageDialog(this, "Xin chào hoc sinh " + hoTen);
         }
-    }
 
 }
